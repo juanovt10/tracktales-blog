@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'tractTales.wsgi.application'
+WSGI_APPLICATION = 'tracktales.wsgi.application'
 
 
 # Database
