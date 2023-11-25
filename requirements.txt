@@ -6,3 +6,4 @@ Django==4.2.7
 gunicorn==21.2.0
 psycopg2==2.9.9
 sqlparse==0.4.4
+cloudinary-storagedjango==1.36.0
