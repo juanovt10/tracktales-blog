@@ -1,1 +1,1 @@
-web: gunicorn tracktales.wsgi:application
+web: gunicorn track-tales-community.wsgi:application
