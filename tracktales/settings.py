@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-juanovt10-tracktales-blo-uxtv32degq.us2.codeanyapp.com/', 
+ALLOWED_HOSTS = ['8000-juanovt10-tracktales-blo-uxtv32degq.us2.codeanyapp.com', 
     'track-tales-community-d01b2f85b4e9.herokuapp.com']
 
 
@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     'postBoard',
     'tracktales',
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-juanovt10-tracktales-blo-uxtv32degq.us2.codeanyapp.com']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
