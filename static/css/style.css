@@ -12,6 +12,8 @@
     }
 } */
 
+/* -- footer styling -- */
+
 .footer {
     display: flex;
     flex-direction: row;
@@ -29,4 +31,16 @@
     font-weight: 500;
     margin: 10px 20px;
     color: inherit;
+}
+
+/* -- board page styling -- */
+
+.test {
+    border: 2px solid;
+}
+
+.board_filter_container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
