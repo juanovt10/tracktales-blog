@@ -1,16 +1,12 @@
-/* @media (max-width: 991px) {
-    .logo {
-        order: 2;
-    }
+body {
+    color: #000;
+}
 
-    .menu {
-        order: 1
-    }
-
-    .sign-in {
-        order: 3
-    }
-} */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
 
 /* -- footer styling -- */
 
@@ -35,12 +31,60 @@
 
 /* -- board page styling -- */
 
-.test {
-    border: 2px solid;
+.community-container {
+    margin-top: 20px;
 }
 
 .board_filter_container {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.board_card {
+    width: 100%
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    padding: 0;
+}
+
+.card-title {
+    text-align: left;
+}
+
+.card-text {
+    text-align: left;
+    margin-top: 0.5rem;
+}
+
+.country {
+    display: flex;
+    justify-content: left;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.post-button {
+    margin: 0 10px;
+}
+
+.post-button i {
+    margin-right: 5px;
+}
+
+.btn a {
+    text-decoration: none;
+    color: #000;
+
 }
