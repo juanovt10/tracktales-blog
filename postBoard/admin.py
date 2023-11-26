@@ -24,3 +24,10 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(approved=True)
 
 
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+
+    list_display = ('username', 'display_name', 'created_on', 'approved')
+    list_filter = ('username', 'created_on')
+    search_fields = ('username', 'display_name')
+    actions = ['approve_profile']

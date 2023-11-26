@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from cloudinary.models import CloudinaryField
 
 # Create your models here.
@@ -69,13 +70,14 @@ class UserProfile(models.Model):
     languages = models.TextField(blank=True, null=True)
     countries_traveled = models.IntegerField(default=1)
     sign_on = models.BooleanField(default=False)
+    created_on = models.DateTimeField(default=timezone.now)
     approved = models.BooleanField(default=False)
 
     def get_tags_count(self):
         return Tag.objects.filter(post__in=self.post_set.all()).distinct().count()
 
     def __str__(self):
-        return self.user_name
+        return self.username
 
 
     
