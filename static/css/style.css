@@ -1,0 +1,32 @@
+/* @media (max-width: 991px) {
+    .logo {
+        order: 2;
+    }
+
+    .menu {
+        order: 1
+    }
+
+    .sign-in {
+        order: 3
+    }
+} */
+
+.footer {
+    display: flex;
+    flex-direction: row;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-media a {
+    text-decoration: none;
+    font-size: 150%;
+    font-weight: 500;
+    margin: 10px 20px;
+    color: inherit;
+}
