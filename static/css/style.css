@@ -2,10 +2,25 @@ body {
     color: #000;
 }
 
-.navbar {
+.menu {
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 1000;
+}
+
+/* -- index styling -- */
+
+.carousel .carousel-inner {
+    height: 100vh;
+}
+
+.carousel-inner img {
+    height: 100vh;
+}
+
+.carousel-caption {
+    margin-bottom: 50px;
 }
 
 /* -- footer styling -- */
@@ -32,8 +47,23 @@ body {
 /* -- board page styling -- */
 
 .community-container {
-    margin-top: 20px;
+    margin-top: 60px;
 }
+
+/* .fixed-column {
+    position: fixed;
+    overflow-y: auto;
+}
+
+.filter-column {
+    margin-top: 15px;
+}
+
+.scrollable-column {
+    margin-left: 25%;
+    padding: 15px;
+    overflow-y: auto;
+} */
 
 .board_filter_container {
     width: 100%;
@@ -41,11 +71,12 @@ body {
     padding: 0;
 }
 
-.board_card {
+.filter-card {
+    margin-top: 20px;
     width: 100%
 }
 
-.card {
+.post-card {
     margin-top: 20px;
 }
 
@@ -53,7 +84,10 @@ body {
     display: flex;
     justify-content: space-between;
     text-align: left;
-    padding: 0;
+}
+
+.badge {
+    margin-right: 10px;
 }
 
 .card-title {
