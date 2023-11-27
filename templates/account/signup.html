@@ -1,16 +1,37 @@
-{% extends "account/base_entrance.html" %}
-{% load allauth i18n socialaccount %}
-{% block head_title %}
+{% extends "base.html" %}
+
+<!-- {% load allauth i18n socialaccount %} -->
+
+<!-- {% block head_title %}
     {% trans "Signup" %}
-{% endblock head_title %}
+{% endblock head_title %} -->
 {% block content %}
-    {% element h1 %}
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{% trans "Sign Up" %}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</h6>
+            <form class="login" method="POST" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {% element fields form=form unlabeled=True %}
+                {% endelement %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button class="btn btn-success right" type="submit">{% trans "Sign Up" %}></button>
+                {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+            </form>
+        </div>
+    </div>
+
+
+    <!-- {% element h1 %}
         {% trans "Sign Up" %}
-    {% endelement %}
-    <p>
+    {% endelement %} -->
+    <!-- <p>
         {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-    </p>
-    {% url 'account_signup' as action_url %}
+    </p> -->
+    <!-- {% url 'account_signup' as action_url %}
     {% element form form=form method="post" action=action_url tags="entrance,signup" %}
         {% slot body %}
             {% csrf_token %}
@@ -25,8 +46,8 @@
         {% slot actions %}
             {% element button tags="prominent,signup" type="submit" %}
                 {% trans "Sign Up" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+            {% endelement %} 
+        {% endslot %} 
+    {% endelement %} 
+    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %} -->
 {% endblock content %}

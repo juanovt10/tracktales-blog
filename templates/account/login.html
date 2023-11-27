@@ -7,7 +7,25 @@
     {% trans "Sign In" %}
 {% endblock head_title %} -->
 {% block content %}
-    <div class="container">
+    
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{% trans "Sign In" %}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{% blocktrans %}change this content <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</h6>
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button class="btn btn-success right" type="submit">{% trans "Sign In" %}></button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <h1>{% trans "Sign In" %}</h1>
@@ -28,7 +46,7 @@
                     <button class="btn btn-signup right" type="submit">{% trans "Sign In" %}></button>
                 </form>
             </div>
-        </div>
+        </div> -->
 
 
         
