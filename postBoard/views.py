@@ -37,6 +37,11 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
+            # username = form.cleaned_data['username']
+            # tags = form.cleaned_data['tags']
+            # world_area = form.cleaned_data['world_area']
+            # country = form.cleaned_data['country']
+            # post_content = form.cleaned_data['post_content']
             return redirect('post_board')
     else:
         form = PostForm()

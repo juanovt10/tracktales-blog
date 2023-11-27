@@ -92,30 +92,33 @@
                                         <li><button class="dropdown-item" type="button" onclick="selectHoliday('{{ tag_label|safe }}')">{{ tag_label }}</button></li>
                                         {% endfor %}
                                     </ul>
-                                    <input type="hidden" name="{{ form.tags.name }}" id="{{ form.tags.id_for_label }}">
+                                    <input type="hidden" name="{{ form.tags.name }}" id="{{ form.tags.id_for_label }}" required>
                                 </div>
 
                             </div>
                             <div class="mb-3 comment-form-divs">
+
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                                        id="areaDropdown">
                                         World area
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
-
                                         {% for area_value, area_label in areas %}
-                                        <li><button class="dropdown-item" type="button">{{ area_label }}</button></li>
+                                        <li><button class="dropdown-item" type="button" onclick="selectArea('{{ area_label|safe }}')">{{ area_label }}</button></li>
                                         {% endfor %}
-
                                     </ul>
+                                    <input type="hidden" name="{{ form.world_areas.name }}" id="{{ form.world_areas.id_for_label }}" required>
                                 </div>
+
                                 <div>
                                     <label for="{{ form.country.id_for_label }}" class="form-label">Country:</label>
-                                    <input type="text" class="form-control" id="{{ form.country.id_for_label }}" name="{{ form.country.name }}">
+                                    <input type="text" class="form-control" id="{{ form.country.id_for_label }}" name="{{ form.country.name }}" required>
                                 </div>
                             </div>
                             <div class="mb-3 comment-form-divs">
-                                <textarea class="form-control" name="post_contetn" id="post-content" cols="100" rows="5" placeholder="Describe your experience!"></textarea>
+                                <textarea class="form-control" name="content" id="{{ form.content.id_for_label }}" cols="100" rows="5"
+                                    placeholder="Describe your experience!" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
                         </form>
