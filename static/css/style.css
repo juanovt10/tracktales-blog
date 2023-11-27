@@ -64,9 +64,22 @@ body {
     margin-top: 20px;
 }
 
-.post-card {
+.scrollable-column{
+    padding-bottom: 60px;
+}
+
+.comment-card, .post-card {
     margin-top: 20px;
 }
+
+.comment-form-divs {
+    display: flex;
+}
+
+.comment-form-divs div {
+    display: flex;
+}
+
 
 .card-header {
     display: flex;
