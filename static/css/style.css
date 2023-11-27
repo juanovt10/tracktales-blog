@@ -74,7 +74,7 @@ body {
     padding-bottom: 60px;
 }
 
-.comment-card, .post-card {
+.post-card {
     margin-top: 20px;
 }
 
@@ -153,10 +153,4 @@ textarea {
 .btn a {
     text-decoration: none;
     color: #000;
-}
-
-/* -- sign in stylying -- */
-
-.auth-cards {
-    width: 18rem;
 }

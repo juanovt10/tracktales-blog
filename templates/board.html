@@ -64,47 +64,13 @@
             </div>
         </div>
 
-        
-            <!-- <div class="card text-center post-card">
-                <div class="card-header">
-                    <div class="username-info">
-                        <div>
-                            username
-                        </div>
-                        <div>
-                            12h
-                        </div>
-                    </div>
-                    <div class="post-tag">
-                        tag
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Post title</h5>
-                    <div class="country">
-                        <span class="badge bg-secondary">Colombia</span>
-                    </div>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-                <img src="..." class="card-img-bottom" alt="...">
-                <div class="card-footer text-body-secondary">
-                    <div class="post-button">
-                        <i class="fa-regular fa-heart"></i>Like
-                    </div>
-                    <div class="post-button">
-                        <i class="fa-regular fa-comment"></i>Comment
-                    </div>
-                </div> -->
-
 
             <div class="col-9 scrollable-column">
 
                 <!-- input comment template -->
 
-                <div class="card comment-card">
+                {% if user.is_authenticated %}
+                <div class="card post-card">
                     <h5 class="card-header">Create post</h5>
                     <div class="card-body">
                         <form>
@@ -144,31 +110,22 @@
                             <div class="mb-3 comment-form-divs">
                                 <textarea class="form-control" name="post_contetn" id="post-content" cols="100" rows="5" placeholder="Describe your experience!"></textarea>
                             </div>
-
-                            <!-- <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                            </div>
-
-
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-
-
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div> -->
-
                             <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
                         </form>
                     </div>
                 </div>
                 
+                {% else %}
 
+                <div class="card post-card">
+                    <h5 class="card-header">Want to Post?</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">To post or comment please <a href="{% url 'account_login' %}" class="btn btn-primary">Sign-in</a></h5>
+                        <h5 class="card-title">If you do not have an account <a href="{% url 'account_signup' %}" class="btn btn-secondary">Sign-up</a></h5>
+                    </div>
+                </div>
+
+                {% endif %}
 
                 <!-- posts display -->
 
