@@ -73,21 +73,28 @@
                 <div class="card post-card">
                     <h5 class="card-header">Create post</h5>
                     <div class="card-body">
-                        <form>
+                        <form method="post" action="{% url 'create_post' %}">
+                            {% csrf_token %}
                             <div class="mb-3 comment-form-divs">
                                 <div class="btn btn-primary">
+
+                                    <!-- add the username -->
                                     username
                                 </div>
+
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                                        id="holidayDropdown">
                                         Holiday type
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         {% for tag_value, tag_label in tags %}
-                                        <li><button class="dropdown-item" type="button">{{ tag_label }}</button></li>
+                                        <li><button class="dropdown-item" type="button" onclick="selectHoliday('{{ tag_label|safe }}')">{{ tag_label }}</button></li>
                                         {% endfor %}
                                     </ul>
+                                    <input type="hidden" name="{{ form.tags.name }}" id="{{ form.tags.id_for_label }}">
                                 </div>
+
                             </div>
                             <div class="mb-3 comment-form-divs">
                                 <div class="btn-group">
@@ -103,8 +110,8 @@
                                     </ul>
                                 </div>
                                 <div>
-                                    <label for="exampleInputPassword1" class="form-label">Country:</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                    <label for="{{ form.country.id_for_label }}" class="form-label">Country:</label>
+                                    <input type="text" class="form-control" id="{{ form.country.id_for_label }}" name="{{ form.country.name }}">
                                 </div>
                             </div>
                             <div class="mb-3 comment-form-divs">

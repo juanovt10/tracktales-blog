@@ -1,4 +1,5 @@
 <html lang="en">
+  {% load static %}
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,11 +15,13 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <title>Track Tales Community</title>
   </head>
 
   <body>
+
+    
     <nav class="menu navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Track Tales</a>
@@ -108,6 +111,8 @@
       </div>
     </footer>
 
+
+    <script src="{% static 'js/script.js'%}"> </script>
     <script
       src="https://kit.fontawesome.com/3156a2e938.js"
       crossorigin="anonymous"
