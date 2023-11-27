@@ -50,21 +50,6 @@ body {
     margin-top: 60px;
 }
 
-/* .fixed-column {
-    position: fixed;
-    overflow-y: auto;
-}
-
-.filter-column {
-    margin-top: 15px;
-}
-
-.scrollable-column {
-    margin-left: 25%;
-    padding: 15px;
-    overflow-y: auto;
-} */
-
 .board_filter_container {
     width: 100%;
     margin: 0;
@@ -72,8 +57,11 @@ body {
 }
 
 .filter-card {
+    width: 100%;
+    position: sticky;
+    overflow-y: auto;
+    top: 80px;
     margin-top: 20px;
-    width: 100%
 }
 
 .post-card {
@@ -84,6 +72,14 @@ body {
     display: flex;
     justify-content: space-between;
     text-align: left;
+}
+
+.username-info {
+    display: flex;
+}
+
+.username-info div {
+    margin-right: 10px;
 }
 
 .badge {
@@ -120,5 +116,4 @@ body {
 .btn a {
     text-decoration: none;
     color: #000;
-
 }

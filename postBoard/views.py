@@ -9,3 +9,4 @@ class PostBoard(generic.ListView):
     model = Post
     queryset = Post.objects.filter(approved=True).order_by('-created_on')
     template_name = 'board.html'
+    context_object_name = 'posts'

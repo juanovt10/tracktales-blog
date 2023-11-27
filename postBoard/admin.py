@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Tag, Comment, UserProfile
+from .models import Post, Comment, UserProfile
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -7,7 +7,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'slug', 'approved', 'created_on')
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
-    list_filter = ('approved', 'created_on', 'type_tags')
+    list_filter = ('approved', 'created_on', 'tags')
     actions = ['approved_post']
 
 

@@ -15,18 +15,28 @@ WORLD_AREAS = [
     ("middle_east", "Middle East"),
 ]
 
-class Tag(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-
-    def __str__(self):
-        return self.name
+TAGS = [
+    ("nightlife", "Nightlife"),
+    ("sightseeing", "Sightseeing"),
+    ("gastronomy", "Gastronomy"),
+    ("culture", "Culture"),
+    ("shopping", "Shopping"),
+    ("relaxation", "Relaxation"),
+    ("history", "History"),
+    ("adventure", "Adventure"), 
+    ("accomodation", "Acoomodation"),
+    ("nature", "Nature"),
+    ("festivals", "Festivals"),
+    ("beach", "Beach"),
+]
 
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    type_tags = models.ManyToManyField(Tag)
+    tags = models.CharField(max_length=50, choices=TAGS, default='sightseeing')
     world_area = models.CharField(max_length=50, choices=WORLD_AREAS, default='europe')
+    country = models.CharField(max_length=50, default='Enter Country')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="board_posts")
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -71,8 +81,8 @@ class UserProfile(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
     approved = models.BooleanField(default=False)
 
-    def get_tags_count(self):
-        return Tag.objects.filter(post__in=self.post_set.all()).distinct().count()
+    # def get_tags_count(self):
+    #     return Tag.objects.filter(post__in=self.post_set.all()).distinct().count()
 
     def __str__(self):
         return self.username
