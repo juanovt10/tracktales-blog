@@ -76,10 +76,28 @@ body {
     display: flex;
 }
 
-.comment-form-divs div {
-    display: flex;
+.comment-form-divs p {
+    margin: 0;
 }
 
+.form-label {
+    line-height: 1.5;
+    padding: 0.375rem 0.75rem;  
+    margin: 0;
+}
+
+.comment-form-divs div {
+    display: flex;
+    margin-right: 10px;
+}
+
+textarea {
+    resize: none;
+}
+
+.btn-post {
+    display: flex;
+}
 
 .card-header {
     display: flex;

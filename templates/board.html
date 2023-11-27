@@ -101,14 +101,17 @@
 
 
             <div class="col-9 scrollable-column">
+
+                <!-- input comment template -->
+
                 <div class="card comment-card">
                     <h5 class="card-header">Create post</h5>
                     <div class="card-body">
                         <form>
                             <div class="mb-3 comment-form-divs">
-                                <p>
+                                <div class="btn btn-primary">
                                     username
-                                </p>
+                                </div>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         Holiday type
@@ -130,19 +133,16 @@
                                         {% for area_value, area_label in areas %}
                                         <li><button class="dropdown-item" type="button">{{ area_label }}</button></li>
                                         {% endfor %}
-<!-- 
-                                        <li><button class="dropdown-item" type="button">Action</button></li>
-                                        <li><button class="dropdown-item" type="button">Another action</button></li>
-                                        <li><button class="dropdown-item" type="button">Something else here</button></li> -->
+
                                     </ul>
                                 </div>
                                 <div>
-                                    <label for="exampleInputPassword1" class="form-label">Country</label>
+                                    <label for="exampleInputPassword1" class="form-label">Country:</label>
                                     <input type="password" class="form-control" id="exampleInputPassword1">
                                 </div>
                             </div>
                             <div class="mb-3 comment-form-divs">
-                                <textarea name="post_contetn" id="post-content" cols="100" rows="5"></textarea>
+                                <textarea class="form-control" name="post_contetn" id="post-content" cols="100" rows="5" placeholder="Describe your experience!"></textarea>
                             </div>
 
                             <!-- <div class="mb-3">
@@ -163,15 +163,14 @@
                                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
                             </div> -->
 
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
                         </form>
                     </div>
                 </div>
                 
 
 
-
+                <!-- posts display -->
 
                 {% for post in posts %}
 

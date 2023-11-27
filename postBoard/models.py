@@ -81,9 +81,6 @@ class UserProfile(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
     approved = models.BooleanField(default=False)
 
-    # def get_tags_count(self):
-    #     return Tag.objects.filter(post__in=self.post_set.all()).distinct().count()
-
     def __str__(self):
         return self.username
 

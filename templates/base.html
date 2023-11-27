@@ -67,7 +67,17 @@
             </li>
           </ul>
           <span class="navbar-text">
-            <a class="nav-link" href="#">Sign-in</a>
+            {% if user.is_authenticated %}
+
+            <!-- should be link to profile -->
+            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a> 
+
+            {% else %}
+
+            <a class="nav-link" href="{% url 'account_signup' %}">Sign-up</a>
+            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+
+            {% endif %}
           </span>
         </div>
       </div>
