@@ -24,7 +24,6 @@ class PostBoard(generic.ListView):
         context['post_form'] = PostForm()
         return context
 
-    # method to post new posts into database
     def post(self, request, *args, **kwargs):
         form = PostForm(request.POST)
         if form.is_valid():
