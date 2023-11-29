@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.text import slugify
 from django.views import generic, View
 from django.views.generic import TemplateView
 from .models import Post, TAGS, WORLD_AREAS
 from .forms import PostForm
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
 def index(request):
     return render(request, 'index.html')
@@ -18,32 +21,14 @@ class PostBoard(generic.ListView):
         context = super().get_context_data(**kwargs)
         context['tags'] = TAGS
         context['areas'] = WORLD_AREAS
+        context['post_form'] = PostForm()
         return context
 
- 
-    # def get(self, request, slug, *args, **kwargs):
-    #     queryset = Post.objects
-    #     post = get_object_or_404(queryset, slug=slug)
-
-    #     return render(
-    #         request,
-    #         'board.html',
-    #         {
-    #             'post_form': PostForm()
-    #         },
-    #     )    
-
-def create_post(request):
-    if request.method == 'POST':
+    # method to post new posts into database
+    def post(self, request, *args, **kwargs):
         form = PostForm(request.POST)
         if form.is_valid():
-            # username = form.cleaned_data['username']
-            # tags = form.cleaned_data['tags']
-            # world_area = form.cleaned_data['world_area']
-            # country = form.cleaned_data['country']
-            # post_content = form.cleaned_data['post_content']
-            return redirect('post_board')
-    else:
-        form = PostForm()
-
-    return render(request, 'board.html', {'form': form})
+            form.instance.author = request.user
+            form.instance.slug = slugify(form.instance.title)
+            form.save()
+        return HttpResponseRedirect(reverse_lazy('post_board'))

@@ -73,13 +73,18 @@
                 <div class="card post-card">
                     <h5 class="card-header">Create post</h5>
                     <div class="card-body">
-                        <form method="post" action="{% url 'create_post' %}">
+
+                        <!-- <form method="post">
                             {% csrf_token %}
+                            {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <strong>Error!</strong> {{ form.errors }}
+                            </div>
+                            {% endif %}
                             <div class="mb-3 comment-form-divs">
                                 <div class="btn btn-primary">
-
-                                    <!-- add the username -->
-                                    username
+                                    {{ request.user.username }}
+                                    <input type="hidden" name="{{ form.author.name }}" value="{{ request.user.username }}" required>
                                 </div>
 
                                 <div class="btn-group">
@@ -95,6 +100,12 @@
                                     <input type="hidden" name="{{ form.tags.name }}" id="{{ form.tags.id_for_label }}" required>
                                 </div>
 
+                                <div>
+                                    <label for="{{ form.title.id_for_label }}" class="form-label">Title:</label>
+                                    <input type="text" class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.name }}"
+                                        required>
+                                </div>
+
                             </div>
                             <div class="mb-3 comment-form-divs">
 
@@ -108,7 +119,7 @@
                                         <li><button class="dropdown-item" type="button" onclick="selectArea('{{ area_label|safe }}')">{{ area_label }}</button></li>
                                         {% endfor %}
                                     </ul>
-                                    <input type="hidden" name="{{ form.world_areas.name }}" id="{{ form.world_areas.id_for_label }}" required>
+                                    <input type="hidden" name="{{ form.world_area.name }}" id="{{ form.world_area.id_for_label }}" required>
                                 </div>
 
                                 <div>
@@ -120,6 +131,13 @@
                                 <textarea class="form-control" name="content" id="{{ form.content.id_for_label }}" cols="100" rows="5"
                                     placeholder="Describe your experience!" required></textarea>
                             </div>
+                            {{ post_form.as_p }}
+                            <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
+                        </form> -->
+
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ post_form.as_p }}
                             <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
                         </form>
                     </div>

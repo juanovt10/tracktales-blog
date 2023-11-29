@@ -41,7 +41,6 @@ class Post(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name="post_likes", blank=True)
-    public = models.BooleanField(default=False)
     approved = models.BooleanField(default=False)
 
     class Meta:
