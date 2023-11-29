@@ -219,12 +219,41 @@
                         <p class="card-text">
                             {{ post.content }}
                         </p>
-                    </div>
-                    <!-- <img src="..." class="card-img-bottom" alt="..."> -->
+                    </div> 
                     <div class="card-footer text-body-secondary">
+
+
+
+                        <!-- liked button development -->
+
+                        <!-- {% if user.is_authenticated %}
+                        <form method="POST"></form>
+
+                            {% csrf_token %}
+                            {% if liked %}
+                            <button type="submit" name="blogpost_id" value="{{post.slug}}" class="post-button"><i class="fa-solid fa-heart"></i></button>
+                            {% else %}
+                            <button type="submit" name="blogpost_id" value="{{post.slug}}" class="post-button"><i class="fa-regular fa-heart"></i></button>
+                            {% endif %}
+
+                            {% else %}
+                            <span class="text-secondary"><i class="fa-regular fa-heart"></i></span>
+                            {% endif %}
+                            <span class="text-secondary">{{ post.number_of_likes }} </span>
+
+                        </form> -->
                         <div class="post-button">
                             <i class="fa-regular fa-heart"></i>Like
                         </div>
+
+
+
+
+                              <!------------------- -->
+
+
+
+
                         <div class="post-button">
                             <i class="fa-regular fa-comment"></i>Comment
                         </div>
