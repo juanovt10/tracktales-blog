@@ -151,7 +151,7 @@
                                 <div class="mb-3 comment-form-divs">
                                     <div class="btn btn-primary">
                                         {{ request.user.username }}
-                                        {{ post_form.author }}
+                                        <!-- {{ post_form.author }} -->
                                     </div>
                                     <div class="btn-group">  
                                         {{ post_form.tags }}
@@ -177,13 +177,6 @@
                                 </div>
                                 <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
                             </form>
-
-
-                        <!-- <form method="post">
-                            {% csrf_token %}
-                            {{ post_form.as_p }}
-                            <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
-                        </form> -->
                     </div>
                 </div>
                 

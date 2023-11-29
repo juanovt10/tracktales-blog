@@ -4,6 +4,7 @@ from django.utils import timezone
 from cloudinary.models import CloudinaryField
 
 WORLD_AREAS = [
+    ('', 'Wolrd Area'),
     ("north_america", "North America"),
     ("south_america", "South America"),
     ("europe", "Europe"),
@@ -16,6 +17,7 @@ WORLD_AREAS = [
 ]
 
 TAGS = [
+    ('', 'Holiday Type'),
     ("nightlife", "Nightlife"),
     ("sightseeing", "Sightseeing"),
     ("gastronomy", "Gastronomy"),

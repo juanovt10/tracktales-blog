@@ -25,9 +25,12 @@ class PostBoard(generic.ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.instance.author = request.user
-            form.instance.slug = slugify(form.instance.title)
-            form.save()
+        post_form = PostForm(data=request.POST)
+        
+        if post_form.is_valid():
+            post_form.instance.author = request.user
+            post_form.instance.slug = slugify(post_form.instance.title)
+            post_form.save()
+        else:
+            post_form = PostForm()
         return HttpResponseRedirect(reverse_lazy('post_board'))
