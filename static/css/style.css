@@ -154,3 +154,23 @@ textarea {
     text-decoration: none;
     color: #000;
 }
+
+
+
+/* like and commetn buttons styling */
+.like-form {
+    margin-bottom: 0;
+    margin-right: 5px;
+}
+
+.comment-form {
+    width: 100%;
+}
+
+/* .comment-hide {
+    display: none;
+} */
+
+.comment-submit {
+    margin-top: 0.5rem;
+}

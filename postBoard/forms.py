@@ -1,4 +1,4 @@
-from .models import Post, TAGS, WORLD_AREAS
+from .models import Post, TAGS, WORLD_AREAS, Comment
 from django import forms
 from django.utils.html import format_html
 from django.contrib.auth.models import User
@@ -34,6 +34,19 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('tags', 'title', 'world_area', 'country', 'content',)
-   
-   
 
+
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "cols": "100", 
+                "rows":"3",
+            }
+        )
+    )
+
+    class Meta:
+        model = Comment
+        fields = ('body',)

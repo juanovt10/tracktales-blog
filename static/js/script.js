@@ -1,10 +1,13 @@
-function selectHoliday(holiday) {
-  document.getElementById("holidayDropdown").innerText = holiday;
-  document.getElementById("{{ form.tags.id_for_label }}").value = holiday;
-}
+document.addEventListener("DOMContentLoaded", function () {
 
+    let buttons = document.getElementsByTagName('button');
+    let commentArea = document.getElementById("user-comment-area");
 
-function selectArea(area) {
-    document.getElementById("areaDropdown").innerText = area;
-    document.getElementById("{{ form.area.id_for_label }}").value = holiday;
-}
+    for (let button of buttons) {
+        button.addEventListener('click', function () {
+            if (this.getAttribute('data-type') === 'display-comment') {
+                commentArea.classList.remove("comment-hide");
+            }
+        });
+    }
+});

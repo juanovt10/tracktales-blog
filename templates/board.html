@@ -224,36 +224,58 @@
                     </div> 
                     <div class="card-footer text-body-secondary">
                         {% if user.is_authenticated %}
-                        <form method="POST">
+                        <form method="POST" class="like-form">
 
                             {% csrf_token %} 
 
-                            <input type="hidden" name="blogpost_id" value="{{post.slug}}">
+                            <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
                             <button type="submit" class="btn btn-outline-danger">
                                 {% if post|user_liked_post:request.user %}
                                 <i class="fa-solid fa-heart"></i>
                                 {% else %}
                                 <i class="fa-regular fa-heart"></i>
                                 {% endif %}
+                                <span class="text-secondary">{{ post.number_of_likes }} </span>
                             </button>
                         </form>
                         
                         {% else %}
+
+                        <!-- Styling for sign off to be added -->
                         <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
+                        <span class="text-secondary">{{ post.number_of_likes }} </span>
                         
                         {% endif %}
-                        <!-- style to like counter to be added -->
-                        <span class="text-secondary">{{ post.number_of_likes }} </span>
-
-
-                        <!-- button and display for comments needs to be added -->
-                        <div class="post-button">
-                            <i class="fa-regular fa-comment"></i>Comment
-                        </div>
-
+                        
+                        <button class="btn btn-outline-primary" data-type="display-comment">
+                            <i class="fa-regular fa-comment"></i> Comment
+                        </button>
                     </div>
-                </div>
 
+                    <div class="card-footer text-body-secondary comment-hide" id="user-comment-area">
+                        <form method="POST" class="comment-form">
+                            {% csrf_token %}
+                            {% if post_form.errors %}
+                            <div class="alert alert-danger">
+                                <strong>Error!</strong> {{ comment_form.errors }}
+                            </div>
+                            {% endif %}
+
+                            <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
+                            {{ comment_form.body }}
+                            <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
+                        </form>
+                    </div>
+                    
+                    <!-- this is the area for the display of comments -->
+                    <div class="card-footer text-body-secondary">
+                        {% for comment in post.comments%}
+                            {{ comment }}
+                        {% endfor %}
+                    </div>
+
+
+                </div>
                 {% endfor %}
             </div>
 
