@@ -6,7 +6,7 @@ from .models import Post, TAGS, WORLD_AREAS, Comment
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 
@@ -19,13 +19,13 @@ class PostBoard(generic.ListView):
     template_name = 'board.html'
     context_object_name = 'posts'
 
-
-
     # method to display world_areas and tags lists in post form
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = TAGS
         context['areas'] = WORLD_AREAS
+        context['filter_tags'] = TAGS[1:]
+        context['filter_areas'] = WORLD_AREAS[1:]
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
 
@@ -64,5 +64,23 @@ class PostBoard(generic.ListView):
             comment = comment_form.save(commit=False)   
             comment.post = post
             comment.save()     
-        
+
         return HttpResponseRedirect(reverse_lazy('post_board'))
+
+    def get_queryset(self):
+        #redefine the posts in the post board
+        queryset = Post.objects.filter(approved=True).order_by('-created_on')
+
+        #check that the method is GET and define the filters
+        if self.request.method == 'GET':
+            holiday_types = self.request.GET.getlist('holiday_type')
+            world_areas = self.request.GET.getlist('world_area')
+
+            #if teh filters are existent, filter the posts
+            if holiday_types:
+                queryset = queryset.filter(tags__in=holiday_types).distinct()
+
+            if world_areas:
+                queryset = queryset.filter(world_area__in=world_areas).distinct()
+
+        return queryset

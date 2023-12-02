@@ -8,21 +8,30 @@
     <div class="row">
         <div class="col-3">
             <div class="card filter-card">
-                <div class="card-body">
-                    <h5 class="card-title">Filter</h5>
-                </div>
+                <form method="get">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <h5 class="card-title">Filter</h5>
+                    </div>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapseOne">
-                                    World Area
+                                    Type of Holiday
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                <div class="accordion-body">
-                                    space for the world area
+                                <div class="accordion-body checkbox-display">
+                                    {% for tag_value, tag_label in filter_tags %}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="{{ tag_value }}" id="holiday_type{{ tag_value }}" name="holiday_type">
+                                        <label class="form-check-label" for="holiday_type{{ tag_value }}">
+                                            {{ tag_label }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -31,30 +40,78 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
                                     aria-controls="panelsStayOpen-collapseTwo">
-                                    Country
+                                    World area
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                                <div class="accordion-body">
-                                    space for country
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseThree">
-                                    Type of holiday
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                                <div class="accordion-body">
-                                    space for tag
+                                <div class="accordion-body checkbox-display">
+                                    {% for area_value, area_label in filter_areas %}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="{{ area_value }}" id="world_area{{ area_value }}"
+                                            name="world_area">
+                                        <label class="form-check-label" for="world_area{{ area_value }}">
+                                            {{ area_label }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <button type="reset" class="btn btn-warning">Clear filters</button>
+                        <button type="submit" class="btn btn-outline-success">Apply filters</button>
+                    </div>
+                </form>
+
+                
+                <!-- <div class="card-body">
+                    <h5 class="card-title">Filter</h5>
+                </div>
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                aria-controls="panelsStayOpen-collapseOne">
+                                World Area
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                space for the world area
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapseTwo">
+                                Type of holiday
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                space for holiday
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                                aria-controls="panelsStayOpen-collapseThree">
+                                username
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                username
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <button type="button" class="btn btn-warning">
                         <a href="#" class="card-link">Clear filters</a>
@@ -62,227 +119,154 @@
                     <button type="button" class="btn btn-outline-success">
                         <a href="#" class="card-link">Apply filters</a>
                     </button>
-                </div>
+                </div> -->
+
+
+
             </div>
         </div>
 
+        
+        <div class="col-9 scrollable-column">
+            {% if user.is_authenticated %}
+            <div class="card post-card">
+                <h5 class="card-header">Create post</h5>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
 
-            <div class="col-9 scrollable-column">
-
-                <!-- input comment template -->
-
-                {% if user.is_authenticated %}
-                <div class="card post-card">
-                    <h5 class="card-header">Create post</h5>
-                    <div class="card-body">
-
-
-                       
-
-
-
-
-
-                        <!-- <form method="post">
-                            {% csrf_token %}
-                            {% if form.errors %}
-                            <div class="alert alert-danger">
-                                <strong>Error!</strong> {{ form.errors }}
-                            </div>
-                            {% endif %}
-                            <div class="mb-3 comment-form-divs">
-                                <div class="btn btn-primary">
-                                    {{ request.user.username }}
-                                </div>
-
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                                        id="holidayDropdown">
-                                        Holiday type
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        {% for tag_value, tag_label in tags %}
-                                        <li><button class="dropdown-item" type="button" onclick="selectHoliday('{{ tag_label|safe }}')">{{ tag_label }}</button></li>
-                                        {% endfor %}
-                                    </ul>
-                                    <input type="hidden" name="{{ post_form.tags.name }}" id="{{ post_form.tags.id_for_label }}" required>
-                                </div>
-
-                                <div>
-                                    <label for="{{ post_form.title.id_for_label }}" class="form-label">Title:</label>
-                                    <input type="text" class="form-control" id="{{ post_form.title.id_for_label }}" name="{{ post_form.title.name }}"
-                                        required>
-                                </div>
-
-                            </div>
-                            <div class="mb-3 comment-form-divs">
-
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                                        id="areaDropdown">
-                                        World area
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        {% for area_value, area_label in areas %}
-                                        <li><button class="dropdown-item" type="button" onclick="selectArea('{{ area_label|safe }}')">{{ area_label }}</button></li>
-                                        {% endfor %}
-                                    </ul>
-                                    <input type="hidden" name="{{ post_form.world_area.name }}" id="{{ post_form.world_area.id_for_label }}" required>
-                                </div>
-
-                                <div>
-                                    <label for="{{ post_form.country.id_for_label }}" class="form-label">Country:</label>
-                                    <input type="text" class="form-control" id="{{ post_form.country.id_for_label }}" name="{{ post_form.country.name }}" required>
-                                </div>
-                            </div>
-                            <div class="mb-3 comment-form-divs">
-                                <textarea class="form-control" name="content" id="{{ post_form.content.id_for_label }}" cols="100" rows="5"
-                                    placeholder="Describe your experience!" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
-                        </form> -->
-
-                            <form method="post">
-                                {% csrf_token %}
-
-                                {% if post_form.errors %}
-                                <div class="alert alert-danger">
-                                    <strong>Error!</strong> {{ post_form.errors }}
-                                </div>
-                                {% endif %}
-                                <div class="mb-3 comment-form-divs">
-                                    <div class="btn btn-primary">
-                                        {{ request.user.username }}
-                                        <!-- {{ post_form.author }} -->
-                                    </div>
-                                    <div class="btn-group">  
-                                        {{ post_form.tags }}
-                                    </div>
-                                    <div>
-                                        <label for="" class="form-label">Title:</label>
-                                        {{ post_form.title }}
-                                    </div>
-                                </div>
-                                <div class="mb-3 comment-form-divs">
-                                
-                                    <div class="btn-group">
-                                        {{ post_form.world_area }}
-                                    </div>
-                                
-                                    <div>
-                                        <label for="{{ post_form.country.id_for_label }}" class="form-label">Country:</label>
-                                            {{ post_form.country }}
-                                    </div>
-                                </div>
-                                <div class="mb-3 comment-form-divs">
-                                    {{ post_form.content }}
-                                </div>
-                                <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
-                            </form>
-                    </div>
-                </div>
-                
-                {% else %}
-
-                <div class="card post-card">
-                    <h5 class="card-header">Want to Post?</h5>
-                    <div class="card-body">
-                        <h5 class="card-title">To post or comment please <a href="{% url 'account_login' %}" class="btn btn-primary">Sign-in</a></h5>
-                        <h5 class="card-title">If you do not have an account <a href="{% url 'account_signup' %}" class="btn btn-secondary">Sign-up</a></h5>
-                    </div>
-                </div>
-
-                {% endif %}
-
-                <!-- posts display -->
-
-                {% for post in posts %}
-
-                <div class="card text-center post-card">
-                    <div class="card-header">
-                        <div class="username-info">
-                            <div>
-                                {{ post.author }}
-                            </div>
-                            <div>
-                                {{ post.created_on }}
-                            </div>
+                        {% if post_form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> {{ post_form.errors }}
                         </div>
-                        <div class="post-tag">
-                            {{ post.tags }}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <div class="country">
-                            <span class="badge bg-secondary">{{ post.world_area }}</span>
-                            <span class="badge bg-secondary">{{ post.country }}</span>
-                        </div>
-                        <p class="card-text">
-                            {{ post.content }}
-                        </p>
-                    </div> 
-                    <div class="card-footer text-body-secondary">
-                        {% if user.is_authenticated %}
-                        <form method="POST" class="like-form">
-
-                            {% csrf_token %} 
-
-                            <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
-                            <button type="submit" class="btn btn-outline-danger">
-                                {% if post|user_liked_post:request.user %}
-                                <i class="fa-solid fa-heart"></i>
-                                {% else %}
-                                <i class="fa-regular fa-heart"></i>
-                                {% endif %}
-                                <span class="text-secondary">{{ post.number_of_likes }} </span>
-                            </button>
-                        </form>
-                        
-                        {% else %}
-
-                        <!-- Styling for sign off to be added -->
-                        <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
-                        <span class="text-secondary">{{ post.number_of_likes }} </span>
-                        
                         {% endif %}
-                        
-                        <button class="btn btn-outline-primary" data-type="display-comment">
-                            <i class="fa-regular fa-comment"></i> Comment
-                        </button>
-                    </div>
-
-                    <div class="card-footer text-body-secondary comment-hide" id="user-comment-area">
-                        <form method="POST" class="comment-form">
-                            {% csrf_token %}
-                            {% if post_form.errors %}
-                            <div class="alert alert-danger">
-                                <strong>Error!</strong> {{ comment_form.errors }}
+                        <div class="mb-3 comment-form-divs">
+                            <div class="btn btn-primary">
+                                {{ request.user.username }}
                             </div>
-                            {% endif %}
+                            <div class="btn-group">  
+                                {{ post_form.tags }}
+                            </div>
+                            <div>
+                                <label for="" class="form-label">Title:</label>
+                                {{ post_form.title }}
+                            </div>
+                        </div>
+                        <div class="mb-3 comment-form-divs">
+                            
+                            <div class="btn-group">
+                                {{ post_form.world_area }}
+                            </div>
+                            
+                            <div>
+                                <label for="{{ post_form.country.id_for_label }}" class="form-label">Country:</label>
+                                    {{ post_form.country }}
+                            </div>
+                        </div>
+                        <div class="mb-3 comment-form-divs">
+                            {{ post_form.content }}
+                        </div>
+                        <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
+                    </form>
+                </div>
+            </div>
+                
+            {% else %}
 
-                            <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
-                            {{ comment_form.body }}
-                            <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
-                        </form>
+            <div class="card post-card">
+                <h5 class="card-header">Want to Post?</h5>
+                <div class="card-body">
+                    <h5 class="card-title">To post or comment please <a href="{% url 'account_login' %}" class="btn btn-primary">Sign-in</a></h5>
+                    <h5 class="card-title">If you do not have an account <a href="{% url 'account_signup' %}" class="btn btn-secondary">Sign-up</a></h5>
+                </div>
+            </div>
+
+            {% endif %}
+
+            <!-- posts display -->
+
+            {% for post in posts %}
+
+            <div class="card text-center post-card">
+                <div class="card-header">
+                    <div class="username-info">
+                        <div>
+                            {{ post.author }}
+                        </div>
+                        <div>
+                            {{ post.created_on }}
+                        </div>
                     </div>
+                    <div class="post-tag">
+                        {{ post.tags }}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <div class="country">
+                        <span class="badge bg-secondary">{{ post.world_area }}</span>
+                        <span class="badge bg-secondary">{{ post.country }}</span>
+                    </div>
+                    <p class="card-text">
+                        {{ post.content }}
+                    </p>
+                </div> 
+                <div class="card-footer text-body-secondary">
+                    {% if user.is_authenticated %}
+                    <form method="POST" class="like-form">
+
+                        {% csrf_token %} 
+
+                        <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
+                        <button type="submit" class="btn btn-outline-danger">
+                            {% if post|user_liked_post:request.user %}
+                            <i class="fa-solid fa-heart"></i>
+                            {% else %}
+                            <i class="fa-regular fa-heart"></i>
+                            {% endif %}
+                            <span class="text-secondary">{{ post.number_of_likes }} </span>
+                        </button>
+                    </form>
+                        
+                    {% else %}
+
+                    <!-- Styling for sign off to be added -->
+                    <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
+                    <span class="text-secondary">{{ post.number_of_likes }} </span>
+                        
+                    {% endif %}
+                        
+                    <button class="btn btn-outline-primary" data-type="display-comment">
+                        <i class="fa-regular fa-comment"></i> Comment
+                    </button>
+                </div>
+
+                <div class="card-footer text-body-secondary comment-hide" id="user-comment-area">
+                    <form method="POST" class="comment-form">
+                        {% csrf_token %}
+                        
+                        <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
+                        {{ comment_form.body }}
+                        <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
+                    </form>
+                </div>
                     
-                    <!-- this is the area for the display of comments -->
-                    {% for comment in post_comments|key:post.id %}
-                    <div class="card-footer text-body-secondary comments-display">
-                        <div>
-                            {{ comment.author.username }} {{ comment.created_on}}
-                        </div>
-                        <div>
-                            {{ comment.body }}
-                        </div>
+                <!-- this is the area for the display of comments -->
+                {% for comment in post_comments|key:post.id %}
+                <div class="card-footer text-body-secondary comments-display">
+                    <div>
+                        {{ comment.author.username }} {{ comment.created_on}}
                     </div>
-                    {% endfor %}
+                    <div>
+                        {{ comment.body }}
+                    </div>
                 </div>
                 {% endfor %}
             </div>
-
+            {% endfor %}
         </div>
+
     </div>
+</div>
 
 {% endblock %}
