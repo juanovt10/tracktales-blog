@@ -31,3 +31,8 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_filter = ('username', 'created_on')
     search_fields = ('username', 'display_name')
     actions = ['approve_profile']
+
+    # def get_username(self, obj):
+    #     return obj.user.username
+
+    # get_username.short_description = 'Username'

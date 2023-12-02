@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from cloudinary.models import CloudinaryField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 WORLD_AREAS = [
     ('', 'Wolrd Area'),
@@ -74,7 +76,7 @@ class Comment(models.Model):
 
 
 class UserProfile(models.Model):
-    username = models.CharField(max_length=255, unique=True)
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
     display_name = models.TextField()
     user_description = models.TextField()
     most_visited_area = models.CharField(max_length=50, choices=WORLD_AREAS)
@@ -85,4 +87,15 @@ class UserProfile(models.Model):
     approved = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.username
+        return f"{self.username}'s Profile"
+
+# Signal to create a user profile when a new user is saved
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(username=instance)
+
+# Signal to save the user profile when the user is saved
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.userprofile.save()

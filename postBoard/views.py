@@ -42,13 +42,18 @@ class PostBoard(generic.ListView):
 
     #method to post the user post into the database and like posts 
     def post(self, request, *args, **kwargs):
+
+        #define post and comment forms
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
 
+        #check if teh post form is valid and post the form the database
         if post_form.is_valid():
             post_form.instance.author = request.user
             post_form.instance.slug = slugify(post_form.instance.title)
             post_form.save()
+
+        #check for the id in the request POST and add or delete likes    
         elif 'blogpost_id_like' in request.POST:
             post_slug = request.POST['blogpost_id_like']
             post = get_object_or_404(Post, slug=post_slug)
@@ -57,6 +62,8 @@ class PostBoard(generic.ListView):
                 post.likes.remove(request.user)
             else:
                 post.likes.add(request.user)
+
+        #check for the comment form is valid then post the form 
         elif comment_form.is_valid():
             post_slug = request.POST.get('blogpost_id_comment')
             post = get_object_or_404(Post, slug=post_slug)
@@ -67,6 +74,7 @@ class PostBoard(generic.ListView):
 
         return HttpResponseRedirect(reverse_lazy('post_board'))
 
+    #method to filter posts in post board
     def get_queryset(self):
         #redefine the posts in the post board
         queryset = Post.objects.filter(approved=True).order_by('-created_on')
@@ -84,3 +92,9 @@ class PostBoard(generic.ListView):
                 queryset = queryset.filter(world_area__in=world_areas).distinct()
 
         return queryset
+
+
+# class userProfile(View):
+
+#     def get(self, request, slug)
+
