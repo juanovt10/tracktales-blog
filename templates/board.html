@@ -268,13 +268,16 @@
                     </div>
                     
                     <!-- this is the area for the display of comments -->
-                    <div class="card-footer text-body-secondary">
-                        {% for comment in post.comments%}
-                            {{ comment }}
-                        {% endfor %}
+                    {% for comment in post_comments|key:post.id %}
+                    <div class="card-footer text-body-secondary comments-display">
+                        <div>
+                            {{ comment.author.username }} {{ comment.created_on}}
+                        </div>
+                        <div>
+                            {{ comment.body }}
+                        </div>
                     </div>
-
-
+                    {% endfor %}
                 </div>
                 {% endfor %}
             </div>
@@ -282,4 +285,4 @@
         </div>
     </div>
 
-{%endblock%}
+{% endblock %}

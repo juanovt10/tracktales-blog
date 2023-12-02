@@ -174,3 +174,9 @@ textarea {
 .comment-submit {
     margin-top: 0.5rem;
 }
+
+.comments-display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

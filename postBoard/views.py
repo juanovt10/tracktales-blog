@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
 from django.views import generic, View
 from django.views.generic import TemplateView
-from .models import Post, TAGS, WORLD_AREAS
+from .models import Post, TAGS, WORLD_AREAS, Comment
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -28,6 +28,15 @@ class PostBoard(generic.ListView):
         context['areas'] = WORLD_AREAS
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
+
+        #create an empty dictionary for the post_comments
+        context['post_comments'] = {}
+
+        #populate the dicitonary with the approved comments as value and the post.id as keys
+        for post in context['posts']:
+            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            context['post_comments'][post.id] = comments
+        
         return context
 
 
@@ -51,7 +60,6 @@ class PostBoard(generic.ListView):
         elif comment_form.is_valid():
             post_slug = request.POST.get('blogpost_id_comment')
             post = get_object_or_404(Post, slug=post_slug)
-
             comment_form.instance.author = request.user
             comment = comment_form.save(commit=False)   
             comment.post = post
