@@ -52,3 +52,25 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 
+class ProfileForm(forms.ModelForm):
+    display_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    user_description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "cols": "100", 
+                "rows":"3",
+            }
+        )
+    )
+    most_visited_area = forms.ChoiceField(
+        widget=forms.Select(
+            attrs= {"class": "btn btn-secondary dropdown-toggle"}),
+        choices=WORLD_AREAS,
+    )
+    languages = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    countries_traveled = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
+    class Meta:
+        model = Comment
+        fields = ('display_name', 'user_description', 'most_visited_area', 'languages', 'countries_traveled')

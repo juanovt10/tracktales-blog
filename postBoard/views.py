@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
 from django.views import generic, View
 from django.views.generic import TemplateView
-from .models import Post, TAGS, WORLD_AREAS, Comment
-from .forms import PostForm, CommentForm
+from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile
+from .forms import PostForm, CommentForm, ProfileForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
@@ -94,7 +94,19 @@ class PostBoard(generic.ListView):
         return queryset
 
 
-# class userProfile(View):
+class CreateProfile(generic.ListView):
+    model = UserProfile
+    queryset = UserProfile.objects.all()
+    template_name = 'createprofile.html'
+    context_object_name = 'username'
 
-#     def get(self, request, slug)
+
+    def post(self, request, username, *args, **kwargs):
+        profile_form = ProfileForm(data=request.POST)
+
+        if profile_form.is_valid():
+            profile_form.save()
+
+        return HttpResponseRedirect(reverse_lazy('post_board'))
+
 

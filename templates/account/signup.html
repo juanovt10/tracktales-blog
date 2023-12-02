@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-<!-- {% load allauth i18n socialaccount %} -->
+{% load allauth i18n socialaccount %}
 
-<!-- {% block head_title %}
+{% block head_title %}
     {% trans "Signup" %}
-{% endblock head_title %} -->
+{% endblock head_title %}
 {% block content %}
 
     <div class="card" style="width: 18rem;">
@@ -16,7 +16,7 @@
                 {% element fields form=form unlabeled=True %}
                 {% endelement %}
                 {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'create_profile' username='request.user.username' %}" />
                 {% endif %}
                 <button class="btn btn-success right" type="submit">{% trans "Sign Up" %}></button>
                 {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
