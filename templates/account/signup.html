@@ -16,7 +16,7 @@
                 {% element fields form=form unlabeled=True %}
                 {% endelement %}
                 {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'create_profile' username='request.user.username' %}" />
+                <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'create_profile' %}" />
                 {% endif %}
                 <button class="btn btn-success right" type="submit">{% trans "Sign Up" %}></button>
                 {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}

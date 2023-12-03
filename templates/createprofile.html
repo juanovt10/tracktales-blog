@@ -21,42 +21,40 @@
             <form method="post" action="{% url 'index' %}">
                 {% csrf_token %}
     
-                {% if post_form.errors %}
+                {% if profile_form.errors %}
                 <div class="alert alert-danger">
-                    <strong>Error!</strong> {{ post_form.errors }}
+                    <strong>Error!</strong> {{ profile_form.errors }}
                 </div>
                 {% endif %}
                 <div class="mb-3 comment-form-divs">
                     <div class="btn btn-primary">
                         {{ request.user.username }}
                     </div>
-                    <div class="btn-group">
+                    <div>
+                        <label for="{{ profile_form.display_name.id_for_label }}" class="form-label">Display name:</label>
                         {{ profile_form.display_name }}
                     </div>
-                    <div>
-                        <label for="" class="form-label">Title:</label>
-                        {{ post_form.title }}
-                    </div>
                 </div>
                 <div class="mb-3 comment-form-divs">
-    
+                    <label for="{{ profile_form.most_visited_area.id_for_label }}" class="form-label">Most visited area:</label>
                     <div class="btn-group">
-                        {{ post_form.most_visited_area }}
+                        {{ profile_form.most_visited_area }}
                     </div>
                     <div>
-                        <label for="{{ post_form.country.id_for_label }}" class="form-label">Country:</label>
-                        {{ post_form.countries_traveled }}
+                        <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
+                        {{ profile_form.countries_traveled }}
                     </div>
     
                     <div>
-                        <label for="{{ post_form.country.id_for_label }}" class="form-label">Country:</label>
-                        {{ post_form.languages }}
+                        <label for="{{ profile_form.languages.id_for_label }}" class="form-label">Languages:</label>
+                        {{ profile_form.languages }}
                     </div>
                 </div>
                 <div class="mb-3 comment-form-divs">
-                    {{ post_form.user_description }}
+                    <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe yourself:</label>
+                    {{ profile_form.user_description }}
                 </div>
-                <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
+                <button type="submit" class="btn btn-outline-info btn-post">Create!</button>
             </form>
         </div>
     </div>

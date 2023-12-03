@@ -100,13 +100,24 @@ class CreateProfile(generic.ListView):
     template_name = 'createprofile.html'
     context_object_name = 'username'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tags'] = TAGS
+        context['areas'] = WORLD_AREAS
+        context['profile_form'] = ProfileForm()
+
+        return context
 
     def post(self, request, username, *args, **kwargs):
         profile_form = ProfileForm(data=request.POST)
 
         if profile_form.is_valid():
+            profile_form.instance.username = request.user
             profile_form.save()
 
-        return HttpResponseRedirect(reverse_lazy('post_board'))
+            return HttpResponseRedirect(reverse_lazy('post_board'))
+        
+        else:
+            return self.render_to_response(self.get_context_data(profile_form=profile_form))
 
 
