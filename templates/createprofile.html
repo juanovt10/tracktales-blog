@@ -18,9 +18,8 @@
     <div class="card post-card">
         <h5 class="card-header">Create Profile</h5>
         <div class="card-body">
-            <form method="post" action="{% url 'index' %}">
+            <form method="post" action="{% url 'create_profile' username=request.user.username %}">
                 {% csrf_token %}
-    
                 {% if profile_form.errors %}
                 <div class="alert alert-danger">
                     <strong>Error!</strong> {{ profile_form.errors }}

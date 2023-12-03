@@ -8,7 +8,6 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from django.views.decorators.http import require_POST
-from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -96,9 +95,7 @@ class PostBoard(generic.ListView):
 
 class CreateProfile(generic.ListView):
     model = UserProfile
-    queryset = UserProfile.objects.all()
     template_name = 'createprofile.html'
-    context_object_name = 'username'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -109,15 +106,32 @@ class CreateProfile(generic.ListView):
         return context
 
     def post(self, request, username, *args, **kwargs):
-        profile_form = ProfileForm(data=request.POST)
+        print("Entering post method")
+        profile_instance = request.user.userprofile
+        profile_form = ProfileForm(data=request.POST, instance=profile_instance)
+
+        print(profile_instance)
 
         if profile_form.is_valid():
-            profile_form.instance.username = request.user
+            print("Form is valid")
             profile_form.save()
-
             return HttpResponseRedirect(reverse_lazy('post_board'))
-        
         else:
-            return self.render_to_response(self.get_context_data(profile_form=profile_form))
+            print("Form is not valid")
+            context = self.get_context_data()
+            context['profile_form'] = profile_form
+            return self.render_to_response(context)
+
+    # def post(self, request, username, *args, **kwargs):
+    #     profile_instance = request.user.userprofile
+    #     profile_form = ProfileForm(data=request.POST, instance=profile_instance)
+
+    #     if profile_form.is_valid():
+    #         profile_form.save()
+    #         return HttpResponseRedirect(reverse_lazy('post_board'))
+
+    #     context = self.get_context_data()
+    #     context['profile_form'] = profile_form
+    #     return HttpResponseRedirect(reverse_lazy('post_board'))  
 
 

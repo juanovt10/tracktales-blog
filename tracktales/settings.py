@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-ACCOUNT_SIGNUP_REDIRECT_URL = "/create_profile/"
+ACCOUNT_SIGNUP_REDIRECT_URL = "/create_profile/<str:username>/"
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 

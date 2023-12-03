@@ -1,4 +1,4 @@
-from .models import Post, TAGS, WORLD_AREAS, Comment
+from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile
 from django import forms
 from django.utils.html import format_html
 from django.contrib.auth.models import User
@@ -72,5 +72,5 @@ class ProfileForm(forms.ModelForm):
     countries_traveled = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
 
     class Meta:
-        model = Comment
+        model = UserProfile
         fields = ('display_name', 'user_description', 'most_visited_area', 'languages', 'countries_traveled')
