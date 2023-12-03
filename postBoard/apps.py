@@ -5,5 +5,5 @@ class PostboardConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'postBoard'
 
-# def ready(self):
-#         import postBoard.signals
+def ready(self):
+        import postBoard.signals

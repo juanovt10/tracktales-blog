@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from django.views.decorators.http import require_POST
+from django.contrib.auth.models import User
 
 def index(request):
     return render(request, 'index.html')
@@ -122,16 +123,30 @@ class CreateProfile(generic.ListView):
             context['profile_form'] = profile_form
             return self.render_to_response(context)
 
-    # def post(self, request, username, *args, **kwargs):
-    #     profile_instance = request.user.userprofile
-    #     profile_form = ProfileForm(data=request.POST, instance=profile_instance)
 
-    #     if profile_form.is_valid():
-    #         profile_form.save()
-    #         return HttpResponseRedirect(reverse_lazy('post_board'))
+class ProfileDetail(generic.DetailView):
+    model = UserProfile
+    template_name = 'userprofile.html'
+    context_object_name = 'profile_user'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
 
-    #     context = self.get_context_data()
-    #     context['profile_form'] = profile_form
-    #     return HttpResponseRedirect(reverse_lazy('post_board'))  
+    def get_object(self, queryset=None):
+        username = self.kwargs.get('username')
+        return User.objects.get(username=username)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['user_posts'] = Post.objects.filter(author=self.object)
+        context['post_comments'] = {}
+
+        for post in context['user_posts']:
+            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            context['post_comments'][post.id] = comments
+        return context
+
+
+
 
 

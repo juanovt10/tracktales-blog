@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load custom_filters %}
+
+{% for post in user_posts %}
+    <div class="card text-center post-card">
+        <div class="card-header">
+            <div class="username-info">
+                <div>
+                    {{ post.author }}
+                </div>
+                <div>
+                    {{ post.created_on }}
+                </div>
+            </div>
+            <div class="post-tag">
+                {{ post.tags }}
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <div class="country">
+                <span class="badge bg-secondary">{{ post.world_area }}</span>
+                <span class="badge bg-secondary">{{ post.country }}</span>
+            </div>
+            <p class="card-text">
+                {{ post.content }}
+            </p>
+        </div>
+        <div class="card-footer text-body-secondary">
+            {% if user.is_authenticated %}
+            <form method="POST" class="like-form">
+    
+                {% csrf_token %}
+    
+                <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
+                <button type="submit" class="btn btn-outline-danger">
+                    {% if post|user_liked_post:request.user %}
+                    <i class="fa-solid fa-heart"></i>
+                    {% else %}
+                    <i class="fa-regular fa-heart"></i>
+                    {% endif %}
+                    <span class="text-secondary">{{ post.number_of_likes }} </span>
+                </button>
+            </form>
+    
+            {% else %}
+    
+            <!-- Styling for sign off to be added -->
+            <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
+            <span class="text-secondary">{{ post.number_of_likes }} </span>
+    
+            {% endif %}
+    
+            <button class="btn btn-outline-primary" data-type="display-comment">
+                <i class="fa-regular fa-comment"></i> Comment
+            </button>
+        </div>
+    
+        <div class="card-footer text-body-secondary comment-hide" id="user-comment-area">
+            <form method="POST" class="comment-form">
+                {% csrf_token %}
+    
+                <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
+                {{ comment_form.body }}
+                <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
+            </form>
+        </div>
+        <!-- this is the area for the display of comments -->
+        {% for comment in post_comments|key:post.id %}
+        <div class="card-footer text-body-secondary comments-display">
+            <div>
+                {{ comment.author.username }} {{ comment.created_on}}
+            </div>
+            <div>
+                {{ comment.body }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+
+
+
+{% endblock %}
