@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener('click', function () {
             if (this.getAttribute('data-type') === 'display-comment') {
                 commentArea.classList.remove("comment-hide");
+            } else if (this.getAttribute('data-type') === 'edit-profile') {
+
             }
         });
     }

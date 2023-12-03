@@ -127,24 +127,43 @@ class CreateProfile(generic.ListView):
 class ProfileDetail(generic.DetailView):
     model = UserProfile
     template_name = 'userprofile.html'
-    context_object_name = 'profile_user'
+    context_object_name = 'profile_users'
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
     def get_object(self, queryset=None):
         username = self.kwargs.get('username')
-        return User.objects.get(username=username)
+        return get_object_or_404(User, username=username).userprofile
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['user_posts'] = Post.objects.filter(author=self.object)
+        user_profile = self.get_object()
+        context['user_posts'] = Post.objects.filter(author=user_profile.username)
         context['post_comments'] = {}
 
         for post in context['user_posts']:
             comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
             context['post_comments'][post.id] = comments
+
+        context['user_profile'] = user_profile
         return context
+
+    # def post(self, request, username, *args, **kwargs):
+    #     print("Entering post method")
+    #     profile_instance = request.user.userprofile
+    #     profile_form = ProfileForm(data=request.POST, instance=profile_instance)
+
+    #     print(profile_instance)
+
+    #     if profile_form.is_valid():
+    #         print("Form is valid")
+    #         profile_form.save()
+    #     else:
+    #         print("Form is not valid")
+    #         context = self.get_context_data()
+    #         context['profile_form'] = profile_form
+    #         return self.render_to_response(context)
 
 
 

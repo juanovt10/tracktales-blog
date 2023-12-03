@@ -4,85 +4,155 @@
 
 {% load custom_filters %}
 
-{% for post in user_posts %}
-    <div class="card text-center post-card">
-        <div class="card-header">
-            <div class="username-info">
-                <div>
-                    {{ post.author }}
+{% if request.user.is_authenticated %}
+
+<div class="container text-center community-container">
+    <div class="row">
+        <div class="col-3">
+            <div class="card filter-card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user_profile.display_name }}</h5>
+                    <h6 class="card-title">{{ user_profile.username }}</h6>
+                    <button class="btn btn-primary" data-type="edit=profile">Edit Profile</button>
+                    <p class="card-text">{{ user_profile.user_description }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Most visited area: {{ user_profile.most_visited_area }}</li>
+                        <li class="list-group-item">Lanaguages: {{ user_profile.languages }}</li>
+                        <li class="list-group-item">Countries travelled: {{ user_profile.countries_traveled }}</li>
+                        <li class="list-group-item">Joined on: {{ user_profile.created_on }}</li>
+                    </ul>
                 </div>
-                <div>
-                    {{ post.created_on }}
-                </div>
-            </div>
-            <div class="post-tag">
-                {{ post.tags }}
             </div>
         </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <div class="country">
-                <span class="badge bg-secondary">{{ post.world_area }}</span>
-                <span class="badge bg-secondary">{{ post.country }}</span>
-            </div>
-            <p class="card-text">
-                {{ post.content }}
-            </p>
-        </div>
-        <div class="card-footer text-body-secondary">
-            {% if user.is_authenticated %}
-            <form method="POST" class="like-form">
-    
-                {% csrf_token %}
-    
-                <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
-                <button type="submit" class="btn btn-outline-danger">
-                    {% if post|user_liked_post:request.user %}
-                    <i class="fa-solid fa-heart"></i>
+        <div class="col-9 scrollable-column">
+            {% for post in user_posts %}
+            <div class="card text-center post-card">
+                <div class="card-header">
+                    <div class="username-info">
+                        <div>
+                            {{ post.author }}
+                        </div>
+                        <div>
+                            {{ post.created_on }}
+                        </div>
+                    </div>
+                    <div class="post-tag">
+                        {{ post.tags }}
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <div class="country">
+                        <span class="badge bg-secondary">{{ post.world_area }}</span>
+                        <span class="badge bg-secondary">{{ post.country }}</span>
+                    </div>
+                    <p class="card-text">
+                        {{ post.content }}
+                    </p>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    {% if user.is_authenticated %}
+                    <form method="POST" class="like-form">
+            
+                        {% csrf_token %}
+            
+                        <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
+                        <button type="submit" class="btn btn-outline-danger">
+                            {% if post|user_liked_post:request.user %}
+                            <i class="fa-solid fa-heart"></i>
+                            {% else %}
+                            <i class="fa-regular fa-heart"></i>
+                            {% endif %}
+                            <span class="text-secondary">{{ post.number_of_likes }} </span>
+                        </button>
+                    </form>
+            
                     {% else %}
-                    <i class="fa-regular fa-heart"></i>
-                    {% endif %}
+            
+                    <!-- Styling for sign off to be added -->
+                    <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
                     <span class="text-secondary">{{ post.number_of_likes }} </span>
-                </button>
-            </form>
-    
-            {% else %}
-    
-            <!-- Styling for sign off to be added -->
-            <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
-            <span class="text-secondary">{{ post.number_of_likes }} </span>
-    
-            {% endif %}
-    
-            <button class="btn btn-outline-primary" data-type="display-comment">
-                <i class="fa-regular fa-comment"></i> Comment
-            </button>
-        </div>
-    
-        <div class="card-footer text-body-secondary comment-hide" id="user-comment-area">
-            <form method="POST" class="comment-form">
-                {% csrf_token %}
-    
-                <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
-                {{ comment_form.body }}
-                <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
-            </form>
-        </div>
-        <!-- this is the area for the display of comments -->
-        {% for comment in post_comments|key:post.id %}
-        <div class="card-footer text-body-secondary comments-display">
-            <div>
-                {{ comment.author.username }} {{ comment.created_on}}
+            
+                    {% endif %}
+            
+                    <button class="btn btn-outline-primary" data-type="display-comment">
+                        <i class="fa-regular fa-comment"></i> Comment
+                    </button>
+                </div>
+            
+                <div class="card-footer text-body-secondary comment-hide" id="user-comment-area">
+                    <form method="POST" class="comment-form">
+                        {% csrf_token %}
+            
+                        <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
+                        {{ comment_form.body }}
+                        <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
+                    </form>
+                </div>
+                <!-- this is the area for the display of comments -->
+                {% for comment in post_comments|key:post.id %}
+                <div class="card-footer text-body-secondary comments-display">
+                    <div>
+                        {{ comment.author.username }} {{ comment.created_on}}
+                    </div>
+                    <div>
+                        {{ comment.body }}
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div>
-                {{ comment.body }}
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-{% endfor %}
+</div>
 
+    <div class="card post-card edit-profile">
+        <h5 class="card-header">Create Profile</h5>
+        <div class="card-body">
+            <form method="post" action="{% url 'create_profile' username=request.user.username %}">
+                {% csrf_token %}
+                {% if profile_form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> {{ profile_form.errors }}
+                </div>
+                {% endif %}
+                <div class="mb-3 comment-form-divs">
+                    <div class="btn btn-primary">
+                        {{ request.user.username }}
+                    </div>
+                    <div>
+                        <label for="{{ profile_form.display_name.id_for_label }}" class="form-label">Display name:</label>
+                        {{ profile_form.display_name }}
+                    </div>
+                </div>
+                <div class="mb-3 comment-form-divs">
+                    <label for="{{ profile_form.most_visited_area.id_for_label }}" class="form-label">Most visited
+                        area:</label>
+                    <div class="btn-group">
+                        {{ profile_form.most_visited_area }}
+                    </div>
+                    <div>
+                        <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
+                        {{ profile_form.countries_traveled }}
+                    </div>
+    
+                    <div>
+                        <label for="{{ profile_form.languages.id_for_label }}" class="form-label">Languages:</label>
+                        {{ profile_form.languages }}
+                    </div>
+                </div>
+                <div class="mb-3 comment-form-divs">
+                    <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe
+                        yourself:</label>
+                    {{ profile_form.user_description }}
+                </div>
+                <button type="submit" class="btn btn-outline-info btn-post">Create!</button>
+            </form>
+        </div>
+    </div>
 
+{% endif %}
 
+<!-- here I should redirect to the sign up page -->
 
 {% endblock %}
