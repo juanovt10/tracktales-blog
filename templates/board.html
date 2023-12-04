@@ -188,13 +188,12 @@
                     <span class="text-secondary">{{ post.number_of_likes }} </span>
                         
                     {% endif %}
-                        
-                    <button class="btn btn-outline-primary" data-type="display-comment">
+                    
+                    <button class="btn btn-outline-primary display-comment-btn" data-post-id="{{ post.id }}">
                         <i class="fa-regular fa-comment"></i> Comment
                     </button>
                 </div>
-
-                <div class="card-footer text-body-secondary comment-hide" id="user-comment-area">
+                <div class="card-footer text-body-secondary user-comment-area" data-post-id="{{ post.id }}">
                     <form method="POST" class="comment-form">
                         {% csrf_token %}
                         
