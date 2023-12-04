@@ -149,12 +149,16 @@ class ProfileDetail(generic.DetailView):
             comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
             context['post_comments'][post.id] = comments
 
+        profile_instance = user_profile
+        context['profile_form'] = ProfileForm(instance=profile_instance)
+
         context['user_profile'] = user_profile
         return context
 
     def post(self, request, username, *args, **kwargs):
         print("Entering post method")
-        profile_instance = request.user.userprofile
+        user_profile = self.get.object()
+        profile_instance = user_profile
         profile_form = ProfileForm(data=request.POST, instance=profile_instance)
 
         print(profile_instance)
