@@ -15,8 +15,7 @@ $(document).ready(function () {
         let modalId = "#deletePostModal-" + postId;
         $(modalId).modal('show');
     });
-
-    $(".delete-post-btn").on("click", function () {
-        $("#delete-post-form").submit();
+    $(".delete-post").on("click", function () {
+        $(".delete-post-form").submit();
     });
 });

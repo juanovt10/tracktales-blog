@@ -71,10 +71,11 @@ class PostBoard(generic.ListView):
             comment.post = post
             comment.save()
         
-        elif 'delete_post_id' in request.POST:
-            post_slug = request.POST.get('delete_post_id')
-            post = get_object_or_404(Post, slug=post_slug)
-            post.delete()
+        # elif 'delete_post_id' in request.POST:
+        #     print("Delete is being triggered")
+        #     post_slug = request.POST.get('delete_post_id')
+        #     post = get_object_or_404(Post, slug=post_slug)
+        #     post.delete()
 
         return HttpResponseRedirect(reverse_lazy('post_board'))
 
@@ -97,6 +98,14 @@ class PostBoard(generic.ListView):
 
         return queryset
 
+
+class DeletePostView(View):
+    def post(self, request, *args, **kwargs):
+        print("Delete is being triggered")
+        post_slug = request.POST.get('delete_post_id')
+        post = get_object_or_404(Post, slug=post_slug)
+        post.delete()
+        return redirect('post_board')
 
 class CreateProfile(generic.ListView):
     model = UserProfile

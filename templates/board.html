@@ -147,9 +147,8 @@
                                 <i class="fa-solid fa-ellipsis"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Edit Post</a></li>
+                                <li><a class="dropdown-item edit-post-btn" data-post-id="{{ post.slug }}" href="#">Edit Post</a></li>
                                 <li><button class="dropdown-item delete-post-btn" data-post-id="{{ post.slug }}">Delete Post</button></li>
-                                <!-- <li><a class="dropdown-item" href="#">Delete Post</a></li> -->
                             </ul>
                         </div>
                         {% endif %}
@@ -221,6 +220,8 @@
                 {% endfor %}
             </div>
 
+            <!-- delete post modal -->
+
             <div class="modal edit-post delete-post-modal" tabindex="-1" id="deletePostModal-{{ post.slug }}">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -232,16 +233,17 @@
                             <p>Are you sure do you want to delete the folloing post:</p>
                             <p>{{ post.title }}</p>
                         </div>
-                        <form method="post" class="modal-footer" id="delete-post-form">
+                        <form method="post" action="{% url 'delete_post' %}" class="modal-footer delete-post-form">
                             {% csrf_token %}
-                            <!-- <input type="hidden" name="delete_post_id" value="{{post.slug}}" > -->
-                            <input type="hidden" name="delete_post_id" id="delete-post-id-input" value="{{post.slug}}">
+                            <input type="hidden" name="delete_post_id" class="delete-post-id-input" value="{{post.slug}}">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger delete-post-btn">Yes, delete my post</button>
+                            <button type="button" class="btn btn-danger delete-post">Yes, delete my post</button>
                         </form>
                     </div>
                 </div>
             </div>
+
+            
 
             {% endfor %}
         </div>
@@ -287,19 +289,6 @@
                 {{ post_form.content }}
             </div>
             <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
-        </form>
-    </div>
-</div> -->
-<!-- 
-<div class="card edit-post close-popup">
-    <div class="card-header">
-        Are you sure you want to delete the Post?
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">"Post title"</h5>
-        <p class="card-text">Please be aware that if you click Delete Post you can not recover and all likes and comments will be deleted</p>
-        <form method="post">
-            <button type="submit" class="btn btn-outline-danger">Danger</button>
         </form>
     </div>
 </div> -->
