@@ -29,15 +29,29 @@
             <div class="card text-center post-card">
                 <div class="card-header">
                     <div class="username-info">
-                        <div>
+                        <div class="post-header-content">
                             {{ post.author }}
                         </div>
-                        <div>
+                        <div class="post-header-content">
                             {{ post.created_on }}
                         </div>
                     </div>
-                    <div class="post-tag">
-                        {{ post.tags }}
+                    <div class="username-info">
+                        <div class="post-tag post-header-content">
+                            {{ post.tags }}
+                        </div>
+                        {% if request.user.id == post.author.id %}
+                        <div class="btn-group option-btn-group">
+                            <button class="btn btn-outline-secondary option-btn" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Edit Post</a></li>
+                                <li><a class="dropdown-item" href="#">Delete Post</a></li>
+                            </ul>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="card-body">

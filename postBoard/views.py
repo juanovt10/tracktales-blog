@@ -39,6 +39,12 @@ class PostBoard(generic.ListView):
         
         return context
 
+    # def delete_post(self, request, post_id):
+    #     post = get_object_or_404(Post, id=post_id)
+
+    #     post.delete()
+    #     return JsonResponse({'message': 'Post deleted successfully.'})
+    
 
     #method to post the user post into the database and like posts 
     def post(self, request, *args, **kwargs):
@@ -151,7 +157,6 @@ class ProfileDetail(generic.DetailView):
 
         profile_instance = user_profile
         context['profile_form'] = ProfileForm(instance=profile_instance)
-
         context['user_profile'] = user_profile
         return context
 
@@ -171,8 +176,3 @@ class ProfileDetail(generic.DetailView):
             context = self.get_context_data()
             context['profile_form'] = profile_form
             return self.render_to_response(context)
-
-
-
-
-
