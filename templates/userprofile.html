@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ user_profile.display_name }}</h5>
                     <h6 class="card-title">{{ user_profile.username }}</h6>
-                    <button class="btn btn-primary" data-type="edit=profile">Edit Profile</button>
+                    <button class="btn btn-primary" id="edit-profile-btn">Edit Profile</button>
                     <p class="card-text">{{ user_profile.user_description }}</p>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Most visited area: {{ user_profile.most_visited_area }}</li>
@@ -106,7 +106,7 @@
     </div>
 </div>
 
-    <div class="card post-card edit-profile">
+    <div class="card post-card close-popup" id="edit-profile-popup">
         <h5 class="card-header">Create Profile</h5>
         <div class="card-body">
             <form method="post" action="{% url 'create_profile' username=request.user.username %}">

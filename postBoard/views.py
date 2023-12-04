@@ -137,6 +137,9 @@ class ProfileDetail(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['tags'] = TAGS
+        context['areas'] = WORLD_AREAS
+        context['profile_form'] = ProfileForm()
 
         user_profile = self.get_object()
         context['user_posts'] = Post.objects.filter(author=user_profile.username)
@@ -149,21 +152,21 @@ class ProfileDetail(generic.DetailView):
         context['user_profile'] = user_profile
         return context
 
-    # def post(self, request, username, *args, **kwargs):
-    #     print("Entering post method")
-    #     profile_instance = request.user.userprofile
-    #     profile_form = ProfileForm(data=request.POST, instance=profile_instance)
+    def post(self, request, username, *args, **kwargs):
+        print("Entering post method")
+        profile_instance = request.user.userprofile
+        profile_form = ProfileForm(data=request.POST, instance=profile_instance)
 
-    #     print(profile_instance)
+        print(profile_instance)
 
-    #     if profile_form.is_valid():
-    #         print("Form is valid")
-    #         profile_form.save()
-    #     else:
-    #         print("Form is not valid")
-    #         context = self.get_context_data()
-    #         context['profile_form'] = profile_form
-    #         return self.render_to_response(context)
+        if profile_form.is_valid():
+            print("Form is valid")
+            profile_form.save()
+        else:
+            print("Form is not valid")
+            context = self.get_context_data()
+            context['profile_form'] = profile_form
+            return self.render_to_response(context)
 
 
 
