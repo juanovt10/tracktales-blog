@@ -37,14 +37,7 @@ class PostBoard(generic.ListView):
             comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
             context['post_comments'][post.id] = comments
         
-        return context
-
-    # def delete_post(self, request, post_id):
-    #     post = get_object_or_404(Post, id=post_id)
-
-    #     post.delete()
-    #     return JsonResponse({'message': 'Post deleted successfully.'})
-    
+        return context    
 
     #method to post the user post into the database and like posts 
     def post(self, request, *args, **kwargs):
@@ -76,7 +69,12 @@ class PostBoard(generic.ListView):
             comment_form.instance.author = request.user
             comment = comment_form.save(commit=False)   
             comment.post = post
-            comment.save()     
+            comment.save()
+        
+        elif 'delete_post_id' in request.POST:
+            post_slug = request.POST.get('delete_post_id')
+            post = get_object_or_404(Post, slug=post_slug)
+            post.delete()
 
         return HttpResponseRedirect(reverse_lazy('post_board'))
 

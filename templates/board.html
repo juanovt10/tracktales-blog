@@ -16,13 +16,13 @@
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
                                     aria-controls="panelsStayOpen-collapseOne">
                                     Type of Holiday
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
                                 <div class="accordion-body checkbox-display">
                                     {% for tag_value, tag_label in filter_tags %}
                                     <div class="form-check form-check-inline">
@@ -148,14 +148,15 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Edit Post</a></li>
-                                <li><a class="dropdown-item" href="#">Delete Post</a></li>
+                                <li><button class="dropdown-item delete-post-btn" data-post-id="{{ post.slug }}">Delete Post</button></li>
+                                <!-- <li><a class="dropdown-item" href="#">Delete Post</a></li> -->
                             </ul>
                         </div>
                         {% endif %}
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
+                    <h5 class="card-title post-title">{{ post.title }}</h5>
                     <div class="country">
                         <span class="badge bg-secondary">{{ post.world_area }}</span>
                         <span class="badge bg-secondary">{{ post.country }}</span>
@@ -194,6 +195,7 @@
                     </button>
                 </div>
                 <div class="card-footer text-body-secondary user-comment-area" data-post-id="{{ post.id }}">
+                    {% if user.is_authenticated %}
                     <form method="POST" class="comment-form">
                         {% csrf_token %}
                         
@@ -201,6 +203,9 @@
                         {{ comment_form.body }}
                         <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
                     </form>
+                    {% else %}
+                    <p>Please login to be able to comment post</p>
+                    {% endif %}
                 </div>
                     
                 <!-- this is the area for the display of comments -->
@@ -215,6 +220,29 @@
                 </div>
                 {% endfor %}
             </div>
+
+            <div class="modal edit-post delete-post-modal" tabindex="-1" id="deletePostModal-{{ post.slug }}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete post?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure do you want to delete the folloing post:</p>
+                            <p>{{ post.title }}</p>
+                        </div>
+                        <form method="post" class="modal-footer" id="delete-post-form">
+                            {% csrf_token %}
+                            <!-- <input type="hidden" name="delete_post_id" value="{{post.slug}}" > -->
+                            <input type="hidden" name="delete_post_id" id="delete-post-id-input" value="{{post.slug}}">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger delete-post-btn">Yes, delete my post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             {% endfor %}
         </div>
     </div>
@@ -262,7 +290,7 @@
         </form>
     </div>
 </div> -->
-
+<!-- 
 <div class="card edit-post close-popup">
     <div class="card-header">
         Are you sure you want to delete the Post?
@@ -274,6 +302,6 @@
             <button type="submit" class="btn btn-outline-danger">Danger</button>
         </form>
     </div>
-</div>
+</div> -->
 
 {% endblock %}

@@ -4,4 +4,19 @@ $(document).ready(function () {
         let postId = $(this).data("post-id");
         $(".user-comment-area[data-post-id='" + postId + "']").toggle();
     });
+
+    $(".delete-post-btn").on("click", function () {
+        let postId = $(this).data("post-id");
+        let postTitle = $(this).closest(".card").find(".post-title").text();
+
+        $("#delete-post-id-input").val(postId);
+        $("#post-title").text(postTitle);
+
+        let modalId = "#deletePostModal-" + postId;
+        $(modalId).modal('show');
+    });
+
+    $(".delete-post-btn").on("click", function () {
+        $("#delete-post-form").submit();
+    });
 });

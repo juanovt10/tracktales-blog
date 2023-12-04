@@ -211,6 +211,10 @@ textarea {
     display: none;
 }
 
+.display-modal {
+    display: block;
+}
+
 .comment-submit {
     margin-top: 0.5rem;
 }
