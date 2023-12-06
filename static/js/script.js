@@ -5,6 +5,7 @@ $(document).ready(function () {
         $(".user-comment-area[data-post-id='" + postId + "']").toggle();
     });
 
+
     $(".delete-post-btn").on("click", function () {
         let postId = $(this).data("post-id");
         let postTitle = $(this).closest(".card").find(".post-title").text();
@@ -15,7 +16,24 @@ $(document).ready(function () {
         let modalId = "#deletePostModal-" + postId;
         $(modalId).modal('show');
     });
+
     $(".delete-post").on("click", function () {
         $(".delete-post-form").submit();
+    });
+
+    $(".edit-post-btn").on("click", function () {
+        let postId = $(this).data("post-id");
+        let postTitle = $(this).closest(".card").find(".post-title").text();
+
+        $("#edit-post-id-input").val(postId);
+
+        let modalId = "#editPostModal-" + postId;
+        $(modalId).modal('show');
+    });
+
+    $(".edit-post").on("click", function () {
+        $(".edit-post-form").submit(function () {
+
+        });
     });
 });

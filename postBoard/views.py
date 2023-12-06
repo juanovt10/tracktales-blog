@@ -19,6 +19,20 @@ class PostBoard(generic.ListView):
     template_name = 'board.html'
     context_object_name = 'posts'
 
+    # def get_object(self):
+    #     post_slug = self.kwargs.get('post')
+    #     return get_object_or_404(Post, slug=post_slug)
+
+    # def get(self, request, *args, **kwargs):
+    #     post_instance = self.get_object()
+    #     post_form - PostForm(instance=post_instance)
+    #     context = {
+    #         'post_form': post_form,
+    #         'post_content': post_instance
+    #     }
+
+    #     return render(request, 'edit_post.html', context)
+
     # method to display world_areas and tags lists in post form
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,12 +84,6 @@ class PostBoard(generic.ListView):
             comment = comment_form.save(commit=False)   
             comment.post = post
             comment.save()
-        
-        # elif 'delete_post_id' in request.POST:
-        #     print("Delete is being triggered")
-        #     post_slug = request.POST.get('delete_post_id')
-        #     post = get_object_or_404(Post, slug=post_slug)
-        #     post.delete()
 
         return HttpResponseRedirect(reverse_lazy('post_board'))
 
@@ -97,6 +105,28 @@ class PostBoard(generic.ListView):
                 queryset = queryset.filter(world_area__in=world_areas).distinct()
 
         return queryset
+
+class EditPostView(View):
+    model = Post
+    template = 'edit_post.html'
+
+    def get_object(self):
+        post_slug = self.kwargs.get('post')
+        return get_object_or_404(Post, slug=post_slug)
+
+    def get(self, request, *args, **kwargs):
+        post_instance = self.get_object()
+        post_form = PostForm(instance=post_instance)
+        return render(request, self.template_name, {'post_form': post_form, 'post_content': post_instance})
+
+    def post(self, request, *args, **kwargs):
+        post_instance = self.get_object()
+        post_form = PostForm(data=request.POST, instance=post_instance)
+
+        if post_form.is_valid():
+            post_form.save()
+
+        return HttpResponseRedirect(reverse_lazy('post_board')) 
 
 
 class DeletePostView(View):

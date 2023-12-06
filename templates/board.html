@@ -147,7 +147,7 @@
                                 <i class="fa-solid fa-ellipsis"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item edit-post-btn" data-post-id="{{ post.slug }}" href="#">Edit Post</a></li>
+                                <li><button class="dropdown-item edit-post-btn" data-post-id="{{ post.slug }}">Edit Post</button></li>
                                 <li><button class="dropdown-item delete-post-btn" data-post-id="{{ post.slug }}">Delete Post</button></li>
                             </ul>
                         </div>
@@ -222,7 +222,7 @@
 
             <!-- delete post modal -->
 
-            <div class="modal edit-post delete-post-modal" tabindex="-1" id="deletePostModal-{{ post.slug }}">
+            <div class="modal delete-post-modal" tabindex="-1" id="deletePostModal-{{ post.slug }}">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -243,7 +243,59 @@
                 </div>
             </div>
 
-            
+
+            <!-- edit post modal -->
+            <div class="modal fade" id="editPostModal-{{ post.slug }}" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Post: {{ post.title }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" class="edit-post-form" action="{% url 'edit_post' post.slug %}">
+                            <div class="modal-body">
+                                {% csrf_token %}
+                                
+                                {% if post_form.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>Error!</strong> {{ post_form.errors }}
+                                </div>
+                                {% endif %}
+                                <div class="mb-3 comment-form-divs">
+                                    <div class="btn btn-primary">
+                                        {{ request.user.username }}
+                                    </div>
+                                    <div class="btn-group">
+                                        {{ post_form.tags }}
+                                    </div>
+                                    <div>
+                                        <label for="" class="form-label">Title:</label>
+                                        {{ post_form.title }}
+                                    </div>
+                                </div>
+                                <div class="mb-3 comment-form-divs">
+                                
+                                    <div class="btn-group">
+                                        {{ post_form.world_area }}
+                                    </div>
+                                
+                                    <div>
+                                        <label for="{{ post_form.country.id_for_label }}" class="form-label">Country:</label>
+                                        {{ post_form.country }}
+                                    </div>
+                                </div>
+                                <div class="mb-3 comment-form-divs">
+                                    {{ post_form.content }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-outline-info btn-post edit-post">Edit post</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             {% endfor %}
         </div>
