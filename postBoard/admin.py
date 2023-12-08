@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, UserProfile
+from .models import Post, Comment, UserProfile, ContactInfo
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -36,3 +36,10 @@ class UserProfileAdmin(admin.ModelAdmin):
     #     return obj.user.username
 
     # get_username.short_description = 'Username'
+
+@admin.register(ContactInfo)
+class ContactInfoAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'last_name', 'email', 'phone_number', 'subject', 'message')
+    list_filter = ('last_name',)
+    search_fields = ('last_name', 'email')
+

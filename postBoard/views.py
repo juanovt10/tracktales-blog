@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
 from django.views import generic, View
 from django.views.generic import TemplateView
-from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile
-from .forms import PostForm, CommentForm, ProfileForm, EditPostForm
+from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile, ContactInfo
+from .forms import PostForm, CommentForm, ProfileForm, EditPostForm, ContactUsForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
@@ -75,6 +75,7 @@ class PostBoard(generic.ListView):
             comment.post = post
             comment.save()
 
+        #method to edit posts
         elif 'edit_post_id' in request.POST:
             post_slug = request.POST['edit_post_id']
             post = post = get_object_or_404(Post, slug=post_slug)
@@ -189,3 +190,29 @@ class ProfileDetail(generic.DetailView):
             context = self.get_context_data()
             context['profile_form'] = profile_form
             return self.render_to_response(context)
+
+
+class ContactUs(generic.ListView):
+    model = ContactInfo
+    template_name = 'contactus.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contact_form'] = ContactUsForm()
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        contact_form = ContactUsForm(data=request.POST)
+
+        if contact_form.is_valid():
+            contact_form.save()
+            return HttpResponseRedirect(reverse_lazy('index'))
+        else:
+            print("Form is not valid")
+            context = self.get_context_data()
+            context['contact_form'] = contact_form
+            return self.render_to_response(context)
+        
+
+        

@@ -237,3 +237,11 @@ textarea {
 .close-popup {
     visibility: hidden;
 }
+
+
+/* contactus styling */
+
+.contact-container {
+    margin-top: 80px;
+    width: 80%;
+}

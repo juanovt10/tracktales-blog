@@ -1,4 +1,4 @@
-from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile
+from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile, ContactInfo
 from django import forms
 from django.utils.html import format_html
 from django.contrib.auth.models import User
@@ -105,3 +105,23 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('display_name', 'user_description', 'most_visited_area', 'languages', 'countries_traveled')
+
+
+class ContactUsForm(forms.ModelForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    phone_number = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    subject = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    message = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                "class": "form-control",
+                "cols": "100", 
+                "rows":"3",
+            }
+        )
+    )
+    class Meta:
+        model = ContactInfo
+        fields = ('first_name', 'last_name', 'email', 'phone_number', 'subject', 'message',)

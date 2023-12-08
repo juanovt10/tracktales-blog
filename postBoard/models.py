@@ -108,6 +108,7 @@ class ContactInfo(models.Model):
     phone_number = models.CharField(max_length=15)
     subject = models.CharField(max_length=50)
     message = models.TextField()
+    submitted_on = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.subject}" 
