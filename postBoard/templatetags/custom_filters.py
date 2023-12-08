@@ -12,8 +12,3 @@ def user_liked_post(post, user):
 @register.filter
 def key(d, key_name):
     return d[key_name]
-
-@register.filter(name='edit_post')
-def edit_post(post, *fields):
-    form = EditPostForm(instance=post, prefix=f'post_form_edit_{post.slug}')
-    return [form[field] for field in fields]

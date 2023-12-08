@@ -13,6 +13,9 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request, 'index.html')
 
+def about_us(request):
+    return render(request, 'aboutus.html')
+
 class PostBoard(generic.ListView):
     model = Post
     queryset = Post.objects.filter(approved=True).order_by('-created_on')

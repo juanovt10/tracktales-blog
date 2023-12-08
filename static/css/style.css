@@ -50,6 +50,13 @@ body {
     color: inherit;
 }
 
+/* about us styling */
+
+.about-us-container {
+    margin-top: 80px;
+    padding-bottom: 60px;
+}
+
 /* -- board page styling -- */
 
 .community-container {

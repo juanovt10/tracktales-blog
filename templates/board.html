@@ -222,11 +222,11 @@
 
             <!-- delete post modal -->
 
-            <div class="modal delete-post-modal" tabindex="-1" id="deletePostModal-{{ post.slug }}">
+            <div class="modal fade" id="deletePostModal-{{ post.slug }}" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Delete post?</h5>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete post?</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -242,6 +242,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- edit post modal -->
 
             <div class="modal fade" id="editPostModal-{{ post.slug }}" tabindex="-1">
                 <div class="modal-dialog">
@@ -285,8 +287,6 @@
                     </div>
                 </div>
             </div>
-
-
 
             {% endfor %}
         </div>
