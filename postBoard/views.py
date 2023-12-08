@@ -3,7 +3,7 @@ from django.utils.text import slugify
 from django.views import generic, View
 from django.views.generic import TemplateView
 from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile
-from .forms import PostForm, CommentForm, ProfileForm
+from .forms import PostForm, CommentForm, ProfileForm, EditPostForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
@@ -19,20 +19,6 @@ class PostBoard(generic.ListView):
     template_name = 'board.html'
     context_object_name = 'posts'
 
-    # def get_object(self):
-    #     post_slug = self.kwargs.get('post')
-    #     return get_object_or_404(Post, slug=post_slug)
-
-    # def get(self, request, *args, **kwargs):
-    #     post_instance = self.get_object()
-    #     post_form - PostForm(instance=post_instance)
-    #     context = {
-    #         'post_form': post_form,
-    #         'post_content': post_instance
-    #     }
-
-    #     return render(request, 'edit_post.html', context)
-
     # method to display world_areas and tags lists in post form
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,6 +28,7 @@ class PostBoard(generic.ListView):
         context['filter_areas'] = WORLD_AREAS[1:]
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
+        context['edit_post_form'] = EditPostForm()
 
         #create an empty dictionary for the post_comments
         context['post_comments'] = {}
@@ -50,7 +37,7 @@ class PostBoard(generic.ListView):
         for post in context['posts']:
             comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
             context['post_comments'][post.id] = comments
-        
+
         return context    
 
     #method to post the user post into the database and like posts 
@@ -85,6 +72,13 @@ class PostBoard(generic.ListView):
             comment.post = post
             comment.save()
 
+        elif 'edit_post_id' in request.POST:
+            post_slug = request.POST['edit_post_id']
+            post = post = get_object_or_404(Post, slug=post_slug)
+            edit_form = EditPostForm(instance=post, data=request.POST) 
+            if edit_form.is_valid():
+                edit_form.save()
+
         return HttpResponseRedirect(reverse_lazy('post_board'))
 
     #method to filter posts in post board
@@ -105,29 +99,7 @@ class PostBoard(generic.ListView):
                 queryset = queryset.filter(world_area__in=world_areas).distinct()
 
         return queryset
-
-class EditPostView(View):
-    model = Post
-    template = 'edit_post.html'
-
-    def get_object(self):
-        post_slug = self.kwargs.get('post')
-        return get_object_or_404(Post, slug=post_slug)
-
-    def get(self, request, *args, **kwargs):
-        post_instance = self.get_object()
-        post_form = PostForm(instance=post_instance)
-        return render(request, self.template_name, {'post_form': post_form, 'post_content': post_instance})
-
-    def post(self, request, *args, **kwargs):
-        post_instance = self.get_object()
-        post_form = PostForm(data=request.POST, instance=post_instance)
-
-        if post_form.is_valid():
-            post_form.save()
-
-        return HttpResponseRedirect(reverse_lazy('post_board')) 
-
+        
 
 class DeletePostView(View):
     def post(self, request, *args, **kwargs):
@@ -136,6 +108,7 @@ class DeletePostView(View):
         post = get_object_or_404(Post, slug=post_slug)
         post.delete()
         return redirect('post_board')
+
 
 class CreateProfile(generic.ListView):
     model = UserProfile
@@ -199,7 +172,7 @@ class ProfileDetail(generic.DetailView):
 
     def post(self, request, username, *args, **kwargs):
         print("Entering post method")
-        user_profile = self.get.object()
+        user_profile = self.get_object()
         profile_instance = user_profile
         profile_form = ProfileForm(data=request.POST, instance=profile_instance)
 
