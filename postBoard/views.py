@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 def index(request):
     return render(request, 'index.html')
@@ -50,14 +51,8 @@ class PostBoard(generic.ListView):
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
 
-        #check if teh post form is valid and post the form the database
-        if post_form.is_valid():
-            post_form.instance.author = request.user
-            post_form.instance.slug = slugify(post_form.instance.title)
-            post_form.save()
-
         #check for the id in the request POST and add or delete likes    
-        elif 'blogpost_id_like' in request.POST:
+        if 'blogpost_id_like' in request.POST:
             post_slug = request.POST['blogpost_id_like']
             post = get_object_or_404(Post, slug=post_slug)
 
@@ -82,6 +77,16 @@ class PostBoard(generic.ListView):
             edit_form = EditPostForm(instance=post, data=request.POST) 
             if edit_form.is_valid():
                 edit_form.save()
+
+        else: 
+            #check if teh post form is valid and post the form the database
+            if post_form.is_valid():
+                post_form.instance.author = request.user
+                post_form.instance.slug = slugify(post_form.instance.title)
+                post_form.save()
+                messages.success(request, 'Thank you! Your post is awaiting for approval, this will take a couple of minutes')
+            else: 
+                return render(request, 'board.html', {'post_form': post_form})
 
         return HttpResponseRedirect(reverse_lazy('post_board'))
 
@@ -109,7 +114,9 @@ class DeletePostView(View):
     def post(self, request, *args, **kwargs):
         print("Delete is being triggered")
         post_slug = request.POST.get('delete_post_id')
+        print(post_slug)
         post = get_object_or_404(Post, slug=post_slug)
+        print(post)
         post.delete()
         return redirect('post_board')
 
@@ -212,6 +219,7 @@ class ContactUs(FormView):
     def form_invalid(self, form):
         error_message = "There was an error with your submission. Please check the form and try again."
         return self.render_to_response(self.get_context_data(form=form, error_message=error_message))
+
 
 def contact_success(request):
     return render(request, 'contactsuccess.html')

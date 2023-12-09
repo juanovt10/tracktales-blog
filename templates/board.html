@@ -70,9 +70,67 @@
         <div class="col-9 scrollable-column">
             {% if user.is_authenticated %}
             <div class="card post-card">
-                <h5 class="card-header">Create post</h5>
+                <h5 class="card-header">Create post - {{ request.user.username }}</h5>
                 <div class="card-body">
                     <form method="post">
+                        {% csrf_token %}
+
+                        {% if post_form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong>
+                            <ul>
+                                {% for field, error_list in post_form.errors.items %}
+                                {% for error in error_list %}
+                                <li>{{ error }}</li>
+                                {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    
+                        {% if messages %}
+                        <div class="alert alert-success" role="alert">
+                            {% for message in messages %}
+                            {{ message }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-3 row">
+                            <div class="col-6">
+                                {{ post_form.title }}
+                            </div>
+                            <div class="col-6">
+                                {{ post_form.country }}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="btn-group col-6">
+                                {{ post_form.tags }}
+                            </div>
+                            <div class="btn-group col-6">
+                                {{ post_form.world_area }}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col">
+                                {{ post_form.content }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
+                    </form>
+
+
+<!-- 
+------------------------------------------------------------------------------ -->
+
+
+
+
+
+
+
+                    <!-- <form method="post">
                         {% csrf_token %}
 
                         {% if post_form.errors %}
@@ -80,6 +138,7 @@
                             <strong>Error!</strong> {{ post_form.errors }}
                         </div>
                         {% endif %}
+
                         <div class="mb-3 comment-form-divs">
                             <div class="btn btn-primary">
                                 {{ request.user.username }}
@@ -107,7 +166,7 @@
                             {{ post_form.content }}
                         </div>
                         <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
                 
@@ -235,7 +294,7 @@
                         </div>
                         <form method="post" action="{% url 'delete_post' %}" class="modal-footer delete-post-form">
                             {% csrf_token %}
-                            <input type="hidden" name="delete_post_id" class="delete-post-id-input" value="{{post.slug}}">
+                            <input type="hidden" name="delete_post_id" id="delete-post-id-input-{{ post.slug }}" value="{{post.slug}}">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-danger delete-post">Yes, delete my post</button>
                         </form>
@@ -279,7 +338,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="hidden" name="edit_post_id" class="edit-post-id-input" value="{{post.slug}}">
+                                <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-outline-info btn-post edit-post">Edit post</button>
                             </div>

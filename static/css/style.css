@@ -63,14 +63,9 @@ body {
 /* -- board page styling -- */
 
 .community-container {
-    margin-top: 60px;
+    margin-top: 4rem;
 }
 
-.board_filter_container {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
 
 .filter-card {
     width: 100%;

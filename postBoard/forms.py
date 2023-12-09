@@ -5,22 +5,23 @@ from django.contrib.auth.models import User
 
 
 class PostForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    country = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    title = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter post title"}), required=True)
+    country = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter country"}), required=True)
     tags = forms.ChoiceField(
         widget=forms.Select(
             attrs= {
                 "class": "btn btn-secondary dropdown-toggle",
-                "placeholder": "Holiday Type",
             }
         ),
         choices=TAGS,
+        required=True,
     )
 
     world_area = forms.ChoiceField(
         widget=forms.Select(
             attrs= {"class": "btn btn-secondary dropdown-toggle"}),
         choices=WORLD_AREAS,
+        required=True,
     )
     content = forms.CharField(
         widget=forms.Textarea(
@@ -28,8 +29,10 @@ class PostForm(forms.ModelForm):
                 "class": "form-control",
                 "cols": "100", 
                 "rows":"3",
+                "placeholder": "Describe your experience!"
             }
-        )
+        ), 
+        required=True,
     )
     class Meta:
         model = Post

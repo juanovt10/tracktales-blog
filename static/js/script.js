@@ -9,6 +9,7 @@ $(document).ready(function () {
     $(".delete-post-btn").on("click", function () {
         let postId = $(this).data("post-id");
         let postTitle = $(this).closest(".card").find(".post-title").text();
+        console.log(postId)
 
         $("#delete-post-id-input").val(postId);
         $("#post-title").text(postTitle);
@@ -17,9 +18,12 @@ $(document).ready(function () {
         $(modalId).modal('show');
     });
 
+
     $(".delete-post").on("click", function () {
-        $(".delete-post-form").submit();
+        let deleteForm = $(this).closest("form");
+        $(deleteForm).submit();
     });
+
 
 
 
@@ -42,6 +46,7 @@ $(document).ready(function () {
     });
 
     $(".edit-post").on("click", function () {
-        $(".edit-post-form").submit();
+        let editForm = $(this).closest("form");
+        editForm.submit();
     });
 });
