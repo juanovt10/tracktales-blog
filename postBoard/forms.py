@@ -108,19 +108,20 @@ class ProfileForm(forms.ModelForm):
 
 
 class ContactUsForm(forms.ModelForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    phone_number = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    subject = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
+    email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
+    phone_number = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
+    subject = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
     message = forms.CharField(
         widget=forms.Textarea(
             attrs={
-                "class": "form-control",
+                "class": "form-control mb-3",
                 "cols": "100", 
                 "rows":"3",
             }
-        )
+        ),
+        required=True
     )
     class Meta:
         model = ContactInfo

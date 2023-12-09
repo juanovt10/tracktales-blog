@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container contact-us-container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Thank you for your enquiry!</h5>
+            <p class="card-text">We appreciate your interest in contacting us. Your message has been successfully
+                received, and our team will get back to you as soon as possible.</p>
+            <p class="card-text">In the meantime, feel free to explore more about our services or check out our latest
+                articles and updates on our website.</p>
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+                {% if user.is_authenticated %}
+                {% else %}
+                <a href="{% url 'account_signup' %}" class="btn btn-success">Sign Up</a>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

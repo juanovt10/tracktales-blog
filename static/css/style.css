@@ -49,6 +49,13 @@ body {
 /* about us styling */
 
 .about-us-container {
+    margin-top: 4.5rem;
+    margin-bottom: 4rem;
+}
+
+/* contactus styling */
+
+.contact-us-container {
     margin-top: 5rem;
     margin-bottom: 4rem;
 }
@@ -234,10 +241,3 @@ textarea {
     visibility: hidden;
 }
 
-/* contactus styling */
-
-.contact-container {
-    margin-top: 80px;
-    margin-bottom: 80px;
-    width: 80%;
-}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
 from django.views import generic, View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile, ContactInfo
 from .forms import PostForm, CommentForm, ProfileForm, EditPostForm, ContactUsForm
 from django.urls import reverse_lazy
@@ -192,9 +192,11 @@ class ProfileDetail(generic.DetailView):
             return self.render_to_response(context)
 
 
-class ContactUs(generic.ListView):
-    model = ContactInfo
+class ContactUs(FormView):
     template_name = 'contactus.html'
+    form_class = ContactUsForm
+    success_url = reverse_lazy('contact_success')
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -202,17 +204,15 @@ class ContactUs(generic.ListView):
 
         return context
 
-    def post(self, request, *args, **kwargs):
-        contact_form = ContactUsForm(data=request.POST)
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
-        if contact_form.is_valid():
-            contact_form.save()
-            return HttpResponseRedirect(reverse_lazy('index'))
-        else:
-            print("Form is not valid")
-            context = self.get_context_data()
-            context['contact_form'] = contact_form
-            return self.render_to_response(context)
-        
 
+    def form_invalid(self, form):
+        error_message = "There was an error with your submission. Please check the form and try again."
+        return self.render_to_response(self.get_context_data(form=form, error_message=error_message))
+
+def contact_success(request):
+    return render(request, 'contactsuccess.html')
         
