@@ -32,10 +32,6 @@ class UserProfileAdmin(admin.ModelAdmin):
     search_fields = ('username', 'display_name')
     actions = ['approve_profile']
 
-    # def get_username(self, obj):
-    #     return obj.user.username
-
-    # get_username.short_description = 'Username'
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):

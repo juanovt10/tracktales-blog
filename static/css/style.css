@@ -19,10 +19,6 @@ body {
     height: 100vh;
 }
 
-.carousel-caption {
-    margin-bottom: 50px;
-}
-
 /* -- navbar styling -- */
 
 .navbar-text a {
@@ -238,10 +234,10 @@ textarea {
     visibility: hidden;
 }
 
-
 /* contactus styling */
 
 .contact-container {
     margin-top: 80px;
+    margin-bottom: 80px;
     width: 80%;
 }
