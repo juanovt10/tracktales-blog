@@ -2,10 +2,8 @@
 
 {% block content %}
 
-<!-- About Us Page -->
 <section class="about-us-container">
     <div class="container">
-        <!-- Introduction Section -->
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
                 <h2 class="section-title">Welcome to Our Travel Community!</h2>
@@ -14,8 +12,7 @@
             </div>
         </div>
 
-        <!-- What We Offer Section -->
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <h2 class="section-title">What You Can Do Here</h2>
                 <ul class="list-unstyled">
@@ -25,6 +22,15 @@
                     <li><i class="fas fa-check-circle text-success"></i> Create your own personalized dashboard to
                         manage your posts and interactions.</li>
                 </ul>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <h2 class="section-title">Explore Our Featured Destinations</h2>
+                <p class="section-description">Embark on a virtual journey with our curated collection of featured destinations.
+                    From hidden gems to popular hotspots, discover travel inspiration that will fuel your wanderlust and ignite
+                    your sense of adventure.</p>
+                <a href="{% url 'post_board' %}" class="btn btn-primary btn-block mt-2">Start Exploring</a>
             </div>
         </div>
     </div>
