@@ -66,6 +66,10 @@ body {
     margin-top: 4rem;
 }
 
+.post-board-alerts {
+    margin: 0;
+}
+
 
 .filter-card {
     width: 100%;

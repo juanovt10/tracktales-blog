@@ -41,6 +41,7 @@ class PostBoard(generic.ListView):
         for post in context['posts']:
             comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
             context['post_comments'][post.id] = comments
+            
 
         return context    
 
@@ -50,6 +51,8 @@ class PostBoard(generic.ListView):
         #define post and comment forms
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
+
+        context = self.get_context_data()
 
         #check for the id in the request POST and add or delete likes    
         if 'blogpost_id_like' in request.POST:
@@ -73,10 +76,14 @@ class PostBoard(generic.ListView):
         #method to edit posts
         elif 'edit_post_id' in request.POST:
             post_slug = request.POST['edit_post_id']
-            post = post = get_object_or_404(Post, slug=post_slug)
+            post = get_object_or_404(Post, slug=post_slug)
+            post.approved = False
             edit_form = EditPostForm(instance=post, data=request.POST) 
             if edit_form.is_valid():
                 edit_form.save()
+                messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
+            else:
+                return render(request, 'board.html', {'post_form': post_form})
 
         else: 
             #check if teh post form is valid and post the form the database
@@ -84,7 +91,7 @@ class PostBoard(generic.ListView):
                 post_form.instance.author = request.user
                 post_form.instance.slug = slugify(post_form.instance.title)
                 post_form.save()
-                messages.success(request, 'Thank you! Your post is awaiting for approval, this will take a couple of minutes')
+                messages.success(request, 'Thank you! Your post is awaiting for approval, this will take a couple of minutes.')
             else: 
                 return render(request, 'board.html', {'post_form': post_form})
 

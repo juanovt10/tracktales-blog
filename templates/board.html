@@ -6,6 +6,37 @@
 
 <div class="container text-center community-container">
     <div class="row">
+        {% if messages %}
+        <div class="alert alert-success col post-board-alerts" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        </div>
+        {% elif post_form.errors %}
+        <div class="alert alert-danger col post-board-alerts" role="alert">
+            <strong>Your Post was not received!</strong>
+            <ul>
+                {% for field, error_list in post_form.errors.items %}
+                {% for error in error_list %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% elif edit_post_form.errors %}
+        <div class="alert alert-danger col post-board-alerts" role="alert">
+            <strong>Your Post was not received!</strong>
+            <ul>
+                {% for field, error_list in edit_post_form.errors.items %}
+                {% for error in error_list %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <div class="row">
         <div class="col-3">
             <div class="card filter-card">
                 <form method="get">
@@ -75,7 +106,7 @@
                     <form method="post">
                         {% csrf_token %}
 
-                        {% if post_form.errors %}
+                        <!-- {% if post_form.errors %}
                         <div class="alert alert-danger">
                             <strong>Error!</strong>
                             <ul>
@@ -86,15 +117,7 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                        {% endif %}
-                    
-                        {% if messages %}
-                        <div class="alert alert-success" role="alert">
-                            {% for message in messages %}
-                            {{ message }}
-                            {% endfor %}
-                        </div>
-                        {% endif %}
+                        {% endif %} -->
 
                         <div class="mb-3 row">
                             <div class="col-6">
@@ -314,6 +337,7 @@
                         <form method="post" class="edit-post-form">
                             <div class="modal-body">
                                 {% csrf_token %}
+
                                 <div class="mb-3 comment-form-divs">
                                     <div class="btn btn-primary">
                                         {{ request.user.username }}
