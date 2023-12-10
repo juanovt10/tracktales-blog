@@ -25,7 +25,7 @@
         </div>
         {% elif edit_post_form.errors %}
         <div class="alert alert-danger col post-board-alerts" role="alert">
-            <strong>Your Post was not received!</strong>
+            <strong>Your Post was not edited!</strong>
             <ul>
                 {% for field, error_list in edit_post_form.errors.items %}
                 {% for error in error_list %}
@@ -105,20 +105,6 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-
-                        <!-- {% if post_form.errors %}
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong>
-                            <ul>
-                                {% for field, error_list in post_form.errors.items %}
-                                {% for error in error_list %}
-                                <li>{{ error }}</li>
-                                {% endfor %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        {% endif %} -->
-
                         <div class="mb-3 row">
                             <div class="col-6">
                                 {{ post_form.title }}
@@ -142,54 +128,6 @@
                         </div>
                         <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
                     </form>
-
-
-<!-- 
------------------------------------------------------------------------------- -->
-
-
-
-
-
-
-
-                    <!-- <form method="post">
-                        {% csrf_token %}
-
-                        {% if post_form.errors %}
-                        <div class="alert alert-danger">
-                            <strong>Error!</strong> {{ post_form.errors }}
-                        </div>
-                        {% endif %}
-
-                        <div class="mb-3 comment-form-divs">
-                            <div class="btn btn-primary">
-                                {{ request.user.username }}
-                            </div>
-                            <div class="btn-group">  
-                                {{ post_form.tags }}
-                            </div>
-                            <div>
-                                <label for="" class="form-label">Title:</label>
-                                {{ post_form.title }}
-                            </div>
-                        </div>
-                        <div class="mb-3 comment-form-divs">
-                            
-                            <div class="btn-group">
-                                {{ post_form.world_area }}
-                            </div>
-                            
-                            <div>
-                                <label for="{{ post_form.country.id_for_label }}" class="form-label">Country:</label>
-                                    {{ post_form.country }}
-                            </div>
-                        </div>
-                        <div class="mb-3 comment-form-divs">
-                            {{ post_form.content }}
-                        </div>
-                        <button type="submit" class="btn btn-outline-info btn-post">Post!</button>
-                    </form> -->
                 </div>
             </div>
                 

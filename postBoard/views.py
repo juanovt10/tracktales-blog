@@ -48,11 +48,15 @@ class PostBoard(generic.ListView):
     #method to post the user post into the database and like posts 
     def post(self, request, *args, **kwargs):
 
-        #define post and comment forms
+        #define context
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
-
-        context = self.get_context_data()
+        edit_post_form = EditPostForm(data=request.POST)
+        posts = Post.objects.filter(approved=True).order_by('-created_on')
+        post_comments = {}
+        for post in posts:
+            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            post_comments[post.id] = comments
 
         #check for the id in the request POST and add or delete likes    
         if 'blogpost_id_like' in request.POST:
@@ -83,7 +87,19 @@ class PostBoard(generic.ListView):
                 edit_form.save()
                 messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
             else:
-                return render(request, 'board.html', {'post_form': post_form})
+                print("Edit Form Errors:", edit_form.errors)
+                return render(request,
+                'board.html', {
+                    'post_form': post_form,
+                    'comment_form': comment_form,
+                    'edit_post_form': edit_form,
+                    'tags': TAGS,
+                    'areas': WORLD_AREAS,
+                    'filter_tags': TAGS[1:],
+                    'filter_areas': WORLD_AREAS[1:],
+                    'posts': posts,
+                    'post_comments': post_comments,
+                })
 
         else: 
             #check if teh post form is valid and post the form the database
@@ -93,7 +109,18 @@ class PostBoard(generic.ListView):
                 post_form.save()
                 messages.success(request, 'Thank you! Your post is awaiting for approval, this will take a couple of minutes.')
             else: 
-                return render(request, 'board.html', {'post_form': post_form})
+                return render(request,
+                'board.html', {
+                    'post_form': post_form,
+                    'comment_form': comment_form,
+                    'edit_post_form': edit_post_form,
+                    'tags': TAGS,
+                    'areas': WORLD_AREAS,
+                    'filter_tags': TAGS[1:],
+                    'filter_areas': WORLD_AREAS[1:],
+                    'posts': posts,
+                    'post_comments': post_comments,
+                })
 
         return HttpResponseRedirect(reverse_lazy('post_board'))
 
