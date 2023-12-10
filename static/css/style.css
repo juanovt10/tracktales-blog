@@ -76,7 +76,6 @@ body {
     position: sticky;
     overflow-y: auto;
     top: 80px;
-    margin-top: 20px;
 }
 
 .checkbox-display {
@@ -90,10 +89,6 @@ body {
 
 .scrollable-column{
     padding-bottom: 60px;
-}
-
-.post-card {
-    margin-top: 20px;
 }
 
 .comment-form-divs {

@@ -76,6 +76,7 @@ class PostBoard(generic.ListView):
             comment = comment_form.save(commit=False)   
             comment.post = post
             comment.save()
+            messages.success(request, 'Your comment has been recorded and is awaiting for approval, this will take a couple of minutes.')
 
         #method to edit posts
         elif 'edit_post_id' in request.POST:

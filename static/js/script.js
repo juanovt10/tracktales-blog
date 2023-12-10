@@ -5,7 +5,7 @@ $(document).ready(function () {
         $(".user-comment-area[data-post-id='" + postId + "']").toggle();
     });
 
-
+    // This submits triggers the delete post modal 
     $(".delete-post-btn").on("click", function () {
         let postId = $(this).data("post-id");
         let postTitle = $(this).closest(".card").find(".post-title").text();
@@ -18,15 +18,13 @@ $(document).ready(function () {
         $(modalId).modal('show');
     });
 
-
+    // triggers the delete post action
     $(".delete-post").on("click", function () {
         let deleteForm = $(this).closest("form");
         $(deleteForm).submit();
     });
 
-
-
-
+    // This submits triggers the edit post modal 
     $(".edit-post-btn").on("click", function () {
         let postId = $(this).data("post-id");
         let postTitle = $(this).closest(".card").find(".post-title").text();
@@ -45,8 +43,14 @@ $(document).ready(function () {
         $(modalId).modal('show');
     });
 
+    // triggers the edit post action
     $(".edit-post").on("click", function () {
         let editForm = $(this).closest("form");
         editForm.submit();
     });
+
+    $("#filter-posts").on("click", function () {
+        $("#filterModal").modal("show");
+    });
+
 });

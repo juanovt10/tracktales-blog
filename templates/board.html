@@ -5,6 +5,8 @@
 {% load custom_filters %}
 
 <div class="container text-center community-container">
+
+    <!-- error messages display area -->
     <div class="row">
         {% if messages %}
         <div class="alert alert-success col post-board-alerts" role="alert">
@@ -36,9 +38,11 @@
         </div>
         {% endif %}
     </div>
+
     <div class="row">
-        <div class="col-3">
-            <div class="card filter-card">
+        <!-- filter card for larger screens -->
+        <div class="col-md-4 d-none d-md-block">
+            <div class="card filter-card mt-3">
                 <form method="get">
                     {% csrf_token %}
                     <div class="card-body">
@@ -91,16 +95,16 @@
                     </div>
                     <div class="card-body">
                         <button type="reset" class="btn btn-warning">Clear filters</button>
-                        <button type="submit" class="btn btn-outline-success">Apply filters</button>
+                        <button type="submit" class="btn btn-outline-success mt-md-1 mt-lg-0">Apply filters</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        
-        <div class="col-9 scrollable-column">
+        <!-- area to create posts and display posts -->
+        <div class="col-md-8 scrollable-column">
             {% if user.is_authenticated %}
-            <div class="card post-card">
+            <div class="card mt-3">
                 <h5 class="card-header">Create post - {{ request.user.username }}</h5>
                 <div class="card-body">
                     <form method="post">
@@ -130,9 +134,7 @@
                     </form>
                 </div>
             </div>
-                
             {% else %}
-
             <div class="card post-card">
                 <h5 class="card-header">Want to Post?</h5>
                 <div class="card-body">
@@ -140,21 +142,33 @@
                     <h5 class="card-title">If you do not have an account <a href="{% url 'account_signup' %}" class="btn btn-secondary">Sign-up</a></h5>
                 </div>
             </div>
-
             {% endif %}
 
+            <!-- filter button display for medium to small screens -->
+            <div class="mt-2 d-flex d-md-none">
+                <div class="col-9 p-2">
+                    <hr>
+                </div>
+                <div class="col-1 d-flex justify-content-center align-items-center p-0">
+                    <button class="btn btn-outline-warning" id="filter-posts" data-toggle="modal" data-target="#filterModal">
+                        <i class="fa-solid fa-filter"></i>
+                    </button>
+                </div>
+                <div class="col-2 p-2">
+                    <hr>
+                </div>
+            </div>
+
             <!-- posts display -->
-
             {% for post in posts %}
-
-            <div class="card text-center post-card">
+            <div class="card text-center mt-4">
                 <div class="card-header">
                     <div class="username-info">
                         <div class="post-header-content">
                             {{ post.author }}
                         </div>
                         <div class="post-header-content">
-                            {{ post.created_on }}
+                            {{ post.created_on|custom_timesince }}
                         </div>
                     </div>
                     <div class="username-info">
@@ -231,7 +245,7 @@
                 {% for comment in post_comments|key:post.id %}
                 <div class="card-footer text-body-secondary comments-display">
                     <div>
-                        {{ comment.author.username }} {{ comment.created_on}}
+                        {{ comment.author.username }} {{ comment.created_on|custom_timesince }}
                     </div>
                     <div>
                         {{ comment.body }}
@@ -241,7 +255,6 @@
             </div>
 
             <!-- delete post modal -->
-
             <div class="modal fade" id="deletePostModal-{{ post.slug }}" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -264,7 +277,6 @@
             </div>
 
             <!-- edit post modal -->
-
             <div class="modal fade" id="editPostModal-{{ post.slug }}" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -310,6 +322,76 @@
             </div>
 
             {% endfor %}
+        </div>
+
+        <!-- filter modal for medium to small screens-->
+        <div class="modal fade" id="filterModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Filter Posts</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="get">
+                            {% csrf_token %}
+                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                                            aria-controls="panelsStayOpen-collapseOne">
+                                            Type of Holiday
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+                                        <div class="accordion-body checkbox-display">
+                                            {% for tag_value, tag_label in filter_tags %}
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" value="{{ tag_value }}"
+                                                    id="holiday_type{{ tag_value }}" name="holiday_type">
+                                                <label class="form-check-label" for="holiday_type{{ tag_value }}">
+                                                    {{ tag_label }}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                            aria-controls="panelsStayOpen-collapseTwo">
+                                            World area
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                                        <div class="accordion-body checkbox-display">
+                                            {% for area_value, area_label in filter_areas %}
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" value="{{ area_value }}"
+                                                    id="world_area{{ area_value }}" name="world_area">
+                                                <label class="form-check-label" for="world_area{{ area_value }}">
+                                                    {{ area_label }}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <button type="reset" class="btn btn-warning">Clear filters</button>
+                                <button type="submit" class="btn btn-outline-success mt-md-1 mt-lg-0">Apply filters</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
