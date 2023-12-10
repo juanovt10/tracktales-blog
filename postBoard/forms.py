@@ -40,7 +40,7 @@ class PostForm(forms.ModelForm):
 
 
 class EditPostForm(forms.ModelForm):
-    country = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    country = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Edit country"}))
     tags = forms.ChoiceField(
         widget=forms.Select(
             attrs= {
@@ -62,6 +62,7 @@ class EditPostForm(forms.ModelForm):
                 "class": "form-control",
                 "cols": "100", 
                 "rows":"3",
+                "placeholder": "Edit your post content"
             }
         )
     )
