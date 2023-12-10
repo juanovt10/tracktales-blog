@@ -4,7 +4,7 @@
 
 {% load custom_filters %}
 
-<div class="container text-center community-container">
+<div class="container community-container">
 
     <!-- error messages display area -->
     <div class="row px-3">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <button type="reset" class="btn btn-warning">Clear filters</button>
                         <button type="submit" class="btn btn-outline-success mt-md-1 mt-lg-0">Apply filters</button>
                     </div>
@@ -248,7 +248,7 @@
                     <div>
                         {{ comment.author.username }} {{ comment.created_on|custom_timesince }}
                     </div>
-                    <div>
+                    <div class="text-primary">
                        {{ comment.body }}
                     </div>
                 </div>
