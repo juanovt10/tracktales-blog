@@ -7,11 +7,12 @@
 
 {% block content %}
 
-    <div class="card" style="width: 18rem;">
+    <div class="card auth-card">
         <div class="card-body">
             <h5 class="card-title">{% trans "Sign Out" %}</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary">{% trans 'Are you sure you want to sign out?' %}</h6>
-            <form class="login" method="POST" action="{% url 'account_logout' %}">
+            <strong>@{{ request.user.username }}</strong>
+            <form class="login mt-2" method="POST" action="{% url 'account_logout' %}">
                 {% csrf_token %}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />

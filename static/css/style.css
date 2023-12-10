@@ -106,8 +106,21 @@ textarea {
     width: 50%;
 }
 
-
+/* Create profile styling */
 .create-profile-card {
     width: 80%;
 }
 
+/* authentication pages styling */
+
+.auth-card {
+    position: absolute;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.auth-card-signup {
+    width: 80%;
+}

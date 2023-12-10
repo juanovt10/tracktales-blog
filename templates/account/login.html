@@ -2,16 +2,13 @@
 
 {% load i18n %}
 {% load allauth account socialaccount %}
-<!-- {% block head_title %}
 
-    {% trans "Sign In" %}
-{% endblock head_title %} -->
 {% block content %}
     
-    <div class="card" style="width: 18rem;">
+    <div class="card auth-card">
         <div class="card-body">
             <h5 class="card-title">{% trans "Sign In" %}</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{% blocktrans %}change this content <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</h6>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{% blocktrans %}Yo do no have an account with us? <a href="{{ signup_url }}">sign up</a> {% endblocktrans %}</h6>
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}

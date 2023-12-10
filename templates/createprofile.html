@@ -15,7 +15,7 @@
     </head>
 
     <body class="d-flex justify-content-center align-items-center m-0">
-        <div class="card create-profile-card">
+        <div class="card create-profile-card mt-4 mb-4">
             <h5 class="card-header">Create Profile - {{ request.user.username }} </h5>
             <div class="card-body">
                 <form method="post" action="{% url 'create_profile' username=request.user.username %}">
@@ -44,7 +44,7 @@
                             {{ profile_form.most_visited_area }}
                         </div>
                         <div>
-                            <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
+                            <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">How many countries have you visited?</label>
                             {{ profile_form.countries_traveled }}
                         </div>
         

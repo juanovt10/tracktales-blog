@@ -178,12 +178,15 @@ class CreateProfile(generic.ListView):
         if profile_form.is_valid():
             print("Form is valid")
             profile_form.save()
-            return HttpResponseRedirect(reverse_lazy('post_board'))
+            messages.success(request, f'{username}, you have successfully created your profile!')
+            return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': username}))
         else:
-            print("Form is not valid")
-            context = self.get_context_data()
-            context['profile_form'] = profile_form
-            return self.render_to_response(context)
+            return render(request,
+            'createprofile.html', {
+                'tags': TAGS,
+                'areas': WORLD_AREAS,
+                'profile_form': profile_form
+            })
 
 
 class ProfileDetail(generic.DetailView):
