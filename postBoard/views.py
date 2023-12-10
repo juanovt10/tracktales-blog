@@ -260,3 +260,9 @@ class ContactUs(FormView):
 def contact_success(request):
     return render(request, 'contactsuccess.html')
         
+
+def account_signup_redirect(request):
+    username = request.user.username
+    redirect_url = f"/create_profile/{username}"
+
+    return redirect(redirect_url)
