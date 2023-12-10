@@ -7,69 +7,79 @@
 {% if request.user.is_authenticated %}
 
 <div class="container community-container">
+    <div class="row px-3">
+        {% if messages %}
+        <div class="alert alert-success col post-board-alerts" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
     <div class="row">
-        <div class="col-3">
+        <div class="col-md-4">
             <div class="card filter-card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ user_profile.display_name }}</h5>
-                    <h6 class="card-title">{{ user_profile.username }}</h6>
-                    <button class="btn btn-primary" id="edit-profile-btn">Edit Profile</button>
-                    <p class="card-text">{{ user_profile.user_description }}</p>
+                    <h5 class="card-title ms-2">{{ user_profile.display_name }}</h5>
+                    <h6 class="card-title ms-2">@{{ user_profile.username }}</h6>
+                    <p class="card-text mt-2 ms-2">{{ user_profile.user_description }}</p>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Most visited area: {{ user_profile.most_visited_area }}</li>
                         <li class="list-group-item">Lanaguages: {{ user_profile.languages }}</li>
                         <li class="list-group-item">Countries travelled: {{ user_profile.countries_traveled }}</li>
-                        <li class="list-group-item">Joined on: {{ user_profile.created_on }}</li>
+                        <li class="list-group-item">Joined on: {{ user_profile.created_on|date:"d M. Y" }}</li>
                     </ul>
+                    <button class="btn btn-primary ms-2 mt-2" id="edit-profile-btn">Edit Profile</button>
                 </div>
             </div>
         </div>
-        <div class="col-9 scrollable-column">
+
+        <div class="col-md-8 mb-2 pb-5">
+            <!-- posts display -->
             {% for post in user_posts %}
-            <div class="card text-center post-card">
-                <div class="card-header">
-                    <div class="username-info">
-                        <div class="post-header-content">
+            <div class="card mt-4">
+                <div class="card-header d-flex px-2 px-md-3">
+                    <div class="d-flex">
+                        <div class="me-1">
                             {{ post.author }}
                         </div>
-                        <div class="post-header-content">
-                            {{ post.created_on }}
+                        <div>
+                            {{ post.created_on|custom_timesince }}
                         </div>
                     </div>
-                    <div class="username-info">
-                        <div class="post-tag post-header-content">
+                    <div class="d-flex">
+                        <div class="me-1">
                             {{ post.tags }}
                         </div>
                         {% if request.user.id == post.author.id %}
-                        <div class="btn-group option-btn-group">
-                            <button class="btn btn-outline-secondary option-btn" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                        <div class="btn-group me-0">
+                            <button class="btn btn-outline-secondary border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Edit Post</a></li>
-                                <li><a class="dropdown-item" href="#">Delete Post</a></li>
+                                <li><button class="dropdown-item edit-post-btn" data-post-id="{{ post.slug }}">Edit Post</button></li>
+                                <li><button class="dropdown-item delete-post-btn" data-post-id="{{ post.slug }}">Delete Post</button></li>
                             </ul>
                         </div>
                         {% endif %}
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <div class="country">
-                        <span class="badge bg-secondary">{{ post.world_area }}</span>
-                        <span class="badge bg-secondary">{{ post.country }}</span>
+                    <h5 class="card-title text-left post-title">{{ post.title }}</h5>
+                    <div class="d-flex justify-content-start">
+                        <span class="badge me-2 bg-secondary post-area">{{ post.world_area }}</span>
+                        <span class="badge bg-secondary post-country">{{ post.country }}</span>
                     </div>
-                    <p class="card-text">
+                    <p class="card-text text-left mt-1 post-content">
                         {{ post.content }}
                     </p>
-                </div>
+                </div> 
                 <div class="card-footer text-body-secondary">
                     {% if user.is_authenticated %}
-                    <form method="POST" class="like-form">
-            
-                        {% csrf_token %}
-            
+                    <form method="POST" class="mb-0 me-1">
+
+                        {% csrf_token %} 
+
                         <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
                         <button type="submit" class="btn btn-outline-danger">
                             {% if post|user_liked_post:request.user %}
@@ -80,94 +90,151 @@
                             <span class="text-secondary">{{ post.number_of_likes }} </span>
                         </button>
                     </form>
-            
+                        
                     {% else %}
-            
+
                     <!-- Styling for sign off to be added -->
                     <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
                     <span class="text-secondary">{{ post.number_of_likes }} </span>
-            
+                        
                     {% endif %}
-            
+                    
                     <button class="btn btn-outline-primary display-comment-btn" data-post-id="{{ post.id }}">
                         <i class="fa-regular fa-comment"></i> Comment
                     </button>
                 </div>
-            
                 <div class="card-footer text-body-secondary user-comment-area" data-post-id="{{ post.id }}">
                     {% if user.is_authenticated %}
-                    <form method="POST" class="comment-form">
+                    <form method="POST" class="d-flex flex-column align-items-center">
                         {% csrf_token %}
-                    
+                        
                         <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
                         {{ comment_form.body }}
-                        <button type="submit" class="btn btn-outline-info comment-submit">Comment!</button>
+                        <button type="submit" class="btn btn-outline-info mt-2 comment-submit">Comment!</button>
                     </form>
                     {% else %}
                     <p>Please login to be able to comment post</p>
                     {% endif %}
                 </div>
-                
+                    
+                <!-- this is the area for the display of comments -->
                 {% for comment in post_comments|key:post.id %}
-                <div class="card-footer text-body-secondary comments-display">
+                <div class="card-footer text-body-secondary d-flex flex-column align-items-start px-2 px-md-3">
                     <div>
-                        {{ comment.author.username }} {{ comment.created_on}}
+                        {{ comment.author.username }} {{ comment.created_on|custom_timesince }}
                     </div>
-                    <div>
-                        {{ comment.body }}
+                    <div class="text-primary">
+                       {{ comment.body }}
                     </div>
                 </div>
                 {% endfor %}
             </div>
+
+            <!-- delete post modal -->
+            <div class="modal fade" id="deletePostModal-{{ post.slug }}" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete post?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure do you want to delete the folloing post:</p>
+                            <strong>"{{ post.title }}"</strong>
+                        </div>
+                        <form method="post" action="{% url 'delete_post' %}" class="modal-footer delete-post-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_post_id" id="delete-post-id-input-{{ post.slug }}" value="{{post.slug}}">
+                            <button type="button" class="btn btn-danger delete-post">Yes, delete my post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- edit post modal -->
+            <div class="modal fade" id="editPostModal-{{ post.slug }}" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Post: {{ post.title }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" class="edit-post-form">
+                            <div class="modal-body">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    {{ edit_post_form.country }}
+                                </div>
+                                <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between">
+                                    <div class="btn-group col-12 col-sm mb-3 mb-sm-0 edit-post-tags-input">
+                                        {{ edit_post_form.tags }}
+                                    </div>
+                                    <div class="d-none d-sm-block col-sm-1"></div>
+                                    <div class="btn-group col-12 col-sm" id="edit-post-area-input">
+                                        {{ edit_post_form.world_area }}
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex">
+                                    {{ edit_post_form.content }}
+                                </div>
+                                <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
+                                <button type="button" class="btn btn-outline-info d-flex edit-post">Edit post</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
+        </div>     
+    </div>
+
+    <div class="modal fade" id="edit-profile-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile - {{ user_profile.username }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="modal-body" method="post">
+                    {% csrf_token %}
+                    {% if profile_form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> {{ profile_form.errors }}
+                    </div>
+                    {% endif %}
+                    <div class="mb-3 comment-form-divs">
+                        <div>
+                            <label for="{{ profile_form.display_name.id_for_label }}" class="form-label">Display name:</label>
+                            {{ profile_form.display_name }}
+                        </div>
+                    </div>
+                    <div class="mb-3 comment-form-divs">
+                        <label for="{{ profile_form.most_visited_area.id_for_label }}" class="form-label">Most visited
+                            area:</label>
+                        <div class="btn-group">
+                            {{ profile_form.most_visited_area }}
+                        </div>
+                        <div>
+                            <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
+                            {{ profile_form.countries_traveled }}
+                        </div>
+                    
+                        <div>
+                            <label for="{{ profile_form.languages.id_for_label }}" class="form-label">Languages:</label>
+                            {{ profile_form.languages }}
+                        </div>
+                    </div>
+                    <div class="mb-3 comment-form-divs">
+                        <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe
+                            yourself:</label>
+                        {{ profile_form.user_description }}
+                    </div>
+                    <button type="submit" class="btn btn-outline-info btn-post">Edit Profile</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
-    <div class="card post-card close-popup" id="edit-profile-popup">
-        <h5 class="card-header">Edit Profile</h5>
-        <div class="card-body">
-            <form method="post" action="{% url 'create_profile' username=request.user.username %}">
-                {% csrf_token %}
-                {% if profile_form.errors %}
-                <div class="alert alert-danger">
-                    <strong>Error!</strong> {{ profile_form.errors }}
-                </div>
-                {% endif %}
-                <div class="mb-3 comment-form-divs">
-                    <div class="btn btn-primary">
-                        {{ request.user.username }}
-                    </div>
-                    <div>
-                        <label for="{{ profile_form.display_name.id_for_label }}" class="form-label">Display name:</label>
-                        {{ profile_form.display_name }}
-                    </div>
-                </div>
-                <div class="mb-3 comment-form-divs">
-                    <label for="{{ profile_form.most_visited_area.id_for_label }}" class="form-label">Most visited
-                        area:</label>
-                    <div class="btn-group">
-                        {{ profile_form.most_visited_area }}
-                    </div>
-                    <div>
-                        <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
-                        {{ profile_form.countries_traveled }}
-                    </div>
-    
-                    <div>
-                        <label for="{{ profile_form.languages.id_for_label }}" class="form-label">Languages:</label>
-                        {{ profile_form.languages }}
-                    </div>
-                </div>
-                <div class="mb-3 comment-form-divs">
-                    <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe
-                        yourself:</label>
-                    {{ profile_form.user_description }}
-                </div>
-                <button type="submit" class="btn btn-outline-info btn-post">Edit Profile</button>
-            </form>
-        </div>
-    </div>
 
 {% endif %}
 

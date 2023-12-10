@@ -49,8 +49,12 @@ $(document).ready(function () {
         editForm.submit();
     });
 
+    // opens the filter post modal when screens are small
     $("#filter-posts").on("click", function () {
         $("#filterModal").modal("show");
     });
 
+    $("#edit-profile-btn").on("click", function () {
+        $("#edit-profile-modal").modal("show");
+    });
 });

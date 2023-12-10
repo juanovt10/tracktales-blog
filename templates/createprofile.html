@@ -1,66 +1,65 @@
 <html lang="en">
 {% load static %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <title>Track Tales Community</title>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <title>Track Tales Community</title>
+    </head>
 
-<body>
-    <div class="card post-card">
-        <h5 class="card-header">Create Profile</h5>
-        <div class="card-body">
-            <form method="post" action="{% url 'create_profile' username=request.user.username %}">
-                {% csrf_token %}
-                {% if profile_form.errors %}
-                <div class="alert alert-danger">
-                    <strong>Error!</strong> {{ profile_form.errors }}
-                </div>
-                {% endif %}
-                <div class="mb-3 comment-form-divs">
-                    <div class="btn btn-primary">
-                        {{ request.user.username }}
+    <body>
+        <div class="card post-card">
+            <h5 class="card-header">Create Profile</h5>
+            <div class="card-body">
+                <form method="post" action="{% url 'create_profile' username=request.user.username %}">
+                    {% csrf_token %}
+                    {% if profile_form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> {{ profile_form.errors }}
                     </div>
-                    <div>
-                        <label for="{{ profile_form.display_name.id_for_label }}" class="form-label">Display name:</label>
-                        {{ profile_form.display_name }}
+                    {% endif %}
+                    <div class="mb-3 comment-form-divs">
+                        <div class="btn btn-primary">
+                            {{ request.user.username }}
+                        </div>
+                        <div>
+                            <label for="{{ profile_form.display_name.id_for_label }}" class="form-label">Display name:</label>
+                            {{ profile_form.display_name }}
+                        </div>
                     </div>
-                </div>
-                <div class="mb-3 comment-form-divs">
-                    <label for="{{ profile_form.most_visited_area.id_for_label }}" class="form-label">Most visited area:</label>
-                    <div class="btn-group">
-                        {{ profile_form.most_visited_area }}
+                    <div class="mb-3 comment-form-divs">
+                        <label for="{{ profile_form.most_visited_area.id_for_label }}" class="form-label">Most visited area:</label>
+                        <div class="btn-group">
+                            {{ profile_form.most_visited_area }}
+                        </div>
+                        <div>
+                            <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
+                            {{ profile_form.countries_traveled }}
+                        </div>
+        
+                        <div>
+                            <label for="{{ profile_form.languages.id_for_label }}" class="form-label">Languages:</label>
+                            {{ profile_form.languages }}
+                        </div>
                     </div>
-                    <div>
-                        <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
-                        {{ profile_form.countries_traveled }}
+                    <div class="mb-3 comment-form-divs">
+                        <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe yourself:</label>
+                        {{ profile_form.user_description }}
                     </div>
-    
-                    <div>
-                        <label for="{{ profile_form.languages.id_for_label }}" class="form-label">Languages:</label>
-                        {{ profile_form.languages }}
-                    </div>
-                </div>
-                <div class="mb-3 comment-form-divs">
-                    <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe yourself:</label>
-                    {{ profile_form.user_description }}
-                </div>
-                <button type="submit" class="btn btn-outline-info btn-post">Create!</button>
-            </form>
+                    <button type="submit" class="btn btn-outline-info btn-post">Create!</button>
+                </form>
+            </div>
         </div>
-    </div>
 
 
-    <script src="{% static 'js/script.js'%}"> </script>
-    <script src="https://kit.fontawesome.com/3156a2e938.js" crossorigin="anonymous"></script>
-</body>
-    
+        <script src="{% static 'js/script.js'%}"> </script>
+        <script src="https://kit.fontawesome.com/3156a2e938.js" crossorigin="anonymous"></script>
+    </body>
 </html>

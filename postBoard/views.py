@@ -225,8 +225,9 @@ class ProfileDetail(generic.DetailView):
         print(profile_instance)
 
         if profile_form.is_valid():
-            print("Form is valid")
             profile_form.save()
+            messages.success(request, 'Your profile has been successfully updated!')
+            return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': username}))
         else:
             print("Form is not valid")
             context = self.get_context_data()
