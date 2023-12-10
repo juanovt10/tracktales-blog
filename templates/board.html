@@ -7,7 +7,7 @@
 <div class="container text-center community-container">
 
     <!-- error messages display area -->
-    <div class="row">
+    <div class="row px-3">
         {% if messages %}
         <div class="alert alert-success col post-board-alerts" role="alert">
         {% for message in messages %}
@@ -162,18 +162,18 @@
 
             <!-- posts display -->
             {% for post in posts %}
-            <div class="card text-center mt-4">
-                <div class="card-header">
-                    <div class="username-info">
-                        <div class="post-header-content">
+            <div class="card mt-4">
+                <div class="card-header d-flex px-2 px-md-3">
+                    <div class="d-flex">
+                        <div class="me-1">
                             {{ post.author }}
                         </div>
-                        <div class="post-header-content">
+                        <div>
                             {{ post.created_on|custom_timesince }}
                         </div>
                     </div>
-                    <div class="username-info">
-                        <div class="post-tag post-header-content">
+                    <div class="d-flex">
+                        <div class="me-1">
                             {{ post.tags }}
                         </div>
                         {% if request.user.id == post.author.id %}
@@ -244,12 +244,12 @@
                     
                 <!-- this is the area for the display of comments -->
                 {% for comment in post_comments|key:post.id %}
-                <div class="card-footer text-body-secondary comments-display">
+                <div class="card-footer text-body-secondary d-flex flex-column align-items-start px-2 px-md-3">
                     <div>
                         {{ comment.author.username }} {{ comment.created_on|custom_timesince }}
                     </div>
                     <div>
-                        {{ comment.body }}
+                       {{ comment.body }}
                     </div>
                 </div>
                 {% endfor %}

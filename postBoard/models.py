@@ -28,7 +28,7 @@ TAGS = [
     ("relaxation", "Relaxation"),
     ("history", "History"),
     ("adventure", "Adventure"), 
-    ("accomodation", "Acoomodation"),
+    ("stays", "Stays"),
     ("nature", "Nature"),
     ("festivals", "Festivals"),
     ("beach", "Beach"),

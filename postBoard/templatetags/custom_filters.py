@@ -17,6 +17,7 @@ def key(d, key_name):
 def custom_timesince(value):
     timesince_str = timesince(value)
     parts = timesince_str.split(', ')
+    print(timesince_str)
     if len(parts) > 1:
         if parts[0].startswith("1"):
             long_ago = parts[0][:-5]
@@ -24,8 +25,8 @@ def custom_timesince(value):
             long_ago = parts[0][:-6]
         return long_ago + 'h'
     else: 
-        if timesince_str.startswith("1"):
-            long_ago = timesince_str[:-7]
+        if timesince_str.endswith("e") or timesince_str.startswith("0"):
+            long_ago = '1'
         else:
             long_ago = timesince_str[:-8]
         return long_ago + 'm'
