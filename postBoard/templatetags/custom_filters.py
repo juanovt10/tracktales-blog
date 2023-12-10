@@ -16,15 +16,16 @@ def key(d, key_name):
 @register.filter(name='custom_timesince')
 def custom_timesince(value):
     timesince_str = timesince(value)
-    print(timesince_str)
     parts = timesince_str.split(', ')
-    print(parts)
     if len(parts) > 1:
-        long_ago = parts[0][:-6]
+        if parts[0].startswith("1"):
+            long_ago = parts[0][:-5]
+        else: 
+            long_ago = parts[0][:-6]
         return long_ago + 'h'
     else: 
-        if timesince_str == '1 minute':
+        if timesince_str.startswith("1"):
             long_ago = timesince_str[:-7]
-        else: 
+        else:
             long_ago = timesince_str[:-8]
         return long_ago + 'm'

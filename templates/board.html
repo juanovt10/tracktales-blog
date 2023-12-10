@@ -109,19 +109,20 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-                        <div class="mb-3 row">
-                            <div class="col-6">
+                        <div class="mb-3 d-flex flex-column justify-content-between">
+                            <div class="mb-3">
                                 {{ post_form.title }}
                             </div>
-                            <div class="col-6">
+                            <div>
                                 {{ post_form.country }}
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <div class="btn-group col-6">
+                        <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between">
+                            <div class="btn-group col-12 col-sm mb-3 mb-sm-0">
                                 {{ post_form.tags }}
                             </div>
-                            <div class="btn-group col-6">
+                            <div class="d-none d-sm-block col-sm-1"></div>
+                            <div class="btn-group col-12 col-sm">
                                 {{ post_form.world_area }}
                             </div>
                         </div>
@@ -269,7 +270,6 @@
                         <form method="post" action="{% url 'delete_post' %}" class="modal-footer delete-post-form">
                             {% csrf_token %}
                             <input type="hidden" name="delete_post_id" id="delete-post-id-input-{{ post.slug }}" value="{{post.slug}}">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-danger delete-post">Yes, delete my post</button>
                         </form>
                     </div>
@@ -313,7 +313,6 @@
                             </div>
                             <div class="modal-footer">
                                 <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-outline-info btn-post edit-post">Edit post</button>
                             </div>
                         </form>
@@ -386,9 +385,6 @@
                                 <button type="submit" class="btn btn-outline-success mt-md-1 mt-lg-0">Apply filters</button>
                             </div>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
