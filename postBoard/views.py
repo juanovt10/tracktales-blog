@@ -14,8 +14,10 @@ from django.contrib import messages
 def index(request):
     return render(request, 'index.html')
 
+
 def about_us(request):
     return render(request, 'aboutus.html')
+
 
 class PostBoard(generic.ListView):
     model = Post
