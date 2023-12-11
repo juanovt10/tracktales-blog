@@ -1,39 +1,82 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Track Tales Community
 
-Welcome,
+#### /input responsive screenshot/
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+Explore Track Tales, a thoughtfully designed platform for seamless storytelling. Create posts with titles, rich content, and holiday tags. Personalize your profile, adding a unique touch, while geographical tags provide a global context. Interact seamlessly with likes and comments, fostering a sense of community. Join us in the beautifully crafted space of Track Tales and effortlessly share your stories.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+The TrackTales community is live, to access it [click here.][ADD LINK]
 
-## Codeanywhere Reminders
+## Table of contents
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
++ [UX](#ux)
++ [Design](#design)
++ [Features](#features)
++ [Technologies used](#technologies-used)
++ [Testing](#testing)
++ [Technologies used](#technologies-used)
++ [Deployment](#deployment)
++ [Credits](#credits)
 
-`python3 -m http.server`
+## UX
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Site Purpose
+Track Tales serves as a dedicated space for individuals passionate about travel to freely share their stories. Our platform is designed to empower users, allowing them to create personalized profiles, seamlessly publish travel narratives, and engage with a community of like-minded travelers.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+### Audience
 
-`http_server`
+Track Tales caters to travel enthusiasts and storytellers alike, providing a dedicated space for individuals passionate about sharing their unique travel experiences. This platform fosters connections among like-minded individuals who appreciate the beauty of diverse narratives from around the world, creating a vibrant community for bloggers and writers focused on the art of travel storytelling.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### Current User Goals
+At Track Tales, users share their travel experiences, creating personalized profiles to showcase stories. Engaging with a global community, users explore diverse narratives, connect with like-minded enthusiasts, and manage their content effortlessly. Geographical tagging adds depth to stories, offering insights into different cultures and locations. The platform is designed to facilitate seamless storytelling and connections among individuals passionate about travel.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### Future User Goals
+As Track Tales evolves, future users will likely seek a seamless space to share evolving travel experiences, connect with like-minded enthusiasts, and explore narratives that transcend geographical boundaries. The platform aims to continually enhance features, offering users intuitive tools for content management and community engagement in the realm of travel storytelling.
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Design
 
-To log into the Heroku toolbelt CLI:
+### Color scheme
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### Typography
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Imagery
 
----
+## Features
 
-Happy coding!
+### Existing Features
+
+### Future Features
+
+## Technologies used
+
+### Programming languages
+
+- HTML5
+- CSS
+- JavaScript (jQuery)
+- Python (Django)
+
+### Frameworks, Libraries and programs used
+
+- Google Fonts 
+- Bootstrap
+- Github
+- CodeAnywhere
+- Heroku
+- cloudinary
+- dj-database-url
+- dj3-cloudinary-storage
+- Django
+- django-allauth
+- guinicorn
+- psychopg2
+
+
+## Deployment
+
+## Credits
+
+### Design
+
+### Code
+
+### Media
