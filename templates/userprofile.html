@@ -231,7 +231,11 @@
                         {{ profile_form.user_description }}
                     </div>
                     <button type="submit" class="btn btn-outline-info btn-post">Edit Profile</button>
-                    <button class="btn btn-danger" id="delete-profile-btn">Delete Profile</button>
+                </form>
+                <form method="post" id="delete-profile-btn">
+                    {% csrf_token %}
+                    <input type="hidden" name="delete_user_id" value="{{user_profile.username}}">
+                    <button type="submit" class="btn btn-danger" id="delete-profile-btn">Delete Profile</button>
                 </form>
             </div>
         </div>

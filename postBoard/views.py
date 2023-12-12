@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from django.contrib import messages
 
 def index(request):
@@ -225,9 +226,18 @@ class ProfileDetail(generic.DetailView):
 
     def post(self, request, username, *args, **kwargs):
         print("Entering post method")
+        post_form = PostForm(data=request.POST)
+        delete_form = UserDeleteForm(data=request.POST)
+        comment_form = CommentForm(data=request.POST)
+        edit_post_form = EditPostForm(data=request.POST)
         user_profile = self.get_object()
+        posts = Post.objects.filter(author=user_profile.username)
         profile_instance = user_profile
         profile_form = ProfileForm(data=request.POST, instance=profile_instance)
+        post_comments = {}
+        for post in posts:
+            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            post_comments[post.id] = comments
 
         print(profile_instance)
 
@@ -235,33 +245,35 @@ class ProfileDetail(generic.DetailView):
             profile_form.save()
             messages.success(request, 'Your profile has been successfully updated!')
             return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': username}))
+
+        elif 'delete_user_id' in request.POST:
+                print("Entering delete user method")
+                app_user = request.user
+                username = user_profile.username
+                database_user = get_object_or_404(UserProfile, username=username)
+                print(database_user)
+                print(app_user)
+                logout(request)
+                database_user.delete()
+                app_user.delete()
+                messages.success(request, f"Account {username} has been successfully deleted")
+                return HttpResponseRedirect(reverse_lazy('post_board'))
         else:
             print("Form is not valid")
-            context = self.get_context_data()
-            context['profile_form'] = profile_form
-            return self.render_to_response(context)
-
-        # if delete_form.is_valid():
-        #     user = request.user
-        #     print(user)
-        #     logout(request)
-        #     user.delete()
-        #     message.success(request, f"Account {user} has been successfully deleted")
-        #     return HttpResponseRedirect(reverse_lazy('post_board'))
-        # else:
-        #     message.error(request, f"Account {user} has not been deleted")
-        #     return render(
-        #         request,
-        #         'profile_detail', kwargs={'username': username},
-        #             # 'post_form': post_form,
-        #             # 'comment_form': comment_form,
-        #             'edit_post_form': edit_post_form,
-        #             'tags': TAGS,
-        #             'areas': WORLD_AREAS,
-        #             'posts': posts,
-        #             'post_comments': post_comments,                
-        #         )
-
+            return render(
+                request, 
+                'userprofile.html', {
+                'username': self.kwargs['username'],
+                'user_profile': user_profile,
+                'post_form': post_form,
+                'comment_form': comment_form,
+                'edit_post_form': edit_post_form,
+                'profile_form': profile_form,
+                'tags': TAGS,
+                'areas': WORLD_AREAS,
+                'posts': posts,
+                'post_comments': post_comments,                
+                })
 
 
 
