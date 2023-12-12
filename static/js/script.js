@@ -54,7 +54,14 @@ $(document).ready(function () {
         $("#filterModal").modal("show");
     });
 
+    // opens the edit profile modal
     $("#edit-profile-btn").on("click", function () {
         $("#edit-profile-modal").modal("show");
+    });
+
+    // opens the delete profile modal confirmation
+    $("#delete-profile-btn").on("click", function () {
+        $("#edit-profile-modal").modal("hide");
+        $("#delete-profile-modal").modal("show");
     });
 });

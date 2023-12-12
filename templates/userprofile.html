@@ -231,11 +231,28 @@
                         {{ profile_form.user_description }}
                     </div>
                     <button type="submit" class="btn btn-outline-info btn-post">Edit Profile</button>
+                    <button type="button" class="btn btn-danger" id="delete-profile-btn">Delete Profile</button>
                 </form>
-                <form method="post" id="delete-profile-btn">
+            </div>
+        </div>
+    </div>
+
+    <!-- delete profile confirmation modal -->
+    <div class="modal fade" id="delete-profile-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete profile?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure do you want to delete your profile @{{ user_profile.username }}?</p>
+                    <p>Please note that your profile, posts and comments will be permanently deleted.</p>
+                </div>
+                <form method="post" class="modal-footer justify-content-center">
                     {% csrf_token %}
                     <input type="hidden" name="delete_user_id" value="{{user_profile.username}}">
-                    <button type="submit" class="btn btn-danger" id="delete-profile-btn">Delete Profile</button>
+                    <button type="submit" class="btn btn-danger">Delete Profile</button>
                 </form>
             </div>
         </div>

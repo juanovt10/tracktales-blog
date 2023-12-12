@@ -225,7 +225,6 @@ class ProfileDetail(generic.DetailView):
         return context
 
     def post(self, request, username, *args, **kwargs):
-        print("Entering post method")
         post_form = PostForm(data=request.POST)
         delete_form = UserDeleteForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
@@ -239,27 +238,21 @@ class ProfileDetail(generic.DetailView):
             comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
             post_comments[post.id] = comments
 
-        print(profile_instance)
-
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, 'Your profile has been successfully updated!')
             return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': username}))
 
         elif 'delete_user_id' in request.POST:
-                print("Entering delete user method")
                 app_user = request.user
                 username = user_profile.username
                 database_user = get_object_or_404(UserProfile, username=username)
-                print(database_user)
-                print(app_user)
                 logout(request)
                 database_user.delete()
                 app_user.delete()
                 messages.success(request, f"Account {username} has been successfully deleted")
                 return HttpResponseRedirect(reverse_lazy('post_board'))
         else:
-            print("Form is not valid")
             return render(
                 request, 
                 'userprofile.html', {
