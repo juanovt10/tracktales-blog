@@ -18,14 +18,8 @@ def custom_timesince(value):
     timesince_str = timesince(value)
     parts = timesince_str.split(', ')
 
-    if len(parts) > 1:
-        amount = parts[0].replace('\xa0', ' ').split()[0]
-        unit = parts[0].replace('\xa0', ' ').split()[1].lower()
+    amount = parts[0].replace('\xa0', ' ').split()[0]
+    unit = parts[0].replace('\xa0', ' ').split()[1].lower()
 
-        if unit in ['day', 'week', 'year']:
-            return f"{amount}{unit[0]}"
-        else:
-            return f"{amount}h"
-    else: 
-        amount = timesince_str.split()[0]
-        return f"{amount}m"
+    if unit in ['minute', 'minutes', 'hour', 'hours', 'day', 'days', 'week', 'weeks', 'year', 'years']:
+        return f"{amount}{unit[0]}"

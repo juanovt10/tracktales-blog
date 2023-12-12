@@ -124,6 +124,9 @@
                     <p class="card-text text-left mt-1 post-content">
                         {{ post.content }}
                     </p>
+                    {% if post.edited %}
+                    <p>(edited)</p>
+                    {% endif %}
                 </div> 
                 <div class="card-footer text-body-secondary">
                     {% if user.is_authenticated %}
@@ -310,7 +313,5 @@
         </div>
     </div>
 </div>
-
-<!-- here I should redirect to the sign up page -->
 
 {% endblock %}

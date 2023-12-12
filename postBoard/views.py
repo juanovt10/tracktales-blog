@@ -85,9 +85,10 @@ class PostBoard(generic.ListView):
         elif 'edit_post_id' in request.POST:
             post_slug = request.POST['edit_post_id']
             post = get_object_or_404(Post, slug=post_slug)
-            post.approved = False
             edit_form = EditPostForm(instance=post, data=request.POST) 
             if edit_form.is_valid():
+                post.approved = False
+                post.edited = True
                 edit_form.save()
                 messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
             else:
@@ -276,9 +277,10 @@ class ProfileDetail(generic.DetailView):
         elif 'edit_post_id' in request.POST:
             post_slug = request.POST['edit_post_id']
             post = get_object_or_404(Post, slug=post_slug)
-            post.approved = False
             edit_form = EditPostForm(instance=post, data=request.POST) 
             if edit_form.is_valid():
+                post.approved = False
+                post.edited = True
                 edit_form.save()
                 messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
             else:

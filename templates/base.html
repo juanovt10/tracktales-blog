@@ -1,91 +1,76 @@
 <html lang="en">
-  {% load static %}
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <title>Track Tales Community</title>
-  </head>
+{% load static %}
 
-  <body>
+<head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+          crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+          crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+      <title>Track Tales Community</title>
+</head>
 
-    
+<body>
     <nav class="menu navbar navbar-expand-sm bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}">Track Tales</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'about_us' %}">
-                About us
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Explore
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">North America</a></li>
-                <li><a class="dropdown-item" href="#">South America</a></li>
-                <li><a class="dropdown-item" href="#">Europe</a></li>
-                <li><a class="dropdown-item" href="#">South Asia</a></li>
-                <li><a class="dropdown-item" href="#">East Asia</a></li>
-                <li><a class="dropdown-item" href="#">West Asia</a></li>
-                <li><a class="dropdown-item" href="#">Oceania</a></li>
-                <li><a class="dropdown-item" href="#">Africa</a></li>
-                <li><a class="dropdown-item" href="#">Middle East</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact_us' %}">Contact</a>
-            </li>
-          </ul>
-          <span class="navbar-text">
-            {% if user.is_authenticated %}
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">Track Tales</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                  <ul class="navbar-nav me-auto mb-lg-0">
+                      <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="{% url 'about_us' %}">
+                              About us
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="{% url 'post_board' %}">
+                            Board
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{% url 'contact_us' %}">Contact</a>
+                      </li>
+                  </ul>
+                  <span class="nav-item dropdown">
 
-            <!-- should be link to profile -->
-            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a> 
+                      <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <div class="d-flex align-items-center justify-content-center rounded-circle profile-icon">
+                              <i class="fa-solid fa-user"></i>
+                          </div>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                          {% if user.is_authenticated %}
+                              <li><a class="dropdown-item" href="{% url 'profile_detail' username=request.user%}">Profile</a></li>
+                              <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                          {% else %}
+                              <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign-up</a></li>
+                              <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                          {% endif %}
+                      </ul>
 
-            {% else %}
+                      <!-- {% if user.is_authenticated %}
 
-            <a class="nav-link" href="{% url 'account_signup' %}">Sign-up</a>
-            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+           
+                      <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
 
-            {% endif %}
-          </span>
+                      {% else %}
+
+                      <a class="nav-link" href="{% url 'account_signup' %}">Sign-up</a>
+                      <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+
+                    {% endif %} -->
+                  </span>
+              </div>
         </div>
-      </div>
     </nav>
 
     <main class="flex-shrink-0 main-bg">
@@ -95,29 +80,24 @@
     </main>
 
     <footer class="footer bg-light fixed-bottom">
-      <div class="container">
-        <div class="social-media">
-          <a href="https://www.linkedin.com/" target="_blank">
-            <i class="fa-brands fa-linkedin-in"></i>
-          </a>
-          <a
-            href="https://www.instagram.com/infraestructuraysenalizacion/"
-            target="_blank"
-          >
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://www.youtube.com/" target="_blank">
-            <i class="fa-brands fa-youtube"></i>
-          </a>
+        <div class="container">
+            <div class="social-media">
+                <a href="https://www.linkedin.com/" target="_blank">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.instagram.com/infraestructuraysenalizacion/" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </div>
         </div>
-      </div>
     </footer>
 
 
     <script src="{% static 'js/script.js'%}"> </script>
-    <script
-      src="https://kit.fontawesome.com/3156a2e938.js"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    <script src="https://kit.fontawesome.com/3156a2e938.js" crossorigin="anonymous"></script>
+</body>
+
 </html>

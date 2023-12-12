@@ -198,6 +198,9 @@
                     <p class="card-text text-left mt-1 post-content">
                         {{ post.content }}
                     </p>
+                    {% if post.edited %}
+                    <p>(edited)</p>
+                    {% endif %}
                 </div> 
                 <div class="card-footer text-body-secondary">
                     {% if user.is_authenticated %}
@@ -207,7 +210,7 @@
 
                         <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
                         <button type="submit" class="btn btn-outline-danger">
-                            {% if post|user_liked_post:request.user %}
+                                {% if post|user_liked_post:request.user %}
                             <i class="fa-solid fa-heart"></i>
                             {% else %}
                             <i class="fa-regular fa-heart"></i>

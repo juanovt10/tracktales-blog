@@ -25,6 +25,12 @@ body {
     display: inline-block;
 }
 
+.profile-icon {
+    width: 3rem; 
+    height: 3rem;
+    border: 2px solid;
+}
+
 /* -- footer styling -- */
 
 .footer {
