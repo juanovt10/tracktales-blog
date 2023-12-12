@@ -4,7 +4,6 @@
 
 {% load custom_filters %}
 
-{% if request.user.is_authenticated %}
 
 <div class="container community-container">
     <div class="row px-3">
@@ -22,19 +21,71 @@
                 <div class="card-body">
                     <h5 class="card-title ms-2">{{ user_profile.display_name }}</h5>
                     <h6 class="card-title ms-2">@{{ user_profile.username }}</h6>
-                    <p class="card-text mt-2 ms-2">{{ user_profile.user_description }}</p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Most visited area: {{ user_profile.most_visited_area }}</li>
-                        <li class="list-group-item">Lanaguages: {{ user_profile.languages }}</li>
-                        <li class="list-group-item">Countries travelled: {{ user_profile.countries_traveled }}</li>
-                        <li class="list-group-item">Joined on: {{ user_profile.created_on|date:"d M. Y" }}</li>
-                    </ul>
-                    <button class="btn btn-primary ms-2 mt-2" id="edit-profile-btn">Edit Profile</button>
+                    {% if request.user.is_authenticated %}
+                        <p class="card-text mt-2 ms-2">{{ user_profile.user_description }}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Most visited area: {{ user_profile.most_visited_area }}</li>
+                            <li class="list-group-item">Lanaguages: {{ user_profile.languages }}</li>
+                            <li class="list-group-item">Countries travelled: {{ user_profile.countries_traveled }}</li>
+                            <li class="list-group-item">Joined on: {{ user_profile.created_on|date:"d M. Y" }}</li>
+                        </ul>
+                        {% if request.user.id == user_profile.username.id %}
+                            <button class="btn btn-primary ms-2 mt-2" id="edit-profile-btn">Edit Profile</button>
+                        {% endif %}
+                    {% else %}
+                        <p class="card-text mt-2 ms-2">To see this user description and travel information please <a href="{% url 'account_login'%}">login</a></p>
+                    {% endif %}  
                 </div>
             </div>
         </div>
 
+
+
+
         <div class="col-md-8 mb-2 pb-5">
+            {% if request.user.is_authenticated %}
+                {% if request.user.id == user_profile.username.id %}
+                    <div class="card mt-3">
+                        <h5 class="card-header">Create post - {{ request.user.username }}</h5>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="mb-3 d-flex flex-column justify-content-between">
+                                    <div class="mb-3">
+                                        {{ post_form.title }}
+                                    </div>
+                                    <div>
+                                        {{ post_form.country }}
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between">
+                                    <div class="btn-group col-12 col-sm mb-3 mb-sm-0">
+                                        {{ post_form.tags }}
+                                    </div>
+                                    <div class="d-none d-sm-block col-sm-1"></div>
+                                    <div class="btn-group col-12 col-sm">
+                                        {{ post_form.world_area }}
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col">
+                                        {{ post_form.content }}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-outline-info d-flex">Post!</button>
+                            </form>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card mt-3">
+                        <h5 class="card-header">This is @{{ user_profile.username }} profile.</h5>
+                        <div class="card-body">
+                            <h6 class="card-title text-left">To create a post please go to the main <a href="{% url 'post_board' %}">board</a> or to <a href="{% url 'profile_detail' username=request.user %}" class="btn btn-primary">your profile</a>.</h6>  
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+
             <!-- posts display -->
             {% for post in user_posts %}
             <div class="card mt-4">
@@ -93,9 +144,10 @@
                         
                     {% else %}
 
-                    <!-- Styling for sign off to be added -->
-                    <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
-                    <span class="text-secondary">{{ post.number_of_likes }} </span>
+                    <button type="button" class="btn btn-outline-danger me-1 display-comment-btn" data-post-id="{{ post.id }}">
+                        <i class="fa-regular fa-heart"></i>
+                        <span class="text-secondary">{{ post.number_of_likes }} </span>
+                    </button>
                         
                     {% endif %}
                     
@@ -113,7 +165,7 @@
                         <button type="submit" class="btn btn-outline-info mt-2 comment-submit">Comment!</button>
                     </form>
                     {% else %}
-                    <p>Please login to be able to comment post</p>
+                    <p>Please <a href="{% url 'account_login' %}">login</a> to be able to like or comment a post</p>
                     {% endif %}
                 </div>
                     
@@ -258,8 +310,6 @@
         </div>
     </div>
 </div>
-
-{% endif %}
 
 <!-- here I should redirect to the sign up page -->
 

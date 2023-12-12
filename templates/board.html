@@ -136,11 +136,11 @@
                 </div>
             </div>
             {% else %}
-            <div class="card post-card">
-                <h5 class="card-header">Want to Post?</h5>
+            <div class="card mt-3">
+                <h5 class="card-header">Do you want to share your experience?</h5>
                 <div class="card-body">
-                    <h5 class="card-title text-left">To post or comment please <a href="{% url 'account_login' %}" class="btn btn-primary">Sign-in</a></h5>
-                    <h5 class="card-title text-left">If you do not have an account <a href="{% url 'account_signup' %}" class="btn btn-secondary">Sign-up</a></h5>
+                    <h6 class="card-title text-left">Please login to post, comment and like posts <a href="{% url 'account_login' %}" class="btn btn-primary">Sign-in</a></h6>
+                    
                 </div>
             </div>
             {% endif %}
@@ -218,9 +218,10 @@
                         
                     {% else %}
 
-                    <!-- Styling for sign off to be added -->
-                    <span class="text-secondary"><i class="fa-solid fa-heart"></i></span>
-                    <span class="text-secondary">{{ post.number_of_likes }} </span>
+                    <button type="button" class="btn btn-outline-danger me-1 display-comment-btn" data-post-id="{{ post.id }}">
+                        <i class="fa-regular fa-heart"></i>
+                        <span class="text-secondary">{{ post.number_of_likes }} </span>
+                    </button>
                         
                     {% endif %}
                     
@@ -238,7 +239,7 @@
                         <button type="submit" class="btn btn-outline-info mt-2 comment-submit">Comment!</button>
                     </form>
                     {% else %}
-                    <p>Please login to be able to comment post</p>
+                    <p>Please <a href="{% url 'account_login' %}">login</a> to be able to like or comment a post</p>
                     {% endif %}
                 </div>
                     

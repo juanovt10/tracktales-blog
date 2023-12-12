@@ -29,7 +29,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-juanovt10-tracktales-blo-uxtv32degq.us2.codeanyapp.com', 
+ALLOWED_HOSTS = ['8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu106.gitpod.io',
+    '8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu106.gitpod.io',
     'track-tales-community-d01b2f85b4e9.herokuapp.com']
 
 
@@ -59,6 +60,8 @@ ACCOUNT_SIGNUP_REDIRECT_URL = 'account_signup_redirect'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -66,7 +69,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-juanovt10-tracktales-blo-uxtv32degq.us2.codeanyapp.com']
+    'https://8000-juanovt10-tracktales-blo-uxtv32degq.us2.codeanyapp.com',
+    'https://8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu106.gitpod.io',
+    'https://track-tales-community-d01b2f85b4e9.herokuapp.com']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

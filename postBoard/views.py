@@ -208,6 +208,8 @@ class ProfileDetail(generic.DetailView):
         context['tags'] = TAGS
         context['areas'] = WORLD_AREAS
         context['profile_form'] = ProfileForm()
+        context['post_form'] = PostForm()
+        context['comment_form'] = CommentForm()
 
         user_profile = self.get_object()
         context['user_posts'] = Post.objects.filter(author=user_profile.username)
@@ -252,21 +254,71 @@ class ProfileDetail(generic.DetailView):
                 app_user.delete()
                 messages.success(request, f"Account {username} has been successfully deleted")
                 return HttpResponseRedirect(reverse_lazy('post_board'))
-        else:
-            return render(
-                request, 
-                'userprofile.html', {
-                'username': self.kwargs['username'],
-                'user_profile': user_profile,
-                'post_form': post_form,
-                'comment_form': comment_form,
-                'edit_post_form': edit_post_form,
-                'profile_form': profile_form,
-                'tags': TAGS,
-                'areas': WORLD_AREAS,
-                'posts': posts,
-                'post_comments': post_comments,                
+
+        elif 'blogpost_id_like' in request.POST:
+            post_slug = request.POST['blogpost_id_like']
+            post = get_object_or_404(Post, slug=post_slug)
+
+            if post.likes.filter(id=request.user.id).exists():
+                post.likes.remove(request.user)
+            else:
+                post.likes.add(request.user)
+
+        elif comment_form.is_valid():
+            post_slug = request.POST.get('blogpost_id_comment')
+            post = get_object_or_404(Post, slug=post_slug)
+            comment_form.instance.author = request.user
+            comment = comment_form.save(commit=False)   
+            comment.post = post
+            comment.save()
+            messages.success(request, 'Your comment has been recorded and is awaiting for approval, this will take a couple of minutes.')
+
+        elif 'edit_post_id' in request.POST:
+            post_slug = request.POST['edit_post_id']
+            post = get_object_or_404(Post, slug=post_slug)
+            post.approved = False
+            edit_form = EditPostForm(instance=post, data=request.POST) 
+            if edit_form.is_valid():
+                edit_form.save()
+                messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
+            else:
+                print("Edit Form Errors:", edit_form.errors)
+                return render(request,
+                'board.html', {
+                    'post_form': post_form,
+                    'comment_form': comment_form,
+                    'edit_post_form': edit_form,
+                    'tags': TAGS,
+                    'areas': WORLD_AREAS,
+                    'filter_tags': TAGS[1:],
+                    'filter_areas': WORLD_AREAS[1:],
+                    'posts': posts,
+                    'post_comments': post_comments,
                 })
+
+        else:
+            if post_form.is_valid():
+                post_form.instance.author = request.user
+                post_form.instance.slug = slugify(post_form.instance.title)
+                post_form.save()
+                messages.success(request, 'Thank you! Your post is awaiting for approval, this will take a couple of minutes.')
+            else:
+                return render(
+                    request, 
+                    'userprofile.html', {
+                    'username': self.kwargs['username'],
+                    'user_profile': user_profile,
+                    'post_form': post_form,
+                    'comment_form': comment_form,
+                    'edit_post_form': edit_post_form,
+                    'profile_form': profile_form,
+                    'tags': TAGS,
+                    'areas': WORLD_AREAS,
+                    'posts': posts,
+                    'post_comments': post_comments,                
+                    })
+
+        return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': request.user.username}))
 
 
 
