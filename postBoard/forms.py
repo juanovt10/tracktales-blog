@@ -112,6 +112,7 @@ class ProfileForm(forms.ModelForm):
 
 
 class ContactUsForm(forms.ModelForm):
+
     first_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
     last_name = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
     email = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control"}), required=True)
@@ -130,3 +131,7 @@ class ContactUsForm(forms.ModelForm):
     class Meta:
         model = ContactInfo
         fields = ('first_name', 'last_name', 'email', 'phone_number', 'subject', 'message',)
+
+
+class UserDeleteForm(forms.Form):
+    delete = forms.BooleanField(required=True)

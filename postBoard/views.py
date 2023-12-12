@@ -3,7 +3,7 @@ from django.utils.text import slugify
 from django.views import generic, View
 from django.views.generic import TemplateView, FormView
 from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile, ContactInfo
-from .forms import PostForm, CommentForm, ProfileForm, EditPostForm, ContactUsForm
+from .forms import PostForm, CommentForm, ProfileForm, EditPostForm, ContactUsForm, UserDeleteForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
@@ -219,6 +219,8 @@ class ProfileDetail(generic.DetailView):
         profile_instance = user_profile
         context['profile_form'] = ProfileForm(instance=profile_instance)
         context['user_profile'] = user_profile
+
+        context['delete_form'] = UserDeleteForm()
         return context
 
     def post(self, request, username, *args, **kwargs):
@@ -238,6 +240,29 @@ class ProfileDetail(generic.DetailView):
             context = self.get_context_data()
             context['profile_form'] = profile_form
             return self.render_to_response(context)
+
+        # if delete_form.is_valid():
+        #     user = request.user
+        #     print(user)
+        #     logout(request)
+        #     user.delete()
+        #     message.success(request, f"Account {user} has been successfully deleted")
+        #     return HttpResponseRedirect(reverse_lazy('post_board'))
+        # else:
+        #     message.error(request, f"Account {user} has not been deleted")
+        #     return render(
+        #         request,
+        #         'profile_detail', kwargs={'username': username},
+        #             # 'post_form': post_form,
+        #             # 'comment_form': comment_form,
+        #             'edit_post_form': edit_post_form,
+        #             'tags': TAGS,
+        #             'areas': WORLD_AREAS,
+        #             'posts': posts,
+        #             'post_comments': post_comments,                
+        #         )
+
+
 
 
 class ContactUs(FormView):
