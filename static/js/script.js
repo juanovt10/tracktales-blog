@@ -5,14 +5,6 @@ $(document).ready(function () {
         $(".user-comment-area[data-post-id='" + postId + "']").toggle();
     });
 
-
-    $(".display-like-btn").on("click", function () {
-        let postId = $(this).data("post-id");
-        $(".user-like-msg[data-post-id='" + postId + "']").toggle();
-    });
-
-
-
     // This submits triggers the delete post modal 
     $(".delete-post-btn").on("click", function () {
         let postId = $(this).data("post-id");

@@ -1,13 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Quicksand&display=swap');
+
+/* General styling */
 body {
-    color: #000;
+    font-family: "Quicksand", "sans-serif";
+    background-color: #F5F4F5;
 }
 
-.menu {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat", "sans-serif";
 }
+
+
 
 /* -- index styling -- */
 
@@ -20,6 +23,39 @@ body {
 }
 
 /* -- navbar styling -- */
+
+.menu {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-item ul, .menu {
+    background-color: #1B1A26;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link,
+.nav-item a,
+.dropdown-menu .dropdown-item {
+    color: #F5F4F5;
+    transition: all .3s ease;
+}
+
+.navbar-brand:hover,
+.nav-link:hover, 
+.dropdown-menu a:hover {
+    color: #478FAB;
+}
+
+.nav-link:focus {
+    color: #478FAB;
+}
+
+.dropdown-menu a:hover {
+    background-color: #1B1A26;
+}
 
 .navbar-text a {
     display: inline-block;
@@ -36,6 +72,8 @@ body {
 .footer {
     display: flex;
     flex-direction: row;
+    color: #F5F4F5;
+    background-color: #1B1A26;
 }
 
 .social-media {
@@ -48,15 +86,38 @@ body {
     text-decoration: none;
     font-size: 150%;
     font-weight: 500;
-    margin: 10px 20px;
+    padding: 0.75rem 0.75rem;
+    margin: 0 0.75rem;
     color: inherit;
+    transition: all .3s ease;
+}
+
+.social-media a:hover {
+    background-color: #42455A;
 }
 
 /* about us styling */
 
 .about-us-container {
-    margin-top: 4.5rem;
-    margin-bottom: 4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Optionally, you can add a maximum width or other styles */
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #1B1A26;
+}
+
+@media (max-width: 576px) {
+    .about-us-container {
+        position: relative; /* Change to relative positioning for smaller screens */
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 4rem 0;
+    }
 }
 
 /* contactus styling */
@@ -64,6 +125,11 @@ body {
 .contact-us-container {
     margin-top: 5rem;
     margin-bottom: 4rem;
+}
+
+.card {
+    background-color: #42455A;
+    color: #F5F4F5;
 }
 
 /* -- board page styling -- */
@@ -77,6 +143,17 @@ body {
     position: sticky;
     overflow-y: auto;
     top: 80px;
+}
+
+.accordion-item,
+.accordion-button,
+.accordion-button:not(.collapsed) {
+    color:#F5F4F5;
+    background-color: #42455A;
+}
+
+.accordion-button.collapse::after {
+    color: #F5F4F5; 
 }
 
 textarea {
