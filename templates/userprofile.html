@@ -46,7 +46,7 @@
             {% if request.user.is_authenticated %}
                 {% if request.user.id == user_profile.username.id %}
                     <div class="card mt-3">
-                        <h5 class="card-header">Create post - {{ request.user.username }}</h5>
+                        <h5 class="card-header">Create post - @{{ request.user.username }}</h5>
                         <div class="card-body">
                             <form method="post">
                                 {% csrf_token %}
@@ -92,7 +92,7 @@
                 <div class="card-header d-flex px-2 px-md-3">
                     <div class="d-flex">
                         <div class="me-1">
-                            {{ post.author }}
+                            @{{ post.author }}
                         </div>
                         <div>
                             {{ post.created_on|custom_timesince }}
@@ -118,8 +118,8 @@
                 <div class="card-body">
                     <h5 class="card-title text-left post-title">{{ post.title }}</h5>
                     <div class="d-flex justify-content-start">
-                        <span class="badge me-2 bg-secondary post-area">{{ post.world_area }}</span>
-                        <span class="badge bg-secondary post-country">{{ post.country }}</span>
+                        <span class="badge me-2 post-area">{{ post.world_area }}</span>
+                        <span class="badge post-country">{{ post.country }}</span>
                     </div>
                     <p class="card-text text-left mt-1 post-content">
                         {{ post.content }}

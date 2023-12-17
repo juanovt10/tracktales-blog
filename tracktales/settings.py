@@ -31,6 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu106.gitpod.io',
     '8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu106.gitpod.io',
+    '8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu107.gitpod.io',
     'track-tales-community-d01b2f85b4e9.herokuapp.com']
 
 
@@ -71,6 +72,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-juanovt10-tracktales-blo-uxtv32degq.us2.codeanyapp.com',
     'https://8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu106.gitpod.io',
+    'https://8000-juanovt10-tracktalesblo-uvj2wvd89mf.ws-eu107.gitpod.io',
     'https://track-tales-community-d01b2f85b4e9.herokuapp.com']
 
 MIDDLEWARE = [
