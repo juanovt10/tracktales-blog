@@ -245,8 +245,12 @@
                 <div class="col">
                     <hr>
                 </div>
-                <div class="col-4 d-flex justify-content-center align-items-center">
-                    <p class="mb-0">User has no posts</p>
+                <div class="col-5 d-flex justify-content-center align-items-center text-center">
+                    {% if request.user.id == user_profile.username.id %}
+                    <p class="mb-0">You do no have any posts</p>
+                    {% else %}
+                    <p class="mb-0">@{{ user_profile.username }} has no posts</p>
+                    {% endif %}
                 </div>
                 <div class="col">
                     <hr>

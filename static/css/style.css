@@ -3,7 +3,7 @@
 /* General styling */
 body {
     font-family: "Quicksand", "sans-serif";
-    background-color: #090921;
+    background-color: #070719;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -204,14 +204,27 @@ hr {
     justify-content: flex-start;
 }
 
+.btn {
+    border: none;
+}
+
 .btn-warning {
-    background-color: #c89533;
+    background-color: #d59129;
     border: none;
 }
 
 .btn-primary {
-    background-color: #6a557f;
+    background-color: #ED7C4D;
     border: none;
+}
+
+.btn-success {
+    background-color: #9C1150;
+}
+
+.btn-info {
+    background-color: #111522;
+    color: #F5F4F5;
 }
 
 .btn-secondary {

@@ -131,7 +131,7 @@
                                 {{ post_form.content }}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-outline-info d-flex">Post!</button>
+                        <button type="submit" class="btn btn-info d-flex">Post!</button>
                     </form>
                 </div>
             </div>
@@ -239,7 +239,7 @@
                         
                         <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
                         {{ comment_form.body }}
-                        <button type="submit" class="btn btn-outline-info mt-2 comment-submit">Comment!</button>
+                        <button type="submit" class="btn btn-info mt-2 comment-submit">Comment!</button>
                     </form>
                     {% else %}
                     <p>Please <a href="{% url 'account_login' %}">login</a> to be able to like or comment a post</p>
