@@ -36,6 +36,10 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #070719;
 }
 
+.menu-btn {
+    background-color: #F5F6F8;
+}
+
 .navbar-brand,
 .navbar-nav .nav-link,
 .nav-item a,
@@ -244,6 +248,10 @@ hr {
 /* Create profile styling */
 .create-profile-card {
     width: 80%;
+}
+
+.no-posts {
+    color: #ED7C4D;
 }
 
 /* authentication pages styling */

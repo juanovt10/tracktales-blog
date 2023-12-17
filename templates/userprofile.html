@@ -41,7 +41,6 @@
 
 
 
-
         <div class="col-md-8 mb-2 pb-5">
             {% if request.user.is_authenticated %}
                 {% if request.user.id == user_profile.username.id %}
@@ -87,12 +86,13 @@
             {% endif %}
 
             <!-- posts display -->
+            {% if user_posts %}
             {% for post in user_posts %}
             <div class="card mt-4">
                 <div class="card-header d-flex px-2 px-md-3">
                     <div class="d-flex">
                         <div class="me-1">
-                            @{{ post.author }}
+                            <a class="profile-link" href="{% url 'profile_detail' username=post.author %}">@{{ post.author }}</a>
                         </div>
                         <div>
                             {{ post.created_on|custom_timesince }}
@@ -107,7 +107,7 @@
                             <button class="btn btn-outline-secondary border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-ellipsis"></i>
                             </button>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu post-options">
                                 <li><button class="dropdown-item edit-post-btn" data-post-id="{{ post.slug }}">Edit Post</button></li>
                                 <li><button class="dropdown-item delete-post-btn" data-post-id="{{ post.slug }}">Delete Post</button></li>
                             </ul>
@@ -125,7 +125,7 @@
                         {{ post.content }}
                     </p>
                     {% if post.edited %}
-                    <p>(edited)</p>
+                    <p class="fst-italic">(edited)</p>
                     {% endif %}
                 </div> 
                 <div class="card-footer text-body-secondary">
@@ -240,6 +240,19 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="d-flex no-posts mt-3">
+                <div class="col">
+                    <hr>
+                </div>
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                    <p class="mb-0">User has no posts</p>
+                </div>
+                <div class="col">
+                    <hr>
+                </div>
+            </div>
+            {% endif %}
         </div>     
     </div>
 
