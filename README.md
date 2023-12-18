@@ -266,8 +266,6 @@ add screenshot
     - The idea of world areas and holiday type is good to filter and differentiate posts but furter details should be used for this. Such as country and author. 
     - The country should be another dropdown list that has the countries selected depening on the world area that has been selected.
 
-    
-
 ## Testing
 
 ### Methodology 
@@ -373,6 +371,12 @@ Insert methodology here**
 | Post form display - Non-authenticated user in a user's profile | When a non-authenticated user is in another user's profile no card is displayed above the exisiting user's posts. | The post form is not displayed. | PASS |
 | Posts display - User with existing posts | All user posts should be displayed when navigating to their profile. | All user posts are successfully displayed. | PASS |
 | Posts display - User with no existing posts | When navigating to a user's profile without posts, a message should be displayued stating that the user's profile do not have any posts. | Message is displayed succeessfuly for when an user do no have any posts. | PASS |
+
+### Testing user sotries from UX section 
+
+#### Current user goals
+
+#### Future user goals
 
 ## Technologies used
 
