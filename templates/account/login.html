@@ -10,17 +10,19 @@
         <div class="card-body">
             <h5 class="card-title">{% trans "Login" %}</h5>
             <div class="d-flex justify-content-between align-items-center">
-                <h6 class="card-subtitle text-body-secondary">{% blocktrans %}You do not have an account with us?</h6>
-                <a href="{{ signup_url }}" class="btn btn-primary">Sign up</a> {% endblocktrans %}
+                <!-- <h6 class="card-subtitle text-body-secondary">You do not have an account with us?</h6> -->
+                <!-- {% blocktrans %} <a href="{{ signup_url }}" class="btn btn-primary">Sign up</a> {% endblocktrans %} -->
             </div>
             
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
+                <h6 class="card-subtitle text-body-secondary">You do not have an account with us?</h6>
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-between mt-3">
+                    {% blocktrans %} <a href="{{ signup_url }}" class="btn btn-primary">Sign up</a> {% endblocktrans %}
                     <button class="btn btn-secondary right" type="submit">{% trans "Sign In" %}></button>
                 </div>
             </form>

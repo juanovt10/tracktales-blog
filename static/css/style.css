@@ -259,6 +259,20 @@ hr {
     color: #070719;
 }
 
+.home-slide-2-text p,
+.home-slide-2-text h2 {
+    font-weight: 900;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    width: 70%;
+}
+
+
 
 .btn-outline-secondary {
     transition: all .3s ease;

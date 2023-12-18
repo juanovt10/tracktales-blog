@@ -14,35 +14,41 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="../static/images/pexels-ajay-donga-2174656.jpg" class="img-fluid d-block w-100" alt="...">
-            <div class="carousel-caption text-white mb-4 mb-sm-5">
+            <div class="carousel-caption text-white d-flex flex-column justify-content-center align-items-center">
                 <h2 class="display-4">Embark on a Journey</h2>
                 <p class="lead">Experience the world through shared adventures and unique perspectives.</p>
                 <p>Discover captivating travel stories, insider tips, and hidden gems.</p>
-                <a href="{% url 'post_board' %}" class="btn btn-primary btn-block me-3">Check the stories!</a>
-                <a href="{% url 'about_us' %}" class="btn btn-secondary btn-block">How does it work?</a>                
+                <div class="d-flex">
+                    <a href="{% url 'post_board' %}" class="btn btn-primary btn-block me-3">Check the stories!</a>
+                    <a href="{% url 'about_us' %}" class="btn btn-secondary btn-block">How does it work?</a>  
+                </div>            
             </div>
         </div>
         <div class="carousel-item">
             <img src="../static/images/pexels-vincent-rivaud-2265876.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption mb-4 mb-sm-5 home-slide-2-text">
-                    <h2 class="display-4">Explore Together</h2>
-                    <p class="lead">Join our vibrant travel community and explore a world of shared experiences.</p>
-                    <p class="d-none d-sm-block">Discover amazing travel stories, tips, and recommendations from fellow globetrotters.</p>
-                    <p class="d-none d-sm-block">Ready to start your journey? Sign up and become part of our community!</p>
+            <div class="carousel-caption home-slide-2-text d-flex flex-column justify-content-center align-items-center">
+                <h2 class="display-4">Explore Together</h2>
+                <p class="lead">Join our vibrant travel community and explore a world of shared experiences.</p>
+                <p class="d-none d-sm-block">Discover amazing travel stories, tips, and recommendations from fellow globetrotters.</p>
+                <p class="d-none d-sm-block">Ready to start your journey? Sign up and become part of our community!</p>
+                <div class="d-flex">                    
                     <a href="{% url 'account_signup' %}" class="btn btn-primary btn-block me-3">Sign Up</a>
                     <a href="{% url 'account_login' %}" class="btn btn-success btn-block">Login</a>
+                </div>    
             </div>
         </div>
         <div class="carousel-item">
             <img src="../static/images/pexels-jimmy-teoh-1010657.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption text-white mb-4 mb-sm-5">
+            <div class="carousel-caption text-white d-flex flex-column justify-content-center align-items-center">
                 <div class="home-slide-2-text">
                     <h2 class="display-4">Explore Our Community</h2>
                     <p class="lead">Curious about what makes our travel community unique?</p>
                     <p>Learn more about our mission, the stories we share, and the experiences we cherish.</p>
                 </div>
-                <a href="{% url 'about_us' %}" class="btn btn-secondary btn-block me-3">Learn More</a>
-                <a href="{% url 'contact_us' %}" class="btn btn-success btn-block">Contact Us</a>
+                <div class="d-flex">
+                    <a href="{% url 'about_us' %}" class="btn btn-secondary btn-block me-3">Learn More</a>
+                    <a href="{% url 'contact_us' %}" class="btn btn-success btn-block">Contact Us</a>
+                </div>
             </div>
         </div>
     </div>

@@ -11,15 +11,16 @@
     <div class="card auth-card-signup">
         <div class="card-body">
             <h5 class="card-title">{% trans "Sign Up" %}</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</h6>
             <form class="login" method="POST" action="{% url 'account_signup' %}">
                 {% csrf_token %}
                 {% element fields form=form unlabeled=True %}
                 {% endelement %}
+                <h6 class="card-subtitle mb-2 text-body-secondary">Already have an account?</h6>
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'create_profile' %}" />
                 {% endif %}
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-between">
+                    {% blocktrans %}<a href="{{ login_url }}" class="btn btn-primary">Login</a>.{% endblocktrans %}
                     <button class="btn btn-secondary" type="submit">{% trans "Sign Up" %}></button>
                 </div>
                 {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
