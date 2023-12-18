@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<div class="container contact-us-container">
-    <div class="card">
+<div class="container contact-us-container d-flex justify-content-center align-items-center">
+    <div class="card mx-4">
         <div class="card-body">
-            <h5 class="card-title">Get in touch</h5>
+            <h5 class="card-title">Send us a message!</h5>
             <form method="post">
                 {% csrf_token %}
                 {% if error_message %}
@@ -13,13 +13,13 @@
                     {{ error_message }}
                 </div>
                 {% endif %}
-
-                <div class="d-flex justify-content-between">
-                    <div>
+                <div class="d-flex flex-column flex-sm-row row">
+                    <div class="col ps-ineh pe-sm-0">
                         <label for="{{ contact_form.first_name.id_for_label }}" class="form-label">First name:</label>
                         {{ contact_form.first_name }}
                     </div>
-                    <div>
+                    <div class="col-1 p-0 d-none d-sm-block"></div>
+                    <div class="col ps-ineh ps-sm-0">
                         <label for="{{ contact_form.last_name.id_for_label }}" class="form-label">Last name:</label>
                         {{ contact_form.last_name }}
                     </div>
@@ -44,46 +44,6 @@
                     <button type="submit" class="btn btn-secondary">Send!</button>
                 </div>
             </form>
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- <form method="post">
-                {% csrf_token %}
-                <div>
-                    <label for="{{ contact_form.first_name.id_for_label }}" class="form-label">First name:</label>
-                    {{ contact_form.first_name }}
-                </div>
-                <div>
-                    <label for="{{ contact_form.last_name.id_for_label }}" class="form-label">Last name:</label>
-                    {{ contact_form.last_name }}
-                </div>
-                <div>
-                    <label for="{{ contact_form.email.id_for_label }}" class="form-label">Email:</label>
-                    {{ contact_form.email }}
-                </div>
-                <div>
-                    <label for="{{ contact_form.phone_number.id_for_label }}" class="form-label">Phone Number:</label>
-                    {{ contact_form.phone_number }}
-                </div>
-                <div>
-                    <label for="{{ contact_form.subject.id_for_label }}" class="form-label">Subject:</label>
-                    {{ contact_form.subject }}
-                </div>
-                <div>
-                    <label for="{{ contact_form.message.id_for_label }}" class="form-label">Message:</label>
-                    {{ contact_form.message }}
-                </div>
-                <button type="submit" class="btn btn-outline-success">Send!</button>
-            </form> -->
         </div>
     </div>
 </div>
