@@ -106,24 +106,13 @@ h1, h2, h3, h4, h5, h6 {
 /* about us styling */
 
 .about-us-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Optionally, you can add a maximum width or other styles */
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    color: #F5F6F8;
+    min-height: 100vh;
+    color: #EAEAEA;
 }
 
 @media (max-width: 576px) {
     .about-us-container {
-        position: relative; /* Change to relative positioning for smaller screens */
-        top: auto;
-        left: auto;
-        transform: none;
-        margin: 4rem 0;
+        padding: 80px 0;
     }
 }
 
@@ -213,13 +202,40 @@ hr {
     border: none;
 }
 
+.btn-primary, 
+.btn-secondary,
+.btn-success {
+    border: none;
+    transition: all .3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ED7C4D;
+
+    transform: translate(-2px, -5px);
+} 
+
+.btn-secondary:hover {
+    background-color: #801F1F;
+    transform: translate(-2px, -5px);
+}
+ 
+.btn-success:hover {
+    background-color: #A59D64;
+    transform: translate(-2px, -5px);
+}
+
 .btn-primary {
     background-color: #ED7C4D;
     border: none;
 }
 
+.btn-secondary {
+    background-color: #801F1F;
+}
+
 .btn-success {
-    background-color: #9C1150;
+    background-color: #A59D64;
 }
 
 .btn-info {
@@ -227,9 +243,11 @@ hr {
     color: #F5F4F5;
 }
 
-.btn-secondary {
-    background-color: #090921;
+
+.home-slide-2-text {
+    color: #070719;
 }
+
 
 .btn-outline-secondary {
     transition: all .3s ease;

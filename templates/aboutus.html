@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<section class="about-us-container">
+<section class="d-flex justify-content-center align-items-center about-us-container">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h2 class="section-title">Welcome to Our Travel Community!</h2>
+                <h3 class="section-title">Welcome to Our Travel Community!</h3>
                 <p class="section-description">Discover a vibrant community where travel enthusiasts come together to
                     share their journeys and connect with like-minded adventurers.</p>
             </div>
@@ -14,7 +14,7 @@
 
         <div class="row mt-4">
             <div class="col-lg-8 offset-lg-2 text-center">
-                <h2 class="section-title">What You Can Do Here</h2>
+                <h3 class="section-title">What You Can Do Here</h3>
                 <ul class="list-unstyled">
                     <li><i class="fas fa-check-circle text-success"></i> Post your travel experiences on our Board.</li>
                     <li><i class="fas fa-check-circle text-success"></i> Engage with other travelers through comments
@@ -26,11 +26,12 @@
         </div>
         <div class="row mt-4">
             <div class="col-lg-8 offset-lg-2 text-center">
-                <h2 class="section-title">Explore Our Featured Destinations</h2>
+                <h3 class="section-title">Explore Our Featured Destinations</h3>
                 <p class="section-description">Embark on a virtual journey with our curated collection of featured destinations.
                     From hidden gems to popular hotspots, discover travel inspiration that will fuel your wanderlust and ignite
                     your sense of adventure.</p>
-                <a href="{% url 'post_board' %}" class="btn btn-primary btn-block mt-2">Start Exploring</a>
+                <a href="{% url 'post_board' %}" class="btn btn-primary btn-block mt-2 me-2">Start Exploring</a>
+                <a href="{% url 'post_board' %}" class="btn btn-secondary btn-block mt-2">Join us</a>
             </div>
         </div>
     </div>
