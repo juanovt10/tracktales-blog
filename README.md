@@ -47,32 +47,32 @@ As Track Tales evolves, future users will likely seek a seamless space to share 
 
 - In large screens the navbar displays links to home, about us, board contact and user options. 
 
-add screenshot
+![navbar](static/images/readme_images/navbar.png)
 
 - When the user is not logged in, an user icon is displayed and the options are sign-up or login.
 
-add screenshot
+![profile_icon_logged_out](static/images/readme_images/profile_icon_logged_out.png)
 
 - When the user is logged in, an user the two first letter of the user's username are displayed instead of the profile icon and the options are profile or logout.
 
-add screenshot
+![profile_icon_logged_in](static/images/readme_images/profile_icon_logged_in.png)
 
 - In small screens, all links but the home one, are within a burger menu. Additionally, the profile dropdown options are added in the same category as the rest of the links. 
 
-add screenshot
+![collapsed_navbar](static/images/readme_images/sm_navbar.png)
 
 #### Footer
 
 - User have functional links to X, Instagram and Youtube. These links will open in a new tab as they are outside the web application. 
 
-add screenshot 
+![footer](static/images/readme_images/footer.png)
 
 #### Index
 
 - Three carousel images are displayed in the home page. 
-- Inital page cotains a catchy titles and a functional link to the posts board. 
+- Inital page cotains a catchy titles and a functional link to the posts board and about us pages.
 
-add screenshot
+![home_slide_1](static/images/readme_images/home_slide1.png)
 
 - Second page incentivates the user to create an account and provide the links to signup or login.
 
@@ -86,17 +86,17 @@ add screenshot
 
 - This is an informational page. It contains a brief description of the forum, explains what a user can do in the platform, and has a catchy content at the end. Additonally, it provies a button to redirect the user to the posts board. 
 
-add screenshot
+![about_us](static/images/readme_images/about_us.png)
 
 #### Contact
 
 - This page contains a form for a user to directly contact the admin of the page. The fields are first name, last name, email, phone number, subject and message. 
 
-add screenshot
+![contact_us](static/images/readme_images/contact_us.png)
 
 - If the form is invalid, there will be error messages displayed. 
 
-add screenshot 
+![contact_us_error](static/images/readme_images/contact_us_error.png)
 
 - If the form is successfully submited, it will redirect the user to a a success landing page where they have buttons to go back home, or if they are not-authenticated, they can sign up. 
 
