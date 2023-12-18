@@ -11,7 +11,6 @@ The TrackTales community is live, to access it [click here.][ADD LINK]
 + [UX](#ux)
 + [Design](#design)
 + [Features](#features)
-+ [Technologies used](#technologies-used)
 + [Testing](#testing)
 + [Technologies used](#technologies-used)
 + [Deployment](#deployment)
@@ -45,6 +44,48 @@ As Track Tales evolves, future users will likely seek a seamless space to share 
 ### Existing Features
 
 ### Future Features
+
+## Testing
+
+### Methodology 
+
+Insert methodology here**
+
+### User Stories 
+
+#### Index page
+
+| Testing  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Navigation bar functionality (user not authenticated) | Test that all links work | User is directed respectively to the home, about us, board, contact or account registration links | PASS |
+| Navigation bar functionality (user authenticated) | Test that all links work | User is directed respectively to the navbar links and has the correct account links (profile and logout) | PASS |
+| Footer links | Test that all links work and open a new tab when clicked | User is directed respectively to all social media links with  | PASS |
+| Carrousel links | Test that all links work and redirect the user to the board, sing | User is directed respectively to all social media links with  | PASS |
+
+#### About us page
+
+| Testing  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| "Start Exploring" button | Test that the links redirects to the post board | User is directed succesfully to the post board page | PASS |
+
+#### Board
+| Testing  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+
+#### Contact 
+
+| Testing  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Contact form - Form Validation | Submit empty form | Browser promts that required fields need to be filled | PASS |
+| Contact form - Form Validation | Submit empty form (after filling and deleting the field's content) | Browser promts that required fields need to be filled | PASS |
+| Contact form - Form Validation | Submit with an invalid email address | Error message is successfully displayed | PASS |
+| Contact form - Form Validation | Submit valid form | User is redirect to success page stating that the response has been recorded | PASS |
+| Contact form success links | Test the Sign up and home links functionality | User is successfully redirected to signup or home page | PASS |
+
+#### Registration 
+
+#### Profile
+
 
 ## Technologies used
 
