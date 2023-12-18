@@ -123,10 +123,6 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-
-
-
-
 .card {
     background-color: #EAEAEA;
     color: #090921;
@@ -148,8 +144,9 @@ h1, h2, h3, h4, h5, h6 {
 .accordion-item,
 .accordion-button,
 .accordion-button:not(.collapsed) {
-    color:#F5F4F5;
-    background-color: #090921;
+    color:#090921;
+    background-color: #EAEAEA;
+    border: 1px solid #090921;
 }
 
 .accordion-button.collapse::after {
@@ -208,14 +205,14 @@ hr {
 
 .btn-primary, 
 .btn-secondary,
-.btn-success {
+.btn-success,
+.btn-info {
     border: none;
     transition: all .3s ease;
 }
 
 .btn-primary:hover {
     background-color: #ED7C4D;
-
     transform: translate(-2px, -5px);
 } 
 
@@ -227,6 +224,12 @@ hr {
 .btn-success:hover {
     background-color: #A59D64;
     transform: translate(-2px, -5px);
+}
+
+.btn-info:hover,
+.btn-outline-primary:hover {
+    background-color: #090921;
+    color: #F5F4F5;
 }
 
 .btn-primary {
@@ -247,6 +250,9 @@ hr {
     color: #F5F4F5;
 }
 
+.btn-outline-primary {
+    color: #090921;
+}
 
 .home-slide-2-text {
     color: #070719;
@@ -279,6 +285,16 @@ hr {
 .comment-submit {
     width: 50%;
 }
+
+
+/* modals stylying */
+
+.modal-content {
+    background-color: #EAEAEA;
+    color: #090921;
+}
+
+
 
 /* Create profile styling */
 .create-profile-card {

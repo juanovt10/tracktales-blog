@@ -211,6 +211,7 @@ class ProfileDetail(generic.DetailView):
         context['profile_form'] = ProfileForm()
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
+        context['edit_post_form'] = EditPostForm()
 
         user_profile = self.get_object()
         context['user_posts'] = Post.objects.filter(author=user_profile.username)

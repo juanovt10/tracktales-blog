@@ -10,7 +10,7 @@ class PostForm(forms.ModelForm):
     tags = forms.ChoiceField(
         widget=forms.Select(
             attrs= {
-                "class": "btn btn-secondary dropdown-toggle",
+                "class": "btn btn-info dropdown-toggle",
             }
         ),
         choices=TAGS,
@@ -19,7 +19,7 @@ class PostForm(forms.ModelForm):
 
     world_area = forms.ChoiceField(
         widget=forms.Select(
-            attrs= {"class": "btn btn-secondary dropdown-toggle"}),
+            attrs= {"class": "btn btn-info dropdown-toggle"}),
         choices=WORLD_AREAS,
         required=True,
     )
@@ -44,7 +44,7 @@ class EditPostForm(forms.ModelForm):
     tags = forms.ChoiceField(
         widget=forms.Select(
             attrs= {
-                "class": "btn btn-secondary dropdown-toggle",
+                "class": "btn btn-info dropdown-toggle",
                 "placeholder": "Holiday Type",
             }
         ),
@@ -53,7 +53,7 @@ class EditPostForm(forms.ModelForm):
 
     world_area = forms.ChoiceField(
         widget=forms.Select(
-            attrs= {"class": "btn btn-secondary dropdown-toggle"}),
+            attrs= {"class": "btn btn-info dropdown-toggle"}),
         choices=WORLD_AREAS,
     )
     content = forms.CharField(
@@ -100,7 +100,7 @@ class ProfileForm(forms.ModelForm):
     )
     most_visited_area = forms.ChoiceField(
         widget=forms.Select(
-            attrs= {"class": "btn btn-secondary dropdown-toggle"}),
+            attrs= {"class": "btn btn-info dropdown-toggle"}),
         choices=WORLD_AREAS,
     )
     languages = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))

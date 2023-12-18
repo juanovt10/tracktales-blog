@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="card filter-card">
+            <div class="card filter-card mt-3">
                 <div class="card-body">
                     <h5 class="card-title ms-2">{{ user_profile.display_name }}</h5>
                     <h6 class="card-title ms-2">@{{ user_profile.username }}</h6>
@@ -30,18 +30,18 @@
                             <li class="list-group-item">Joined on: {{ user_profile.created_on|date:"d M. Y" }}</li>
                         </ul>
                         {% if request.user.id == user_profile.username.id %}
-                            <button class="btn btn-primary ms-2 mt-2" id="edit-profile-btn">Edit Profile</button>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary mt-2" id="edit-profile-btn">Edit Profile</button>
+                            </div>
                         {% endif %}
                     {% else %}
-                        <p class="card-text mt-2 ms-2">To see this user description and travel information please <a href="{% url 'account_login'%}">login</a></p>
+                        <p class="card-text mt-2 ms-2">Create an account to see this user description and travel information.</p>
                     {% endif %}  
                 </div>
             </div>
         </div>
 
-
-
-        <div class="col-md-8 mb-2 pb-5">
+        <div class="col-md-8 mb-4 pb-5">
             {% if request.user.is_authenticated %}
                 {% if request.user.id == user_profile.username.id %}
                     <div class="card mt-3">
@@ -71,7 +71,9 @@
                                         {{ post_form.content }}
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-outline-info d-flex">Post!</button>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <button type="submit" class="btn btn-secondary">Post!</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -79,10 +81,21 @@
                     <div class="card mt-3">
                         <h5 class="card-header">This is @{{ user_profile.username }} profile.</h5>
                         <div class="card-body">
-                            <h6 class="card-title text-left">To create a post please go to the main <a href="{% url 'post_board' %}">board</a> or to <a href="{% url 'profile_detail' username=request.user %}" class="btn btn-primary">your profile</a>.</h6>  
+                            <h6 class="card-title text-left">To create a post please go to the <a href="#" class="btn btn-primary">main board</a> or to <a href="#" class="btn btn-secondary">your profile</a></h6>  
                         </div>
                     </div>
                 {% endif %}
+            {% else %}
+                <div class="card mt-3">
+                    <h5 class="card-header">You are not logged in!</h5>
+                    <div class="card-body">
+                        <h6 class="card-title text-left">Create an account to post, comment and like posts!</h6>
+                        <div class="d-flex justify-content-end">
+                            <a href="{% url 'account_login' %}" class="btn btn-primary me-1">Login</a> 
+                            <a href="{% url 'account_signup' %}" class="btn btn-secondary">Sign-up</a>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
 
             <!-- posts display -->
@@ -128,7 +141,7 @@
                     <p class="fst-italic">(edited)</p>
                     {% endif %}
                 </div> 
-                <div class="card-footer text-body-secondary">
+                <div class="card-footer">
                     {% if user.is_authenticated %}
                     <form method="POST" class="mb-0 me-1">
 
@@ -165,7 +178,7 @@
                         
                         <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
                         {{ comment_form.body }}
-                        <button type="submit" class="btn btn-outline-info mt-2 comment-submit">Comment!</button>
+                        <button type="submit" class="btn btn-secondary mt-2 comment-submit">Comment!</button>
                     </form>
                     {% else %}
                     <p>Please <a href="{% url 'account_login' %}">login</a> to be able to like or comment a post</p>
@@ -174,11 +187,11 @@
                     
                 <!-- this is the area for the display of comments -->
                 {% for comment in post_comments|key:post.id %}
-                <div class="card-footer text-body-secondary d-flex flex-column align-items-start px-2 px-md-3">
+                <div class="card-footer d-flex flex-column align-items-start px-2 px-md-3">
                     <div>
-                        {{ comment.author.username }} {{ comment.created_on|custom_timesince }}
+                        <a class="profile-link" href="{% url 'profile_detail' username=post.author %}">@{{ comment.author }}</a> {{ comment.created_on|custom_timesince }}
                     </div>
-                    <div class="text-primary">
+                    <div>
                        {{ comment.body }}
                     </div>
                 </div>
@@ -232,8 +245,10 @@
                                 <div class="mb-3 d-flex">
                                     {{ edit_post_form.content }}
                                 </div>
-                                <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
-                                <button type="button" class="btn btn-outline-info d-flex edit-post">Edit post</button>
+                                <div class="d-flex justify-content-end">
+                                    <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
+                                    <button type="button" class="btn btn-secondary d-flex edit-post">Edit post</button>                                        
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -302,8 +317,10 @@
                             yourself:</label>
                         {{ profile_form.user_description }}
                     </div>
-                    <button type="submit" class="btn btn-outline-info btn-post">Edit Profile</button>
-                    <button type="button" class="btn btn-danger" id="delete-profile-btn">Delete Profile</button>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-danger me-2" id="delete-profile-btn">Delete Profile</button>
+                        <button type="submit" class="btn btn-success btn-post">Edit Profile</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -321,7 +338,7 @@
                     <p>Are you sure do you want to delete your profile @{{ user_profile.username }}?</p>
                     <p>Please note that your profile, posts and comments will be permanently deleted.</p>
                 </div>
-                <form method="post" class="modal-footer justify-content-center">
+                <form method="post" class="modal-footer justify-content-end">
                     {% csrf_token %}
                     <input type="hidden" name="delete_user_id" value="{{user_profile.username}}">
                     <button type="submit" class="btn btn-danger">Delete Profile</button>

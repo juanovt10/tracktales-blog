@@ -94,15 +94,15 @@
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <button type="reset" class="btn btn-warning">Clear filters</button>
-                        <button type="submit" class="btn btn-primary mt-md-1 mt-lg-0">Apply filters</button>
+                        <button type="reset" class="btn btn-success">Clear filters</button>
+                        <button type="submit" class="btn btn-secondary mt-md-1 mt-lg-0">Apply filters</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <!-- area to create posts and display posts -->
-        <div class="col-md-8 mb-2 pb-5">
+        <div class="col-md-8 mb-4 pb-5">
             {% if user.is_authenticated %}
             <div class="card mt-3">
                 <h5 class="card-header">Create post - @{{ request.user.username }}</h5>
@@ -131,7 +131,9 @@
                                 {{ post_form.content }}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-info d-flex">Post!</button>
+                        <div class="d-flex justify-content-end align-items-center">
+                            <button type="submit" class="btn btn-secondary">Post!</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -139,8 +141,11 @@
             <div class="card mt-3">
                 <h5 class="card-header">Do you want to share your experience?</h5>
                 <div class="card-body">
-                    <h6 class="card-title text-left">Please login to post, comment and like posts <a href="{% url 'account_login' %}" class="btn btn-primary">Sign-in</a></h6>
-                    
+                    <h6 class="card-title text-left">Create an account to post, comment and like posts!</h6>
+                    <div class="d-flex justify-content-end">
+                        <a href="{% url 'account_login' %}" class="btn btn-primary me-1">Login</a> 
+                        <a href="{% url 'account_signup' %}" class="btn btn-secondary">Sign-up</a>
+                    </div>
                 </div>
             </div>
             {% endif %}
@@ -151,7 +156,7 @@
                     <hr>
                 </div>
                 <div class="col-1 d-flex justify-content-center align-items-center p-0">
-                    <button class="btn btn-outline-warning" id="filter-posts" data-toggle="modal" data-target="#filterModal">
+                    <button class="btn btn-primary" id="filter-posts" data-toggle="modal" data-target="#filterModal">
                         <i class="fa-solid fa-filter"></i>
                     </button>
                 </div>
@@ -202,7 +207,7 @@
                     <p class="fst-italic">(edited)</p>
                     {% endif %}
                 </div> 
-                <div class="card-footer text-body-secondary">
+                <div class="card-footer">
                     {% if user.is_authenticated %}
                     <form method="POST" class="mb-0 me-1">
 
@@ -239,7 +244,7 @@
                         
                         <input type="hidden" name="blogpost_id_comment" value="{{post.slug}}">
                         {{ comment_form.body }}
-                        <button type="submit" class="btn btn-info mt-2 comment-submit">Comment!</button>
+                        <button type="submit" class="btn btn-secondary mt-2 comment-submit">Comment!</button>
                     </form>
                     {% else %}
                     <p>Please <a href="{% url 'account_login' %}">login</a> to be able to like or comment a post</p>
@@ -248,11 +253,11 @@
                     
                 <!-- this is the area for the display of comments -->
                 {% for comment in post_comments|key:post.id %}
-                <div class="card-footer text-body-secondary d-flex flex-column align-items-start px-2 px-md-3">
+                <div class="card-footer d-flex flex-column align-items-start px-2 px-md-3">
                     <div>
-                        {{ comment.author.username }} {{ comment.created_on|custom_timesince }}
+                        <a class="profile-link" href="{% url 'profile_detail' username=post.author %}">@{{ comment.author }}</a> {{ comment.created_on|custom_timesince }}
                     </div>
-                    <div class="text-primary">
+                    <div>
                        {{ comment.body }}
                     </div>
                 </div>
@@ -306,8 +311,10 @@
                                 <div class="mb-3 d-flex">
                                     {{ edit_post_form.content }}
                                 </div>
-                                <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
-                                <button type="button" class="btn btn-outline-info d-flex edit-post">Edit post</button>
+                                <div class="d-flex justify-content-end">
+                                    <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
+                                    <button type="button" class="btn btn-secondary d-flex edit-post">Edit post</button>                                        
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -374,9 +381,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-2">
-                                <button type="reset" class="btn btn-warning">Clear filters</button>
-                                <button type="submit" class="btn btn-outline-success mt-md-1 mt-lg-0">Apply filters</button>
+                            <div class="mt-2 d-flex justify-content-center">
+                                <button type="reset" class="btn btn-success me-2">Clear filters</button>
+                                <button type="submit" class="btn btn-secondary">Apply filters</button>
                             </div>
                         </form>
                     </div>
