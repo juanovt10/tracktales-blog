@@ -118,7 +118,8 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 576px) {
     .about-us-container,
-    .contact-us-container {
+    .contact-us-container,
+    .auth-card-container {
         padding: 80px 0;
     }
 }
@@ -307,12 +308,8 @@ hr {
 
 /* authentication pages styling */
 
-.auth-card {
-    position: absolute;
-    width: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
+.auth-card-container {
+    min-height: 100vh;
 }
 
 .auth-card-signup {

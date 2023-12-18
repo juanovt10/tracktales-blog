@@ -7,7 +7,7 @@
 {% endblock head_title %}
 {% block content %}
 
-<div class="community-container pb-5 d-flex justify-content-center align-items-center">
+<div class="auth-card-container d-flex justify-content-center align-items-center mx-3 mx-sm-0">
     <div class="card auth-card-signup">
         <div class="card-body">
             <h5 class="card-title">{% trans "Sign Up" %}</h5>
@@ -19,7 +19,9 @@
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{% url 'create_profile' %}" />
                 {% endif %}
-                <button class="btn btn-success right" type="submit">{% trans "Sign Up" %}></button>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-secondary" type="submit">{% trans "Sign Up" %}></button>
+                </div>
                 {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
             </form>
         </div>

@@ -7,19 +7,22 @@
 
 {% block content %}
 
-    <div class="card auth-card">
-        <div class="card-body">
-            <h5 class="card-title">{% trans "Sign Out" %}</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{% trans 'Are you sure you want to sign out?' %}</h6>
-            <strong>@{{ request.user.username }}</strong>
-            <form class="login mt-2" method="POST" action="{% url 'account_logout' %}">
-                {% csrf_token %}
-                {% if redirect_field_value %}
-                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                {% endif %}
-                <button class="btn btn-danger right" type="submit">{% trans 'Sign Out' %}></button>
-            </form>
+    <div class="auth-card-container d-flex justify-content-center align-items-center mx-3 mx-sm-0">
+        <div class="card auth-card">
+            <div class="card-body">
+                <h5 class="card-title">{% trans "Sign Out" %}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{% trans 'Are you sure you want to sign out?' %}</h6>
+                <strong>@{{ request.user.username }}</strong>
+                <form class="login mt-4" method="POST" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}></button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
 {% endblock content %}
