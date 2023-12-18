@@ -43,7 +43,230 @@ As Track Tales evolves, future users will likely seek a seamless space to share 
 
 ### Existing Features
 
+#### Navbar
+
+- In large screens the navbar displays links to home, about us, board contact and user options. 
+
+add screenshot
+
+- When the user is not logged in, an user icon is displayed and the options are sign-up or login.
+
+add screenshot
+
+- When the user is logged in, an user the two first letter of the user's username are displayed instead of the profile icon and the options are profile or logout.
+
+add screenshot
+
+- In small screens, all links but the home one, are within a burger menu. Additionally, the profile dropdown options are added in the same category as the rest of the links. 
+
+add screenshot
+
+#### Footer
+
+- User have functional links to X, Instagram and Youtube. These links will open in a new tab as they are outside the web application. 
+
+add screenshot 
+
+#### Index
+
+- Three carousel images are displayed in the home page. 
+- Inital page cotains a catchy titles and a functional link to the posts board. 
+
+add screenshot
+
+- Second page incentivates the user to create an account and provide the links to signup or login.
+
+add screenshot
+
+- Third page gives a small background about the applocaaton and provodes a link to "learn more" that will redirect to the about us page. 
+
+add screenshot
+
+#### About us 
+
+- This is an informational page. It contains a brief description of the forum, explains what a user can do in the platform, and has a catchy content at the end. Additonally, it provies a button to redirect the user to the posts board. 
+
+add screenshot
+
+#### Contact
+
+- This page contains a form for a user to directly contact the admin of the page. The fields are first name, last name, email, phone number, subject and message. 
+
+add screenshot
+
+- If the form is invalid, there will be error messages displayed. 
+
+add screenshot 
+
+- If the form is successfully submited, it will redirect the user to a a success landing page where they have buttons to go back home, or if they are not-authenticated, they can sign up. 
+
+add screenshot
+
+#### Board 
+
+- Create post form. Here is where the user can create a post, they can enter a title, country, dropdowns for holiday type and world area, and the content of the experience.  
+
+add screenshot 
+
+- All posts need to be approved, therfore, after a post is successfully submitted a success message is displayed stating that the post has been recieved an is awaiting for approval. 
+
+add screenshot
+
+- When a user is not authenticated, they cannot create a posts. Therfore, isntead of displaying the create post form, a card is displayed explaining that they need to have an account to create posts.
+
+add screenshot
+
+- All approved posts are displayed, in the board page. A post is comprised of the user that wrote it, time since the post was created, post title, holoday type, location, country and content.
+
+add screenshot
+
+- Additionally, the post have 3-4 buttons: 
+    - The post author is a link that redirects the user to to the author's profile 
+
+    add screenshot 
+
+    - The like button, that when a post is unlike it will show the empty heart and when is liked is shows a solid heart. It also increases or decreases the likes count. 
+
+    add screenshot
+
+    - The comment button, this is a toggle button that displays a text area to comment on the post. 
+
+    add screenshot
+
+    - When the user is not authenticated, they cannot like nor comment a post. In this case both button work as toggles to display a message that the user needs to have an account to like or comment a post.
+
+    add screenshot
+
+    - Options button. This button is only displayed in posts where the authenticated user is the auhtor of the post. This options button is a dropdown menu that displays two options: edit post and delete post. 
+
+    add screenshot
+
+- Comment submition. All comments need to be approved by the admin, therfore, after a comment is submitted, a success message is displayed stating that the comment is awaiting for approval.
+
+add screenshot
+
+- Comment displayed. After comments have been approved, these are displayed below the post stating the author and since when the comment was made. Here the username is also a link to the user's profile. 
+
+add screenshot
+
+- Edit post. When the authenticated user want to edit their post, a modal with the edit post form is displayed. 
+
+add screenshot 
+
+- As the content needs to be reviewed, a success message is displayed when a post has been edited and that is awaiting for approval. 
+
+add screenshot
+
+- After the edited post is approved, an "(edited)" text is added in italics below the post main content to state that the post has been edited.
+
+add screenshot
+
+- Delete post. When the authenticated user clicks on the delete post option, the delete post modal is displayed to ask the user confirmation of they want to delete the post with the speicfic title. 
+
+add screenshot
+
+- When the post is deleted, a success message is displayed stating that the post has been deleted
+
+add screenshot
+
+- Filter posts. In large screens the filter post card is displayed on the left hand side and is sticked to the top of the page. The user can then filter posts depending on the world area or holiday type. Then the card has a clear filter button, that will clear all selected filters, and a apply filters button that will apply the filters, reload the page and only display the posts with the selected filters. 
+
+add screenshot
+
+- In smaller screens the filter card is not displayed, but a small button between the create post form and the posts is displayed. 
+
+add screenshot 
+
+- When clicked, the filter button will open the filter card as a modal, for the user to successfully filter posts in small screens. 
+
+add screenshot
+
+#### Registration (Authentication)
+
+- When not authenticated the user can create an account using a unique username and password.
+
+add screenshot 
+
+- When the user tries to create an account with an exisiting username, a password that do not fulfil the requirments or if the passwords do not match, an error is displayed in the form. 
+
+add screenshot
+
+- Login page. A user can login to the application by inputing their username and correct password. 
+
+add screenshot 
+
+- If, when loging in, the user inputs an incorrect username or passwrod the form will display the error. 
+
+add screenshot
+
+- Logout page. Here the application asks the user for confirmation of logging out. 
+
+add screenshot 
+
+#### Create profile 
+
+- After a user signs in for the first time, they are redirected to the create profile page. This page does not contain navigation links as its purpose is to push the user to fill their profile.
+
+add screenshot 
+
+- The create profile form as form validation features and display errors if a field is not field or if is filled incorrectly. 
+
+add screenshot
+
+- If the form is valid, the user is redirected to their user profile page where they see a success message satting that their profile has been created. 
+
+add screenshot
+
+#### User profile 
+
+- The main difference between the user profile and the posts board is that the there are no posibility of filtering posts, all displayed posts are the user's and you can see a card with the user's profile information. 
+
+add screenshot
+
+- If the user does not have any post, a message will be displayed stating that the user has no posts. 
+
+add screenshot 
+
+- When the authenticated user is in their profile, they can create posts and also edit their profile by displauing the edit profile button. 
+
+add screenshot
+
+- When the authenticated user is on another user's profile. They are not able to edit that user's profile as the "edit profile" button is not displayed, and they also cannot create a posts. An explanation is given and links to the board page or their profile is provided. 
+
+add screenshot 
+
+- When a non-authenticated user is on a user's profile. They cannot see the user's profile information and cannot create a post either. 
+
+add screenshot
+
+- Edit profile. When the user wants to edit their profile, a modal is opened and all the fields are prefilled with the exisiting profile information. 
+
+add screenshot 
+
+- If the edit profile form is successfully submitted, a success message is displayed stating tha tthe profile has been updated. 
+
+add screenshot
+
+- In the edit profile modal, there is also a delete profile button. This button will open another modal that will ask cofnrimation to the user about deleting their profile. 
+
+add screenshot
+
+- If the user decides to delete their profile they will be logged out and their posts, comments, user profile information and login credentials will be permanently deleted from the application. 
+
+add screenshot
+
+- The posts and post buttons have the same functionality describe in the board section. (add link)
+
 ### Future Features
+
+- Asynchronous behaviour
+    - When a post is liked or commented the page is automatically reloaded. A future feature is to avoid reloading the page when these actions are taken by the user. 
+
+- Post information datamodel 
+    - The idea of world areas and holiday type is good to filter and differentiate posts but furter details should be used for this. Such as country and author. 
+    - The country should be another dropdown list that has the countries selected depening on the world area that has been selected.
+
+    
 
 ## Testing
 
@@ -108,8 +331,30 @@ Insert methodology here**
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
+| User sign-up page  | Page should display the sign up form. | User is successfully directed to the signup page and sees the signup form. | PASS |
+| User sign-up - Form validation  | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
+| User sign-up - Form validation  | Submit an incomplete form. | Browser promts that required fields need to be filled. | PASS |
+| User sign-up - Form validation  | Submit an invalid password. | Form promts the errors in the password. | PASS |
+| User sign-up - Form validation  | Submit non-matching invalid password. | Form promts the error. | PASS |
+| User sign-up - Form validation  | Submit an exisiting user name. | Form promts that the username is already taken error. | PASS |
+| User login page  | Page should display the login form. | User is successfully directed to the login page and sees the login form. | PASS |
+| User login page - Form validation | Submit an incorrect username password. | Form promts that the username and/or password is not correct. | PASS |
+| User logout page  | Page should display the logout form. | User is successfully directed to the logout page and sees the logout form. | PASS |
+| User logout page - Form validation | Click in logout. | User is successfully logged out and a display message is displayed at the top. | PASS |
 
-#### Profile
+#### Create profile
+
+| Testing  | Steps | Expected Outcome | Results |  
+| - | - | - | - |
+| Create profile page redirection  | When a new user signs up for the website, it should be redirected to the create profile page. | A new user is successfully redirected to the create profile page that displays the create profile form. | PASS |
+| Create profile - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
+| Create profile - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
+| Create profile - Form validation | Submit an incomplete form. | Browser promts that required fields need to be filled. | PASS |
+| Create profile - Form validation | Submit letters in the countries visited field. | Error message is displayed that this field should be a number. | PASS |
+| Create profile - Form validation | Submit a valid form. | User is redirected to their profile and a success message is displayed. | PASS |
+| Create profile - Form validation | No submition and go to user profile manually by chaning the browser link. | User can see their profile with the default values and the success message of created profile is not displayed. | PASS |
+
+#### User profile
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
@@ -121,6 +366,8 @@ Insert methodology here**
 | Edit profile form - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
 | Edit profile form - Form validation | Submit an incomplete form. | Browser promts that required fields need to be filled. | PASS |
 | Edit profile form - Form validation | Submit a valid form. | The profile is successfully updated an a success message is displayed to provide feedback to the user. | PASS |
+| Delete profile | When a user clicks on delete profile, they have a button for delete profile that shoud open a delete profile confirmation modal. | The delete profile is successfully displayed. | PASS |
+| Delete profile - Functionality | when the user confirms that they want to delete their profile, they should be logged in and their records deleted from the database. | The delete profile feature successfully logs out the user and deletes the user from the databse. | PASS |
 | Post form display - Authenticated user's profile | When the authenticated user is in their profile they are able to create posts. | The post form is successfully displayed for the authenticated user to create a post from their profile page. | PASS |
 | Post form display - Authenticated user in another user's profile | When the authenticated user is in another user's profile they cannot create posts but the there are links explaing where they can create them. | The post form is not displayed and a card with the board and profile buttons is displayed. Both the board and the user profile links are wired correctly. | PASS |
 | Post form display - Non-authenticated user in a user's profile | When a non-authenticated user is in another user's profile no card is displayed above the exisiting user's posts. | The post form is not displayed. | PASS |
