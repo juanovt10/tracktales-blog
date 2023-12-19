@@ -26,18 +26,50 @@ Track Tales serves as a dedicated space for individuals passionate about travel 
 Track Tales caters to travel enthusiasts and storytellers alike, providing a dedicated space for individuals passionate about sharing their unique travel experiences. This platform fosters connections among like-minded individuals who appreciate the beauty of diverse narratives from around the world, creating a vibrant community for bloggers and writers focused on the art of travel storytelling.
 
 ### Current User Goals
-At Track Tales, users share their travel experiences, creating personalized profiles to showcase stories. Engaging with a global community, users explore diverse narratives, connect with like-minded enthusiasts, and manage their content effortlessly. Geographical tagging adds depth to stories, offering insights into different cultures and locations. The platform is designed to facilitate seamless storytelling and connections among individuals passionate about travel.
+
+- Learn about the community
+- Send questions to the community administrators
+- Create travel posts
+- See posts
+- Edit posts
+- Delete posts
+- Filter exisitng posts
+- Comment on posts
+- Like/dislike posts
+- Edit their profile
+- Delete their profile
+
 
 ### Future User Goals
-As Track Tales evolves, future users will likely seek a seamless space to share evolving travel experiences, connect with like-minded enthusiasts, and explore narratives that transcend geographical boundaries. The platform aims to continually enhance features, offering users intuitive tools for content management and community engagement in the realm of travel storytelling.
+
+- Learn about the community
+- Send questions to the community administrators
+- Create travel posts 
+- See posts
+- Edit posts
+- Delete posts
+- Filter exisitng posts
+- Comment on posts
+- Like/dislike posts
+- Create their profile
+- Edit their profile
+- Delete their profile
 
 ## Design
 
 ### Color scheme
 
+The color scheme of the website was deliberately selected to create a dark background where other elements can pop out. The primary colors were platinum and oxford blue to provide a clear contrast, and the main accent color is coral, as it contrasts highly with the oxford blue. The Falu red and Ecru colors were used in buttons where the background was clearer to create a higher contrast. This careful selection of colors contributed to a visually appealing and cohesive design throughout the website
+
+![color_palette](static/images/readme_images/color_palette.png)
+
 ### Typography
 
+The body of the elements on the website utilized the font Quicksand, while the headings were complemented by Montserrat. This careful selection of fonts enhances the professional appearance of the engineering site.
+
 ### Imagery
+
+The three hero images were obtained from a free stock photo platform to capture attention regarding the main purpose of the web application: travel.
 
 ## Features
 
@@ -45,230 +77,234 @@ As Track Tales evolves, future users will likely seek a seamless space to share 
 
 #### Navbar
 
-- In large screens the navbar displays links to home, about us, board contact and user options. 
+- On large screens, the navbar displays links to Home, About Us, Board, Contact, and User Options. 
 
 ![navbar](static/images/readme_images/navbar.png)
 
-- When the user is not logged in, an user icon is displayed and the options are sign-up or login.
+- When the user is not logged in, a user icon is displayed, and the options are sign-up or login.
 
 ![profile_icon_logged_out](static/images/readme_images/profile_icon_logged_out.png)
 
-- When the user is logged in, an user the two first letter of the user's username are displayed instead of the profile icon and the options are profile or logout.
+- When the user is logged in, the first two letters of the user's username are displayed instead of the profile icon, and the options are Profile or Logout.
 
 ![profile_icon_logged_in](static/images/readme_images/profile_icon_logged_in.png)
 
-- In small screens, all links but the home one, are within a burger menu. Additionally, the profile dropdown options are added in the same category as the rest of the links. 
+- In small screens, all links except the Home link are placed within a burger menu. Additionally, the profile dropdown options are added in the same category as the rest of the links. 
 
 ![collapsed_navbar](static/images/readme_images/sm_navbar.png)
 
 #### Footer
 
-- User have functional links to X, Instagram and Youtube. These links will open in a new tab as they are outside the web application. 
+- Users have functional links to X, Instagram, and YouTube. These links will open in a new tab as they are outside the web application. 
 
 ![footer](static/images/readme_images/footer.png)
 
 #### Index
 
-- Three carousel images are displayed in the home page. 
-- Inital page cotains a catchy titles and a functional link to the posts board and about us pages.
+- Three carousel images are displayed on the home page. 
+- The initial page contains catchy titles and functional links to the posts board and About Us pages.
 
 ![home_slide_1](static/images/readme_images/home_slide1.png)
 
-- Second page incentivates the user to create an account and provide the links to signup or login.
+- The second page encourages users to create an account and provides links to sign-up or login.
 
 add screenshot
 
-- Third page gives a small background about the applocaaton and provodes a link to "learn more" that will redirect to the about us page. 
+- The third page provides a brief background about the application and offers a link to "Learn More," redirecting to the About Us page. Additionally, there is a "Contact Us" link that directs users to the contact form. 
 
 add screenshot
 
 #### About us 
 
-- This is an informational page. It contains a brief description of the forum, explains what a user can do in the platform, and has a catchy content at the end. Additonally, it provies a button to redirect the user to the posts board. 
+- This is an informational page that includes a brief description of the forum, explains what a user can do on the platform, and features catchy content at the end. Additionally, it provides buttons to redirect the user to the posts board and to sign up.
 
 ![about_us](static/images/readme_images/about_us.png)
 
 #### Contact
 
-- This page contains a form for a user to directly contact the admin of the page. The fields are first name, last name, email, phone number, subject and message. 
+- This page contains a form for a user to directly contact the admin. The fields include first name, last name, email, phone number, subject, and message. 
 
 ![contact_us](static/images/readme_images/contact_us.png)
 
-- If the form is invalid, there will be error messages displayed. 
+- If the form is invalid, error messages will be displayed. 
 
 ![contact_us_error](static/images/readme_images/contact_us_error.png)
 
-- If the form is successfully submited, it will redirect the user to a a success landing page where they have buttons to go back home, or if they are not-authenticated, they can sign up. 
+- If the form is successfully submitted, it will redirect the user to a success landing page where they have buttons to go back home. If they are not authenticated, they can sign up. 
 
 ![contact_us_success](static/images/readme_images/contact_us_success.png)
 
 #### Board 
 
-- Create post form. Here is where the user can create a post, they can enter a title, country, dropdowns for holiday type and world area, and the content of the experience.  
+- Post Creation Form: This is where users can create a post. They can enter a title, country, choose from dropdowns for holiday type and world area, and provide the content of the experience.  
 
 ![post_form](static/images/readme_images/post_form.png)
 
-- All posts need to be approved, therfore, after a post is successfully submitted a success message is displayed stating that the post has been recieved an is awaiting for approval. 
+- All posts need to be approved; therefore, after a post is successfully submitted, a success message is displayed, stating that the post has been received and is awaiting approval.
 
 ![post_form_success](static/images/readme_images/post_form_success.png)
 
-- When a user is not authenticated, they cannot create a posts. Therfore, isntead of displaying the create post form, a card is displayed explaining that they need to have an account to create posts.
+- When a user is not authenticated, they cannot create posts. Therefore, instead of displaying the create post form, a card is shown explaining that they need to have an account to create posts.
 
 ![post_form_logged_out](static/images/readme_images/post_form_logged_out.png)
 
-- All approved posts are displayed, in the board page. A post is comprised of the user that wrote it, time since the post was created, post title, holoday type, location, country and content.
+- All approved posts are displayed on the board page. A post is comprised of the user who wrote it, the time since the post was created, post title, holiday type, location, country, and content.
 
 ![post_sample](static/images/readme_images/post_sample.png)
 
 - Additionally, the post have 3-4 buttons: 
-    - The post author is a link that redirects the user to to the author's profile 
+    - The post author is a link that redirects the user to the author's profile. 
 
     ![post_profile_button](static/images/readme_images/post_profile_btn.png)
- 
 
-    - The like button, that when a post is unlike it will show the empty heart and when is liked is shows a solid heart. It also increases or decreases the likes count. 
+    - The like button changes appearance; when a post is unliked, it shows an empty heart, and when liked, it displays a solid heart. Additionally, it increases or decreases the like count.
 
     ![post_unliked_button](static/images/readme_images/post_unliked_btn.png)
 
     ![post_liked_button](static/images/readme_images/post_liked_btn.png)
 
-    - The comment button, this is a toggle button that displays a text area to comment on the post. 
+    - The comment button is a toggle button that reveals a text area for users to comment on the post.
 
     ![post_comment_area](static/images/readme_images/post_comment_area.png)
 
-    - When the user is not authenticated, they cannot like nor comment a post. In this case both button work as toggles to display a message that the user needs to have an account to like or comment a post.
+    - When the user is not authenticated, they cannot like or comment on a post. In this case, both buttons work as toggles to display a message that the user needs to have an account to like or comment on a post.
 
     ![post_toggle_buttons](static/images/readme_images/post_toggles_logged_out.png)
 
-    - Options button. This button is only displayed in posts where the authenticated user is the auhtor of the post. This options button is a dropdown menu that displays two options: edit post and delete post. 
+    - Options Button: This button is only displayed in posts where the authenticated user is the author of the post. The options button is a dropdown menu that presents two choices: edit post and delete post.
 
     ![post_options_buttons](static/images/readme_images/post_options_btn.png)
 
-- Comment submition. All comments need to be approved by the admin, therfore, after a comment is submitted, a success message is displayed stating that the comment is awaiting for approval.
+- Comment Submission: All comments need to be approved by the admin. Therefore, after a comment is submitted, a success message is displayed, indicating that the comment is awaiting approval.
 
 ![comment_success_message](static/images/readme_images/comment_success.png)
 
-- Comment displayed. After comments have been approved, these are displayed below the post stating the author and since when the comment was made. Here the username is also a link to the user's profile. 
+- Displayed Comments: After comments have been approved, they are shown below the post, indicating the author and the time since the comment was made. The username is also a link to the user's profile.
 
 ![comment_display](static/images/readme_images/comments_display.png)
 
-- Edit post. When the authenticated user want to edit their post, a modal with the edit post form is displayed. 
+- Edit Post: When the authenticated user wants to edit their post, a modal with the edit post form is displayed.
 
 ![edit_post_modal](static/images/readme_images/edit_post_modal.png)
 
-- As the content needs to be reviewed, a success message is displayed when a post has been edited and that is awaiting for approval. 
+- As the content needs to be reviewed, a success message is displayed when a post has been edited, indicating that it is awaiting approval.
 
 ![edit_post_success_message](static/images/readme_images/edit_post_success.png)
 
-- After the edited post is approved, an "(edited)" text is added in italics below the post main content to state that the post has been edited.
+- After the edited post is approved, an '(edited)' text is added in italics below the main content of the post to indicate that it has been edited.
 
 ![edited_post](static/images/readme_images/post_edited.png)
 
-- Delete post. When the authenticated user clicks on the delete post option, the delete post modal is displayed to ask the user confirmation of they want to delete the post with the speicfic title. 
+- Delete Post: When the authenticated user clicks on the delete post option, the delete post modal is displayed, asking the user for confirmation if they want to delete the post with the specific title.
 
 ![delete_post_modal](static/images/readme_images/delete_post_modal.png)
 
-- When the post is deleted, a success message is displayed stating that the post has been deleted
+- When the post is deleted, a success message is displayed, indicating that the post has been deleted.
 
-add screenshot -> to add
+![delete_post_success](static/images/readme_images/delete_post_success.png)
 
-- Filter posts. In large screens the filter post card is displayed on the left hand side and is sticked to the top of the page. The user can then filter posts depending on the world area or holiday type. Then the card has a clear filter button, that will clear all selected filters, and a apply filters button that will apply the filters, reload the page and only display the posts with the selected filters. 
+- Filter Posts: On large screens, the filter post card is displayed on the left-hand side and is stuck to the top of the page. The user can filter posts based on the world area or holiday type. The card includes a clear filter button to remove all selected filters and an apply filters button to activate the chosen filters, reload the page, and display only the posts with the selected filters.
 
 ![filter_card_collapsed](static/images/readme_images/filter_card_collapsed.png)
 
 ![filter_card_expanded](static/images/readme_images/filter_card_expanded.png)
 
-- In smaller screens the filter card is not displayed, but a small button between the create post form and the posts is displayed. 
+- In smaller screens, the filter card is not displayed. Instead, a small button is placed between the create post form and the posts.
 
 ![filter_button](static/images/readme_images/filter_btn.png)
 
-- When clicked, the filter button will open the filter card as a modal, for the user to successfully filter posts in small screens. 
+- When clicked, the filter button will open the filter card as a modal, allowing the user to successfully filter posts on small screens.
 
 ![filter_modal](static/images/readme_images/filter_modal.png)
 
 #### Registration (Authentication)
 
-- When not authenticated the user can create an account using a unique username and password.
+- When not authenticated, users can create an account using a unique username and password.
 
 ![signup_form](static/images/readme_images/signup_form.png)
 
-- When the user tries to create an account with an exisiting username, a password that do not fulfil the requirments or if the passwords do not match, an error is displayed in the form. 
+- When the user attempts to create an account with an existing username, a password that does not fulfill the requirements, or if the passwords do not match, an error is displayed in the form.
 
 ![signup_form_error](static/images/readme_images/signup_form_error.png)
 
-
-- Login page. A user can login to the application by inputing their username and correct password. 
+- Login Page: A user can log in to the application by inputting their username and correct password.
 
 ![login_form](static/images/readme_images/login_form.png)
 
-- If, when loging in, the user inputs an incorrect username or passwrod the form will display the error. 
+- If, when logging in, the user inputs an incorrect username or password, the form will display the error.
 
 ![login_form_error](static/images/readme_images/login_form_error.png)
 
-- Logout page. Here the application asks the user for confirmation of logging out. 
+- Logout Page: Here, the application asks the user for confirmation before logging out. 
 
 ![logout_form](static/images/readme_images/logout_form.png)
 
 #### Create profile 
 
-- After a user signs in for the first time, they are redirected to the create profile page. This page does not contain navigation links as its purpose is to push the user to fill their profile.
+- After a user signs in for the first time, they are redirected to the create profile page. This page does not contain navigation links, as its purpose is to encourage the user to complete their profile.
 
 ![create_profile_form](static/images/readme_images/create_profile_form.png)
 
-- The create profile form as form validation features and display errors if a field is not field or if is filled incorrectly. 
+- The create profile form has form validation features and displays errors if a field is left blank or filled incorrectly.
 
 ![create_profile_form_error](static/images/readme_images/create_profile_form_error.png)
 
-- If the form is valid, the user is redirected to their user profile page where they see a success message satting that their profile has been created. 
+- If the form is valid, the user is redirected to their user profile page, where they see a success message stating that their profile has been created. 
 
 ![create_profile_success](static/images/readme_images/create_profile_success.png)
 
 #### User profile 
 
-- The main difference between the user profile and the posts board is that the there are no posibility of filtering posts, all displayed posts are the user's and you can see a card with the user's profile information. 
-- When the authenticated user is in their profile, they can create posts and also edit their profile by displauing the edit profile button. 
+- The main difference between the user profile and the posts board is that there is no possibility of filtering posts; all displayed posts belong to the user, and a card with the user's profile information is visible. 
+- When the authenticated user is on their profile, they can create posts and also edit their profile by clicking the 'Edit Profile' button. 
 
 ![user_profile](static/images/readme_images/user_profile_general.png)
 
-- If the user does not have any post, a message will be displayed stating that the user has no posts. 
-- When the authenticated user is on another user's profile. They are not able to edit that user's profile as the "edit profile" button is not displayed, and they also cannot create a posts. An explanation is given and links to the board page or their profile is provided. 
+- If the user does not have any posts, a message will be displayed stating that the user has no posts
+- When the authenticated user is on another user's profile, they are not able to edit that user's profile, as the 'Edit Profile' button is not displayed. Additionally, they cannot create posts. An explanation is provided with links to the board page or their own profile. 
 
 ![user_profile_no_posts](static/images/readme_images/user_profile_no_posts.png)
 
-- When a non-authenticated user is on a user's profile. They cannot see the user's profile information and cannot create a post either. 
+- When a non-authenticated user is on a user's profile, they cannot see the user's profile information and cannot create a post either.
 
 ![user_profile_no_authentication](static/images/readme_images/user_profile_unauthenticated.png)
 
-- Edit profile. When the user wants to edit their profile, a modal is opened and all the fields are prefilled with the exisiting profile information. 
+- Edit Profile: When the user wants to edit their profile, a modal is opened, and all the fields are pre-filled with the existing profile information.
 
 ![edit_profile_modal](static/images/readme_images/edit_profile_modal.png)
 
-- If the edit profile form is successfully submitted, a success message is displayed stating tha tthe profile has been updated. 
+- If the edit profile form is successfully submitted, a success message is displayed, stating that the profile has been updated.
 
 ![edit_profile_success](static/images/readme_images/edit_profile_success.png)
 
-- In the edit profile modal, there is also a delete profile button. This button will open another modal that will ask cofnrimation to the user about deleting their profile. 
+- In the edit profile modal, there is also a delete profile button. This button will open another modal that will ask for confirmation from the user about deleting their profile.
 
 ![delete_profile_modal](static/images/readme_images/delete_profile_modal.png)
 
-- If the user decides to delete their profile they will be logged out and their posts, comments, user profile information and login credentials will be permanently deleted from the application. 
+- If the user decides to delete their profile, they will be logged out, and their posts, comments, user profile information, and login credentials will be permanently deleted from the application.
 
-- The posts and post buttons have the same functionality describe in the [board section](#board).
+![delete_profile_success](static/images/readme_images/delete_profile_success.png)
+
+- The posts and post buttons have the same functionality as described in the [board section](#board).
 
 ### Future Features
 
 - Asynchronous behaviour
-    - When a post is liked or commented the page is automatically reloaded. A future feature is to avoid reloading the page when these actions are taken by the user. 
+    - When a post is liked or commented on, the page is automatically reloaded. A future feature is planned to avoid reloading the page when these actions are taken by the user.
 
 - Post information datamodel 
-    - The idea of world areas and holiday type is good to filter and differentiate posts but furter details should be used for this. Such as country and author. 
-    - The country should be another dropdown list that has the countries selected depening on the world area that has been selected.
+    - The idea of world areas and holiday types is good for filtering and differentiating posts, but additional details such as country and author could enhance this feature
+    - The country should be implemented as another dropdown list with the countries selected based on the chosen world area.
 
 - Further relevant feedback
-    - Remove the sign in and sign out messages
-    - Send notifications to users when their posts or comments have been approved
-    - Send notifications when another user has commented or reacted to a post
-    - Send a notificaiton when a comment is added in a post a user has commented on
+    - Remove the sign-in and sign-out messages.
+    - Implement notifications to inform users when their posts or comments have been approved.
+    - Implement notifications for when another user has commented or reacted to a post.
+    - Implement notifications for when a comment is added to a post a user has commented on.
+
+- Create profile limitation
+    - Currently, the newly signed-up user is requested to fill out a form to create their profile. Although the create profile form has the correct validation and the navbar is not present, the user can simply rewrite the URL link and gain access to all pages.
+    - Ideally, the user should be restricted from taking any actions until they have correctly filled out their profile.
 
 ## Testing
 
@@ -376,11 +412,70 @@ Insert methodology here**
 | Posts display - User with existing posts | All user posts should be displayed when navigating to their profile. | All user posts are successfully displayed. | PASS |
 | Posts display - User with no existing posts | When navigating to a user's profile without posts, a message should be displayued stating that the user's profile do not have any posts. | Message is displayed succeessfuly for when an user do no have any posts. | PASS |
 
-### Testing user sotries from UX section 
+### Testing user stories from UX section 
 
-#### Current user goals
+As the exisitng and new users will have the same user experience for the app besides signing up and creating their profile from scratch, these will be groupped. 
 
-#### Future user goals
+#### All users
+
+- Learn about the community.
+    - The about us page contains all the relevant information regarding the platform, what the users can do and buttons that redirect to a signup page and the post board.
+- Send questions to the community administrators
+    - The contact page contains a form where the authenticated or no-autheticated users can send a question to the administrator. All received responses are logged into the web application database.  
+- See posts and comments
+    - All users, authenticated or no-authenticated can see approved posts and comments.
+- Filter exisitng posts
+    - All users, authenticated or no-authenticated can see filter posts.
+
+#### Existing and Future User Goals
+
+- Create travel posts
+    - Users can create posts and receive feedback if the post is not successfully submitted or if it is.
+- Edit posts
+    - Users can edit their own posts.
+- Delete posts
+    - Users can delete their own posts.
+- Comment on posts
+    - Users can comment on posts.
+- Like/dislike posts
+    - Users can like or dislike posts.
+- Login
+    - Users can login to the platform to access to all the web application features.
+- Logout
+    - Users can logout to restric access to their accoutns.
+- Edit their profile
+    - Users can change their profile description. 
+- Delete their profile
+    - Users can delete their profile permantly from the web application. 
+
+#### Future User Goals
+
+- Sign-up
+    - Users can create an account in the web application.
+- Create their profile
+    - Users are redirected to a create profile form just after they sign up in the web application. 
+
+### Validator testing 
+
+- All html files pass through the [W3C validator](https://jigsaw.w3.org/css-validator/#validate_by_input) with no issues. 
+
+INPUT
+
+- All CSS files pass through the [Jigsaw Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) with no issues. 
+
+INPUT 
+
+- The python file passes through the [PP8 validator](ADDLINK) with no issues except by the more than 79 characters per line recomended by PEP 8. 
+
+INPUT
+
+- Page has an excellent Accessibility rating in Lighthouse. 
+
+INPUT 
+
+- The python file passes through the PP8 validator with no issues except by the more than 79 characters per line recomended by PEP 8.
+- Tested the site opens in Chrome, Safari and Mozilla. 
+- No broken links
 
 ## Technologies used
 
@@ -393,19 +488,20 @@ Insert methodology here**
 
 ### Frameworks, Libraries and programs used
 
-- Google Fonts 
-- Bootstrap
-- Github
-- CodeAnywhere
-- Heroku
-- cloudinary
-- dj-database-url
-- dj3-cloudinary-storage
-- Django
-- django-allauth
-- guinicorn
-- psychopg2
-
+- [Google Fonts](https://fonts.google.com/) 
+- [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+- [Github](https://github.com/juanovt10)
+- [CodeAnywhere](https://id.codeanywhere.com/realms/default/protocol/openid-connect/auth?client_id=dashboard&redirect_uri=https%3A%2F%2Fapp.codeanywhere.com%2F&state=0ed650a0-13c7-4f57-8415-5704cc42250e&response_mode=fragment&response_type=code&scope=openid&nonce=2b3f7872-fc80-4c91-bc06-4850e0415d4b)
+- [Gitpod](https://gitpod.io/workspaces)
+- [Heroku](https://id.heroku.com/login)
+- [Realtime Colors](https://www.realtimecolors.com/?colors=e6eef8-03060a-92b3de-262376-694cc9&fonts=Poppins-Poppins)
+- [Cloudinary](https://cloudinary.com/ip/gr-sea-gg-brand-home-base?utm_source=google&utm_medium=search&utm_campaign=goog_selfserve_brand_wk22_replicate_core_branded_keyword&utm_term=1329&campaignid=17601148700&adgroupid=141182782954&keyword=cloudinary&device=c&matchtype=e&adposition=&gad_source=1&gclid=Cj0KCQiAm4WsBhCiARIsAEJIEzUYoKHM06ldJtPMxUmtjFK3HxOkfQI3_8G9vOXPuRsPWuCVCSFEPzsaAjiJEALw_wcB)
+- [Django](https://www.djangoproject.com/)
+- [Django databases](https://docs.djangoproject.com/en/5.0/ref/databases/)
+- [Django cloudinary storage](https://djangopackages.org/packages/p/django-cloudinary-storage/)
+- [Django-allauth](https://docs.allauth.org/en/latest/)
+- [Guinicorn](https://gunicorn.org/)
+- [Psycopg](https://www.psycopg.org/docs/)
 
 ## Deployment
 

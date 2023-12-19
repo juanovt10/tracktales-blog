@@ -3,7 +3,7 @@
 /* General styling */
 body {
     font-family: "Quicksand", "sans-serif";
-    background-color: #070719;
+    background-color: #090921;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -33,18 +33,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-item ul, .menu {
-    background-color: #070719;
+    background-color: #090921;
 }
 
 .menu-btn {
-    background-color: #F5F6F8;
+    background-color: #EAEAEA;
 }
 
 .navbar-brand,
 .navbar-nav .nav-link,
 .nav-item a,
 .dropdown-menu .dropdown-item {
-    color: #F5F6F8;
+    color: #EAEAEA;
     transition: all .3s ease;
 }
 
@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dropdown-menu a:hover {
-    background-color: #070719;
+    background-color: #090921;
 }
 
 .navbar-text a {
@@ -77,8 +77,8 @@ h1, h2, h3, h4, h5, h6 {
 .footer {
     display: flex;
     flex-direction: row;
-    color: #F5F6F8;
-    background-color: #070719;
+    color: #EAEAEA;
+    background-color: #090921;
     border-top: 1px solid #ED7C4D;
 }
 
@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .social-media a:hover {
     background-color: #ED7C4D;
-    color: #0A0515;
+    color: #090921;
 }
 
 /* about us styling */
@@ -151,7 +151,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .accordion-button.collapse::after {
-    color: #F5F4F5; 
+    color: #EAEAEA; 
 }
 
 textarea {
@@ -230,7 +230,7 @@ hr {
 .btn-info:hover,
 .btn-outline-primary:hover {
     background-color: #090921;
-    color: #F5F4F5;
+    color: #EAEAEA;
 }
 
 .btn-primary {
@@ -247,8 +247,8 @@ hr {
 }
 
 .btn-info {
-    background-color: #111522;
-    color: #F5F4F5;
+    background-color: #090921;
+    color: #EAEAEA;
 }
 
 .btn-outline-primary {
@@ -256,7 +256,7 @@ hr {
 }
 
 .home-slide-2-text {
-    color: #070719;
+    color: #090921;
 }
 
 .home-slide-2-text p,

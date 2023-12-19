@@ -157,6 +157,7 @@ class DeletePostView(View):
         post = get_object_or_404(Post, slug=post_slug)
         print(post)
         post.delete()
+        messages.success(request, f'Your post: "{post.title}" has been successfully deleted')
         return redirect('post_board')
 
 
@@ -214,11 +215,11 @@ class ProfileDetail(generic.DetailView):
         context['edit_post_form'] = EditPostForm()
 
         user_profile = self.get_object()
-        context['user_posts'] = Post.objects.filter(author=user_profile.username)
+        context['user_posts'] = Post.objects.filter(approved=True, author=user_profile.username)
         context['post_comments'] = {}
 
         for post in context['user_posts']:
-            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            comments = Comment.objects.filter(post=post, approved=True, author=user_profile.username).order_by('created_on')
             context['post_comments'][post.id] = comments
 
         profile_instance = user_profile
