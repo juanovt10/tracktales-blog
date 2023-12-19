@@ -100,108 +100,114 @@ add screenshot
 
 - If the form is successfully submited, it will redirect the user to a a success landing page where they have buttons to go back home, or if they are not-authenticated, they can sign up. 
 
-add screenshot
+![contact_us_success](static/images/readme_images/contact_us_success.png)
 
 #### Board 
 
 - Create post form. Here is where the user can create a post, they can enter a title, country, dropdowns for holiday type and world area, and the content of the experience.  
 
-add screenshot 
+![post_form](static/images/readme_images/post_form.png)
 
 - All posts need to be approved, therfore, after a post is successfully submitted a success message is displayed stating that the post has been recieved an is awaiting for approval. 
 
-add screenshot
+![post_form_success](static/images/readme_images/post_form_success.png)
 
 - When a user is not authenticated, they cannot create a posts. Therfore, isntead of displaying the create post form, a card is displayed explaining that they need to have an account to create posts.
 
-add screenshot
+![post_form_logged_out](static/images/readme_images/post_form_logged_out.png)
 
 - All approved posts are displayed, in the board page. A post is comprised of the user that wrote it, time since the post was created, post title, holoday type, location, country and content.
 
-add screenshot
+![post_sample](static/images/readme_images/post_sample.png)
 
 - Additionally, the post have 3-4 buttons: 
     - The post author is a link that redirects the user to to the author's profile 
 
-    add screenshot 
+    ![post_profile_button](static/images/readme_images/post_profile_btn.png)
+ 
 
     - The like button, that when a post is unlike it will show the empty heart and when is liked is shows a solid heart. It also increases or decreases the likes count. 
 
-    add screenshot
+    ![post_unliked_button](static/images/readme_images/post_unliked_btn.png)
+
+    ![post_liked_button](static/images/readme_images/post_liked_btn.png)
 
     - The comment button, this is a toggle button that displays a text area to comment on the post. 
 
-    add screenshot
+    ![post_comment_area](static/images/readme_images/post_comment_area.png)
 
     - When the user is not authenticated, they cannot like nor comment a post. In this case both button work as toggles to display a message that the user needs to have an account to like or comment a post.
 
-    add screenshot
+    ![post_toggle_buttons](static/images/readme_images/post_toggles_logged_out.png)
 
     - Options button. This button is only displayed in posts where the authenticated user is the auhtor of the post. This options button is a dropdown menu that displays two options: edit post and delete post. 
 
-    add screenshot
+    ![post_options_buttons](static/images/readme_images/post_options_btn.png)
 
 - Comment submition. All comments need to be approved by the admin, therfore, after a comment is submitted, a success message is displayed stating that the comment is awaiting for approval.
 
-add screenshot
+![comment_success_message](static/images/readme_images/comment_success.png)
 
 - Comment displayed. After comments have been approved, these are displayed below the post stating the author and since when the comment was made. Here the username is also a link to the user's profile. 
 
-add screenshot
+![comment_display](static/images/readme_images/comments_display.png)
 
 - Edit post. When the authenticated user want to edit their post, a modal with the edit post form is displayed. 
 
-add screenshot 
+![edit_post_modal](static/images/readme_images/edit_post_modal.png)
 
 - As the content needs to be reviewed, a success message is displayed when a post has been edited and that is awaiting for approval. 
 
-add screenshot
+![edit_post_success_message](static/images/readme_images/edit_post_success.png)
 
 - After the edited post is approved, an "(edited)" text is added in italics below the post main content to state that the post has been edited.
 
-add screenshot
+![edited_post](static/images/readme_images/post_edited.png)
 
 - Delete post. When the authenticated user clicks on the delete post option, the delete post modal is displayed to ask the user confirmation of they want to delete the post with the speicfic title. 
 
-add screenshot
+![delete_post_modal](static/images/readme_images/delete_post_modal.png)
 
 - When the post is deleted, a success message is displayed stating that the post has been deleted
 
-add screenshot
+add screenshot -> to add
 
 - Filter posts. In large screens the filter post card is displayed on the left hand side and is sticked to the top of the page. The user can then filter posts depending on the world area or holiday type. Then the card has a clear filter button, that will clear all selected filters, and a apply filters button that will apply the filters, reload the page and only display the posts with the selected filters. 
 
-add screenshot
+![filter_card_collapsed](static/images/readme_images/filter_card_collapsed.png)
+
+![filter_card_expanded](static/images/readme_images/filter_card_expanded.png)
 
 - In smaller screens the filter card is not displayed, but a small button between the create post form and the posts is displayed. 
 
-add screenshot 
+![filter_button](static/images/readme_images/filter_btn.png)
 
 - When clicked, the filter button will open the filter card as a modal, for the user to successfully filter posts in small screens. 
 
-add screenshot
+![filter_modal](static/images/readme_images/filter_modal.png)
 
 #### Registration (Authentication)
 
 - When not authenticated the user can create an account using a unique username and password.
 
-add screenshot 
+![signup_form](static/images/readme_images/signup_form.png)
 
 - When the user tries to create an account with an exisiting username, a password that do not fulfil the requirments or if the passwords do not match, an error is displayed in the form. 
 
-add screenshot
+![signup_form_error](static/images/readme_images/signup_form_error.png)
+
 
 - Login page. A user can login to the application by inputing their username and correct password. 
 
-add screenshot 
+![login_form](static/images/readme_images/login_form.png)
 
 - If, when loging in, the user inputs an incorrect username or passwrod the form will display the error. 
 
-add screenshot
+![login_form_error](static/images/readme_images/login_form_error.png)
 
 - Logout page. Here the application asks the user for confirmation of logging out. 
 
-add screenshot 
+![logout_form](static/images/readme_images/logout_form.png)
 
 #### Create profile 
 
@@ -220,42 +226,34 @@ add screenshot
 #### User profile 
 
 - The main difference between the user profile and the posts board is that the there are no posibility of filtering posts, all displayed posts are the user's and you can see a card with the user's profile information. 
-
-add screenshot
-
-- If the user does not have any post, a message will be displayed stating that the user has no posts. 
-
-add screenshot 
-
 - When the authenticated user is in their profile, they can create posts and also edit their profile by displauing the edit profile button. 
 
-add screenshot
+![user_profile](static/images/readme_images/user_profile_general.png)
 
+- If the user does not have any post, a message will be displayed stating that the user has no posts. 
 - When the authenticated user is on another user's profile. They are not able to edit that user's profile as the "edit profile" button is not displayed, and they also cannot create a posts. An explanation is given and links to the board page or their profile is provided. 
 
-add screenshot 
+![user_profile_no_posts](static/images/readme_images/user_profile_no_posts.png)
 
 - When a non-authenticated user is on a user's profile. They cannot see the user's profile information and cannot create a post either. 
 
-add screenshot
+![user_profile_no_authentication](static/images/readme_images/user_profile_unauthenticated.png)
 
 - Edit profile. When the user wants to edit their profile, a modal is opened and all the fields are prefilled with the exisiting profile information. 
 
-add screenshot 
+![edit_profile_modal](static/images/readme_images/edit_profile_modal.png)
 
 - If the edit profile form is successfully submitted, a success message is displayed stating tha tthe profile has been updated. 
 
-add screenshot
+![edit_profile_success](static/images/readme_images/edit_profile_success.png)
 
 - In the edit profile modal, there is also a delete profile button. This button will open another modal that will ask cofnrimation to the user about deleting their profile. 
 
-add screenshot
+![delete_profile_modal](static/images/readme_images/delete_profile_modal.png)
 
 - If the user decides to delete their profile they will be logged out and their posts, comments, user profile information and login credentials will be permanently deleted from the application. 
 
-add screenshot
-
-- The posts and post buttons have the same functionality describe in the board section. (add link)
+- The posts and post buttons have the same functionality describe in the [board section](#board).
 
 ### Future Features
 
@@ -265,6 +263,12 @@ add screenshot
 - Post information datamodel 
     - The idea of world areas and holiday type is good to filter and differentiate posts but furter details should be used for this. Such as country and author. 
     - The country should be another dropdown list that has the countries selected depening on the world area that has been selected.
+
+- Further relevant feedback
+    - Remove the sign in and sign out messages
+    - Send notifications to users when their posts or comments have been approved
+    - Send notifications when another user has commented or reacted to a post
+    - Send a notificaiton when a comment is added in a post a user has commented on
 
 ## Testing
 

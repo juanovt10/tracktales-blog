@@ -78,6 +78,7 @@ class CommentForm(forms.ModelForm):
                 "class": "form-control",
                 "cols": "100", 
                 "rows":"3",
+                "placeholder": "Add your comment here!"
             }
         )
     )
