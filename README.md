@@ -213,15 +213,15 @@ add screenshot -> to add
 
 - After a user signs in for the first time, they are redirected to the create profile page. This page does not contain navigation links as its purpose is to push the user to fill their profile.
 
-add screenshot 
+![create_profile_form](static/images/readme_images/create_profile_form.png)
 
 - The create profile form as form validation features and display errors if a field is not field or if is filled incorrectly. 
 
-add screenshot
+![create_profile_form_error](static/images/readme_images/create_profile_form_error.png)
 
 - If the form is valid, the user is redirected to their user profile page where they see a success message satting that their profile has been created. 
 
-add screenshot
+![create_profile_success](static/images/readme_images/create_profile_success.png)
 
 #### User profile 
 
