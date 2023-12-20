@@ -505,6 +505,104 @@ INPUT
 
 ## Deployment
 
+### Forking the Github repository 
+
+1. Go to [Track Tales Repository](https://github.com/juanovt10/tracktales-blog)
+2. In the top right, click the "Fork" button.
+3. There will now be a copy of the repository in your own Github account.
+
+### Running the project locally
+
+1. Go to [Track Tales Repository](https://github.com/juanovt10/tracktales-blog)
+2. Click on the "Code" button.
+3. Choose one of the following three options and click copy.
+    - HTTPS
+    - SSH
+    - Github CLI
+4. Open termina in your preferable IDE (cloud or local).
+5. Type `git clone` and paste the URL that was copied in step 3. 
+6. Press enter and the local close will be created.
+
+### Deploying with Heroku
+
+The following steps were taken from the Django "I think before I blog" walkthrough project provided by [Code Institute](https://codeinstitute.net/global/).
+
+1. Login or create an account in [Heroku](https://id.heroku.com/login). 
+2. Go to your dashboard on the top right and click the `New` dropdown button and select `Create New App`.
+3. Enter a name of the project (must be unique).
+4. Select the region your are working in. 
+
+#### External database set up
+
+I used [ElephantSQL](https://www.elephantsql.com/) as my database. 
+
+1. Login or create an account. 
+2. In dashboard on the right top corner click `Create New Instance`
+3. You will be forward to a `Select a plan and name`:
+    - `Name` should be the name of the project
+    - `Plan` should be the type of subscription you have with ElephantSQL, in my case I used the `Tiny Turtle (Free)` plan.
+    - `Tags` can be left in blank
+
+    Then click on `Select Region`.
+
+4. Here selecte your `Data center`. This is hosted with AWS. In my case due to my location I used `EU-West-1 (Ireland)`. Please note that you should select an AWS Availability Zone (AZ) closest where your main users will be located to reduce downtime.
+
+    Then click `Review`.
+5. Here you will check the name, cloud provider and region where the application will be hosted. If, everything is correct, click `Create instance`.
+6. Go to dashboard and your instance will be there. Click in the name and under `Details` copy the `URL`, this will be values that will be needed for the [Heroku variables setup](#heroku-settings) and the [env.py](#envpy-file-set-up) file.
+
+#### External storage set up
+
+I used [Cloudinary](https://cloudinary.com/ip/gr-sea-gg-brand-home-base?utm_source=google&utm_medium=search&utm_campaign=goog_selfserve_brand_wk22_replicate_core_branded_keyword&utm_term=1329&campaignid=17601148700&adgroupid=141182782954&keyword=cloudinary&device=c&matchtype=e&adposition=&gad_source=1&gclid=Cj0KCQiAm4WsBhCiARIsAEJIEzUYoKHM06ldJtPMxUmtjFK3HxOkfQI3_8G9vOXPuRsPWuCVCSFEPzsaAjiJEALw_wcB) as cloud storage for this project. 
+
+1. Create and account or login. 
+2. Go to `Dashboard` and copy the `API Environment variable`.
+3. This URL will be required when setting up the [env.py](#envpy-file-set-up) and the [Heroku variables](#heroku-settings). 
+
+#### env.py file set up
+
+1. In the root directory of your project create a new file called `env.py`.
+2. Add this `env.py` file to your `.gitignore` file so the confidential information in the file is not push to Github.
+3. In the `env.py` file import the `os` module and add the [database URL](#external-database-set-up).
+
+```
+os.environ["DATABASE_URL"]="<copiedURL>"
+```
+
+4. Then, using the same process create a `SECRET_KEY`. This can be anything, I used [RandomKeygen](https://randomkeygen.com/) to create a complicated key. 
+
+```
+os.environ["SECRET_KEY"]="<copiedGeneratedKEY>"
+```
+
+5. Finally, using the same process, create a `CLOUDINARY_URL`. 
+
+```
+os.environ["CLOUDINARY_URL"]="<copiedCloudinaryURL>"
+```
+
+6. Save the file.
+
+#### Heroku settings 
+
+After the application is created in Heroku. Got to your dashboard and you will see the application name, click on it and then follow the following: 
+
+1. Go to the settings tab and go to `ConfigVars` and click on `Reveal Config Vars` and set the following variables: 
+    - Key: `PORT`, Value: `8000`
+    - Key: `DATABASE_URL`, Value: [databaseURL](#external-database-set-up) 
+    - Key: `ClOUDINARY_URL`, Value: [storageURL](#external-storage-set-up)
+    - Key: `SECRET_KEY`, Value: [randomKey](#envpy-file-set-up)
+
+2. After setting up the variables, go to `Buildpacks` and select `Python`.
+
+#### Heroku deployment 
+
+1. Go to `Deploy` tab and under `Deployment method` connect to the Github repository.
+2. Then there can be two options: manual or automatic deployment. 
+    - Manual deployment means that it will be necessary to go to Heroku and deploy the application each time that changes are made. 
+    - Automatic deployment will re-deploy the application each time new code is pushed to Github. 
+3. After selecting the deployment method, under `Manual Deployment` click `Deploy branch`. 
+
 ## Credits
 
 ### Design
