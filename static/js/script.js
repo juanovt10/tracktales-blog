@@ -28,16 +28,15 @@ $(document).ready(function () {
     $(".edit-post-btn").on("click", function () {
         let postId = $(this).data("post-id");
         let postTitle = $(this).closest(".card").find(".post-title").text();
-        let postTags = $(this).closest(".card").find(".post-tags").text();
+        let postTags = $(this).closest(".card").find(".post-tags").text().trim();
         let postWorldArea = $(this).closest(".card").find(".post-area").text();
         let postCountry = $(this).closest(".card").find(".post-country").text();
-        let postContent = $(this).closest(".card").find(".post-content").text();
+        let postContent = $(this).closest(".card").find(".post-content").text().trim();
 
-        $("#edit-post-id-input").val(postId);
-        $("#edit-post-country-input").val(postCountry);
-        $("#edit-post-content-input").val(postContent);
-        $("#edit-post-tags-input").val(postTags).trigger('change');
-        $("#edit-post-area-input").val(postWorldArea).trigger('change');
+        $(".edit-post-country-input input").val(postCountry);
+        $(".edit-post-content-input textarea").val(postContent);
+        $(".edit-post-tags-input select").val(postTags);
+        $(".edit-post-area-input select").val(postWorldArea);
 
         let modalId = "#editPostModal-" + postId;
         $(modalId).modal('show');

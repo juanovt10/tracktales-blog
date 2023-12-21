@@ -48,7 +48,7 @@ class PostBoard(generic.ListView):
 
         return context    
 
-    #method to post the user post into the database and like posts 
+    #method to post the users' posts, comments and likes into the database.
     def post(self, request, *args, **kwargs):
 
         #define context
@@ -83,6 +83,7 @@ class PostBoard(generic.ListView):
 
         #method to edit posts
         elif 'edit_post_id' in request.POST:
+            print("Entering edit post form")
             post_slug = request.POST['edit_post_id']
             post = get_object_or_404(Post, slug=post_slug)
             edit_form = EditPostForm(instance=post, data=request.POST) 
@@ -92,7 +93,6 @@ class PostBoard(generic.ListView):
                 edit_form.save()
                 messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
             else:
-                print("Edit Form Errors:", edit_form.errors)
                 return render(request,
                 'board.html', {
                     'post_form': post_form,
@@ -147,6 +147,7 @@ class PostBoard(generic.ListView):
                 queryset = queryset.filter(world_area__in=world_areas).distinct()
 
         return queryset
+            
         
 
 class DeletePostView(View):

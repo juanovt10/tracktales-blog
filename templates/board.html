@@ -178,7 +178,7 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <div class="me-1">
+                        <div class="me-1 post-tags">
                             {{ post.tags }}
                         </div>
                         {% if request.user.id == post.author.id %}
@@ -297,7 +297,7 @@
                         <form method="post" class="edit-post-form">
                             <div class="modal-body">
                                 {% csrf_token %}
-                                <div class="mb-3">
+                                <div class="mb-3 edit-post-country-input">
                                     {{ edit_post_form.country }}
                                 </div>
                                 <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between">
@@ -305,11 +305,11 @@
                                         {{ edit_post_form.tags }}
                                     </div>
                                     <div class="d-none d-sm-block col-sm-1"></div>
-                                    <div class="btn-group col-12 col-sm" id="edit-post-area-input">
+                                    <div class="btn-group col-12 col-sm edit-post-area-input">
                                         {{ edit_post_form.world_area }}
                                     </div>
                                 </div>
-                                <div class="mb-3 d-flex">
+                                <div class="mb-3 d-flex edit-post-content-input">
                                     {{ edit_post_form.content }}
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -321,7 +321,6 @@
                     </div>
                 </div>
             </div>
-
             {% endfor %}
         </div>
 
