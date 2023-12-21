@@ -3,7 +3,7 @@ from django.utils.text import slugify
 from django.views import generic, View
 from django.views.generic import TemplateView, FormView
 from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile, ContactInfo
-from .forms import PostForm, CommentForm, ProfileForm, EditPostForm, ContactUsForm, UserDeleteForm
+from .forms import PostForm, CommentForm, ProfileForm, ContactUsForm, UserDeleteForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
@@ -35,7 +35,6 @@ class PostBoard(generic.ListView):
         context['filter_areas'] = WORLD_AREAS[1:]
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
-        context['edit_post_form'] = EditPostForm()
 
         #create an empty dictionary for the post_comments
         context['post_comments'] = {}
@@ -116,7 +115,6 @@ class PostBoard(generic.ListView):
                 'board.html', {
                     'post_form': post_form,
                     'comment_form': comment_form,
-                    # 'edit_post_form': edit_post_form,
                     'tags': TAGS,
                     'areas': WORLD_AREAS,
                     'filter_tags': TAGS[1:],
@@ -211,7 +209,6 @@ class ProfileDetail(generic.DetailView):
         context['profile_form'] = ProfileForm()
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
-        context['edit_post_form'] = EditPostForm()
 
         user_profile = self.get_object()
         context['user_posts'] = Post.objects.filter(approved=True, author=user_profile.username)
@@ -232,9 +229,8 @@ class ProfileDetail(generic.DetailView):
         post_form = PostForm(data=request.POST)
         delete_form = UserDeleteForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
-        edit_post_form = EditPostForm(data=request.POST)
         user_profile = self.get_object()
-        posts = Post.objects.filter(author=user_profile.username)
+        posts = Post.objects.filter(author=user_profile.username, approved=True).order_by('-created_on')
         profile_instance = user_profile
         profile_form = ProfileForm(data=request.POST, instance=profile_instance)
         post_comments = {}
@@ -278,19 +274,17 @@ class ProfileDetail(generic.DetailView):
         elif 'edit_post_id' in request.POST:
             post_slug = request.POST['edit_post_id']
             post = get_object_or_404(Post, slug=post_slug)
-            edit_form = EditPostForm(instance=post, data=request.POST) 
-            if edit_form.is_valid():
+            post_form = PostForm(instance=post, data=request.POST) 
+            if post_form.is_valid():
                 post.approved = False
                 post.edited = True
-                edit_form.save()
+                post_form.save()
                 messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
             else:
-                print("Edit Form Errors:", edit_form.errors)
                 return render(request,
                 'board.html', {
                     'post_form': post_form,
                     'comment_form': comment_form,
-                    'edit_post_form': edit_form,
                     'tags': TAGS,
                     'areas': WORLD_AREAS,
                     'filter_tags': TAGS[1:],
@@ -298,7 +292,6 @@ class ProfileDetail(generic.DetailView):
                     'posts': posts,
                     'post_comments': post_comments,
                 })
-
         else:
             if post_form.is_valid():
                 post_form.instance.author = request.user
