@@ -39,41 +39,6 @@ class PostForm(forms.ModelForm):
         fields = ('tags', 'title', 'world_area', 'country', 'content',)
 
 
-# class EditPostForm(forms.ModelForm):
-#     country = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Edit country"}), required=True)
-#     tags = forms.ChoiceField(
-#         widget=forms.Select(
-#             attrs= {
-#                 "class": "btn btn-info dropdown-toggle",
-#                 "placeholder": "Holiday Type",
-#             }
-#         ),
-#         choices=TAGS,
-#         required=True,
-#     )
-
-#     world_area = forms.ChoiceField(
-#         widget=forms.Select(
-#             attrs= {"class": "btn btn-info dropdown-toggle"}),
-#         choices=WORLD_AREAS,
-#         required=True,
-#     )
-#     content = forms.CharField(
-#         widget=forms.Textarea(
-#             attrs={
-#                 "class": "form-control",
-#                 "cols": "100", 
-#                 "rows":"3",
-#                 "placeholder": "Edit your post content"
-#             }
-#         ),
-#         required=True,
-#     )
-#     class Meta:
-#         model = Post
-#         fields = ('tags', 'world_area', 'country', 'content',)
-
-
 class CommentForm(forms.ModelForm):
     body = forms.CharField(
         widget=forms.Textarea(

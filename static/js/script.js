@@ -33,8 +33,6 @@ $(document).ready(function () {
         let postCountry = $(this).closest(".card").find(".post-country").text();
         let postContent = $(this).closest(".card").find(".post-content").text().trim();
 
-        console.log(postTags)
-
         $(".edit-post-title-input input").val(postTitle);
         $(".edit-post-country-input input").val(postCountry);
         $(".edit-post-content-input textarea").val(postContent);

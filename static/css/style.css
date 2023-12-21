@@ -150,8 +150,16 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid #090921;
 }
 
-.accordion-button.collapse::after {
-    color: #EAEAEA; 
+.accordion-item:active,
+.accordion-button:active {
+    --bs-accordion-btn-focus-box-shadow: 234, 234, 234;
+    --bs-accordion-btn-focus-border-color: #090921;
+}
+
+.accordion-item:focus,
+.accordion-button:focus {
+    --bs-accordion-btn-focus-box-shadow: 234, 234, 234;
+    --bs-accordion-btn-focus-border-color: #090921;
 }
 
 textarea {
@@ -217,9 +225,17 @@ hr {
     transform: translate(-2px, -5px);
 } 
 
+.btn-primary:active {
+    --bs-btn-active-bg: #ae5c37;
+}
+
 .btn-secondary:hover {
     background-color: #801F1F;
     transform: translate(-2px, -5px);
+}
+
+.btn-secondary:active {
+    --bs-btn-active-bg: #5a1616;
 }
  
 .btn-success:hover {
@@ -227,10 +243,27 @@ hr {
     transform: translate(-2px, -5px);
 }
 
+.btn-success:active {
+    --bs-btn-active-bg: #7d7550;
+}
+
 .btn-info:hover,
 .btn-outline-primary:hover {
     background-color: #090921;
     color: #EAEAEA;
+}
+
+.btn-info:active {
+    --bs-btn-active-bg: #090921;
+    --bs-btn-active-color: #EAEAEA;
+    --bs-btn-active-shadow: none;
+}
+
+.btn-info:focus {
+    --bs-btn-active-shadow: none;
+    --bs-btn-hover-bg: #090921;
+    --bs-btn-hover-color: #EAEAEA;
+    --bs-btn-focus-shadow-rgb: 41, 41, 65;
 }
 
 .btn-primary {
