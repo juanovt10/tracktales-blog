@@ -372,3 +372,10 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+/* --bs-btn-focus-shadow-rgb: 41, 41, 65; */
+.form-control:focus {
+    color:#090921;
+    border-color: #090921;
+    box-shadow: 0 0 0 0.2rem rgba(41, 41, 65, .50);
+}

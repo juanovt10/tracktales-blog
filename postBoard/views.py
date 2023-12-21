@@ -198,8 +198,6 @@ class ProfileDetail(generic.DetailView):
         context['profile_form'] = ProfileForm()
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
-        context['profile_form'] = ProfileForm()
-        context['user_profile'] = user_profile
 
         user_profile = self.get_object()
         context['user_posts'] = Post.objects.filter(approved=True, author=user_profile.username)
@@ -208,7 +206,10 @@ class ProfileDetail(generic.DetailView):
         for post in context['user_posts']:
             comments = Comment.objects.filter(post=post, approved=True, author=user_profile.username).order_by('created_on')
             context['post_comments'][post.id] = comments
-            
+
+        context['profile_form'] = ProfileForm()
+        context['user_profile'] = user_profile
+
         return context
 
     def post(self, request, username, *args, **kwargs):
