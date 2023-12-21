@@ -30,11 +30,19 @@
                 <h2 class="display-4">Explore Together</h2>
                 <p class="lead">Join our vibrant travel community and explore a world of shared experiences.</p>
                 <p class="d-none d-sm-block">Discover amazing travel stories, tips, and recommendations from fellow globetrotters.</p>
+                {% if not user.is_authenticated %}
                 <p class="d-none d-sm-block">Ready to start your journey? Sign up and become part of our community!</p>
                 <div class="d-flex">                    
                     <a href="{% url 'account_signup' %}" class="btn btn-primary btn-block me-3">Sign Up</a>
                     <a href="{% url 'account_login' %}" class="btn btn-success btn-block">Login</a>
-                </div>    
+                </div>
+                {% else %}
+                <p class="d-none d-sm-block">Why wait? Be an active part of this thriving community! Your contributions matter.</p>
+                <div class="d-flex">                    
+                    <a href="{% url 'post_board' %}" class="btn btn-primary btn-block me-3">Posts Board</a>
+                    <a href="{% url 'profile_detail' username=request.user %}" class="btn btn-success btn-block">Your profile</a>
+                </div>
+                {% endif %}  
             </div>
         </div>
         <div class="carousel-item">
