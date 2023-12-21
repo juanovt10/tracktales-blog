@@ -89,7 +89,7 @@
                 </form>
             </div>
         </div>
-        
+
         <!-- area to create posts and display posts -->
         <div class="col-md-8 mb-4 pb-5">
             {% if user.is_authenticated %}
@@ -155,6 +155,7 @@
             </div>
 
             <!-- posts display -->
+            {% if posts %}
             {% for post in posts %}
             <div class="card mt-4">
                 <div class="card-header d-flex px-2 px-md-3">
@@ -312,6 +313,19 @@
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <div class="d-flex no-posts mt-3">
+                <div class="col">
+                    <hr>
+                </div>
+                <div class="col-7 d-flex justify-content-center align-items-center text-center">
+                    Your filter selection does not match any exisitng post
+                </div>
+                <div class="col">
+                    <hr>
+                </div>
+            </div>
+            {% endif %}            
         </div>
 
         <!-- filter modal for medium to small screens-->

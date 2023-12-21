@@ -327,7 +327,7 @@ Insert methodology here**
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| "Start Exploring" button | Test that the links redirects to the post board | User is directed succesfully to the post board page | PASS |
+| "Start Exploring" and "Join us" buttons | Test that the links redirects to the post board | User is directed succesfully to the post board page and to the signup page when not authenticated | PASS |
 
 #### Board
 
@@ -386,9 +386,8 @@ Insert methodology here**
 | - | - | - | - |
 | Create profile page redirection  | When a new user signs up for the website, it should be redirected to the create profile page. | A new user is successfully redirected to the create profile page that displays the create profile form. | PASS |
 | Create profile - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
-| Create profile - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
 | Create profile - Form validation | Submit an incomplete form. | Browser promts that required fields need to be filled. | PASS |
-| Create profile - Form validation | Submit letters in the countries visited field. | Error message is displayed that this field should be a number. | PASS |
+| Create profile - Form validation | Submit letters in the countries visited field. | Browswer does not allow letters in this field. | PASS |
 | Create profile - Form validation | Submit a valid form. | User is redirected to their profile and a success message is displayed. | PASS |
 | Create profile - Form validation | No submition and go to user profile manually by chaning the browser link. | User can see their profile with the default values and the success message of created profile is not displayed. | PASS |
 
@@ -404,7 +403,7 @@ Insert methodology here**
 | Edit profile form - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
 | Edit profile form - Form validation | Submit an incomplete form. | Browser promts that required fields need to be filled. | PASS |
 | Edit profile form - Form validation | Submit a valid form. | The profile is successfully updated an a success message is displayed to provide feedback to the user. | PASS |
-| Delete profile | When a user clicks on delete profile, they have a button for delete profile that shoud open a delete profile confirmation modal. | The delete profile is successfully displayed. | PASS |
+| Delete profile | When a user clicks on delete profile, they have a button for delete profile that shoud open a delete profile confirmation modal. | The delete profile modal is successfully displayed. | PASS |
 | Delete profile - Functionality | when the user confirms that they want to delete their profile, they should be logged in and their records deleted from the database. | The delete profile feature successfully logs out the user and deletes the user from the databse. | PASS |
 | Post form display - Authenticated user's profile | When the authenticated user is in their profile they are able to create posts. | The post form is successfully displayed for the authenticated user to create a post from their profile page. | PASS |
 | Post form display - Authenticated user in another user's profile | When the authenticated user is in another user's profile they cannot create posts but the there are links explaing where they can create them. | The post form is not displayed and a card with the board and profile buttons is displayed. Both the board and the user profile links are wired correctly. | PASS |
@@ -457,17 +456,17 @@ As the exisitng and new users will have the same user experience for the app bes
 
 ### Validator testing 
 
-- All html files pass through the [W3C validator](https://jigsaw.w3.org/css-validator/#validate_by_input) with no issues. 
+- I tested the board.html and userprofile.html files. They both get 39 and 33 errors that are related to djnago curly brackets sytnax. [W3C validator](https://validator.w3.org/#validate_by_uri) with no issues. 
 
-INPUT
+- style.css file passed through the [Jigsaw Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) with no issues. 
 
-- All CSS files pass through the [Jigsaw Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) with no issues. 
+![CSS Validation](static/images/readme_images/css_test_success.png)
 
-INPUT 
+- script.js passsed through the [jshint validator](https://jshint.com/) by only displaying the let vs var at the moment of declaring variables. 
 
-- The python file passes through the [PP8 validator](ADDLINK) with no issues except by the more than 79 characters per line recomended by PEP 8. 
+![JavaScript Validation](static/images/readme_images/js_success_testing.png)
 
-INPUT
+- The views.py file passes through the [PP8 validator](https://pep8ci.herokuapp.com/#) with no issues except by the trailing whitespaces and the continuatin line is unde-indented. 
 
 - Page has an excellent Accessibility rating in Lighthouse. 
 

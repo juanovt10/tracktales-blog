@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.contrib import messages
 
+
 def index(request):
     return render(request, 'index.html')
 
@@ -34,27 +35,29 @@ class PostBoard(generic.ListView):
         context['post_form'] = PostForm()
         context['comment_form'] = CommentForm()
 
-        #create an empty dictionary for the post_comments
+        # Create an empty dictionary for the post_comments
         context['post_comments'] = {}
 
-        #populate the dicitonary with the approved comments as value and the post.id as keys
+        # Populate the dicitonary with the approved comments 
+        # as value and the post.id as keys
         for post in context['posts']:
-            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            comments = Comment.objects.filter(post=post, approved=True).\
+                order_by('created_on')
             context['post_comments'][post.id] = comments
-            
 
         return context    
 
-    #method to post the users' posts, comments and likes into the database.
+    # method to post the users' posts, comments and likes into the database.
     def post(self, request, *args, **kwargs):
 
-        #define context
+        # define context
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
         posts = Post.objects.filter(approved=True).order_by('-created_on')
         post_comments = {}
         for post in posts:
-            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            comments = Comment.objects.filter(post=post, approved=True)\
+                .order_by('created_on')
             post_comments[post.id] = comments
 
         # return context when the post and edit forms are invalid
@@ -69,7 +72,7 @@ class PostBoard(generic.ListView):
                     'post_comments': post_comments,
                 }
 
-        #check for the id in the request POST and add or delete likes    
+        # check for the id in the request POST and add or delete likes    
         if 'blogpost_id_like' in request.POST:
             post_slug = request.POST['blogpost_id_like']
             post = get_object_or_404(Post, slug=post_slug)
@@ -79,7 +82,7 @@ class PostBoard(generic.ListView):
             else:
                 post.likes.add(request.user)
 
-        #check for the comment form is valid then post the form 
+        # check for the comment form is valid then post the form 
         elif comment_form.is_valid():
             post_slug = request.POST.get('blogpost_id_comment')
             post = get_object_or_404(Post, slug=post_slug)
@@ -87,9 +90,11 @@ class PostBoard(generic.ListView):
             comment = comment_form.save(commit=False)   
             comment.post = post
             comment.save()
-            messages.success(request, 'Your comment has been recorded and is awaiting for approval, this will take a couple of minutes.')
+            messages.success(request,
+                'Your comment has been recorded and is awaiting for approval. '
+                'This will take a couple of minutes.')
 
-        #method to edit posts
+        # method to edit posts
         elif 'edit_post_id' in request.POST:
             print("Entering edit post form")
             post_slug = request.POST['edit_post_id']
@@ -99,41 +104,46 @@ class PostBoard(generic.ListView):
                 post.approved = False
                 post.edited = True
                 post_form.save()
-                messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
+                messages.success(request, 
+                    'Your post has been edited and is awaiting for approval. '
+                    'This will take a couple of minutes.')
             else:
                 print("Edit Form Errors:", post_form.errors)
                 return render(request, 'board.html', invalid_forms_context)
         else: 
-            #check if teh post form is valid and post the form the database
+            # check if teh post form is valid and post the form the database
             if post_form.is_valid():
                 post_form.instance.author = request.user
                 post_form.instance.slug = slugify(post_form.instance.title)
                 post_form.save()
-                messages.success(request, 'Thank you! Your post is awaiting for approval, this will take a couple of minutes.')
+                messages.success(request, 
+                    'Thank you! Your post is awaiting for approval. ' 
+                    'This will take a couple of minutes.')
             else: 
                 return render(request, 'board.html', invalid_forms_context)
 
         return HttpResponseRedirect(reverse_lazy('post_board'))
 
-    #method to filter posts in post board
+    # method to filter posts in post board
     def get_queryset(self):
-        #redefine the posts in the post board
+        # redefine the posts in the post board
         queryset = Post.objects.filter(approved=True).order_by('-created_on')
 
-        #check that the method is GET and define the filters
+        # check that the method is GET and define the filters
         if self.request.method == 'GET':
             holiday_types = self.request.GET.getlist('holiday_type')
             world_areas = self.request.GET.getlist('world_area')
 
-            #if teh filters are existent, filter the posts
+            # if the filters are existent, filter the posts
             if holiday_types:
                 queryset = queryset.filter(tags__in=holiday_types).distinct()
 
             if world_areas:
-                queryset = queryset.filter(world_area__in=world_areas).distinct()
+                queryset = queryset.filter(world_area__in=world_areas)\
+                    .distinct()
 
         return queryset
-                
+
 
 class DeletePostView(View):
     def post(self, request, *args, **kwargs):
@@ -143,7 +153,9 @@ class DeletePostView(View):
         post = get_object_or_404(Post, slug=post_slug)
         print(post)
         post.delete()
-        messages.success(request, f'Your post: "{post.title}" has been successfully deleted')
+        messages.success(request, 
+            f'Your post: "{post.title}" has been successfully deleted')
+
         return redirect('post_board')
 
 
@@ -162,22 +174,26 @@ class CreateProfile(generic.ListView):
     def post(self, request, username, *args, **kwargs):
         print("Entering post method")
         profile_instance = request.user.userprofile
-        profile_form = ProfileForm(data=request.POST, instance=profile_instance)
+        profile_form = ProfileForm(data=request.POST, 
+            instance=profile_instance)
 
         print(profile_instance)
 
         if profile_form.is_valid():
             print("Form is valid")
             profile_form.save()
-            messages.success(request, f'{username}, you have successfully created your profile!')
-            return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': username}))
+            messages.success(request, 
+                f'{username}, you have successfully created your profile!')
+
+            return HttpResponseRedirect(reverse_lazy('profile_detail', 
+                kwargs={'username': username}))
         else:
             return render(request,
-            'createprofile.html', {
-                'tags': TAGS,
-                'areas': WORLD_AREAS,
-                'profile_form': profile_form
-            })
+                'createprofile.html', {
+                    'tags': TAGS,
+                    'areas': WORLD_AREAS,
+                    'profile_form': profile_form
+                })
 
 
 class ProfileDetail(generic.DetailView):
@@ -200,11 +216,13 @@ class ProfileDetail(generic.DetailView):
         context['comment_form'] = CommentForm()
 
         user_profile = self.get_object()
-        context['user_posts'] = Post.objects.filter(approved=True, author=user_profile.username)
+        context['user_posts'] = Post.objects.filter(approved=True,
+            author=user_profile.username)
         context['post_comments'] = {}
 
         for post in context['user_posts']:
-            comments = Comment.objects.filter(post=post, approved=True, author=user_profile.username).order_by('created_on')
+            comments = Comment.objects.filter(post=post, approved=True,
+                author=user_profile.username).order_by('created_on')
             context['post_comments'][post.id] = comments
 
         context['profile_form'] = ProfileForm()
@@ -216,12 +234,16 @@ class ProfileDetail(generic.DetailView):
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
         user_profile = self.get_object()
-        user_posts = Post.objects.filter(author=user_profile.username, approved=True).order_by('-created_on')
+        user_posts = Post.objects.filter(author=user_profile.username,
+            approved=True).order_by('-created_on')
         profile_instance = user_profile
-        profile_form = ProfileForm(data=request.POST, instance=profile_instance)
+        profile_form = ProfileForm(data=request.POST,
+            instance=profile_instance)
         post_comments = {}
         for post in user_posts:
-            comments = Comment.objects.filter(post=post, approved=True).order_by('created_on')
+            comments = Comment.objects.filter(post=post,
+                approved=True).order_by('created_on')
+
             post_comments[post.id] = comments
 
         invalid_forms_context = {
@@ -240,8 +262,11 @@ class ProfileDetail(generic.DetailView):
 
         if profile_form.is_valid():
             profile_form.save()
-            messages.success(request, 'Your profile has been successfully updated!')
-            return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': username}))
+            messages.success(request,
+                'Your profile has been successfully updated!')
+
+            return HttpResponseRedirect(reverse_lazy('profile_detail',
+                kwargs={'username': username}))
 
         elif 'delete_user_id' in request.POST:
             app_user = request.user
@@ -250,7 +275,9 @@ class ProfileDetail(generic.DetailView):
             logout(request)
             database_user.delete()
             app_user.delete()
-            messages.success(request, f"Account {username} has been successfully deleted")
+            messages.success(request,
+                f"Account {username} has been successfully deleted")
+
             return HttpResponseRedirect(reverse_lazy('post_board'))
 
         elif 'blogpost_id_like' in request.POST:
@@ -269,7 +296,9 @@ class ProfileDetail(generic.DetailView):
             comment = comment_form.save(commit=False)   
             comment.post = post
             comment.save()
-            messages.success(request, 'Your comment has been recorded and is awaiting for approval, this will take a couple of minutes.')
+            messages.success(request,
+                'Your comment has been recorded and is awaiting for approval. '
+                'This will take a couple of minutes.')
 
         elif 'edit_post_id' in request.POST:
             post_slug = request.POST['edit_post_id']
@@ -279,26 +308,32 @@ class ProfileDetail(generic.DetailView):
                 post.approved = False
                 post.edited = True
                 post_form.save()
-                messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
+                messages.success(request,
+                    'Your post has been edited and is awaiting for approval. '
+                    'This will take a couple of minutes.')
             else:
-                return render(request, 'userprofile.html', invalid_forms_context)
+                return render(request,
+                    'userprofile.html', invalid_forms_context)
         else:
             if post_form.is_valid():
                 post_form.instance.author = request.user
                 post_form.instance.slug = slugify(post_form.instance.title)
                 post_form.save()
-                messages.success(request, 'Thank you! Your post is awaiting for approval, this will take a couple of minutes.')
+                messages.success(request,
+                    'Thank you! Your post is awaiting for approval. '
+                    'This will take a couple of minutes.')
             else:
-                return render(request, 'userprofile.html', invalid_forms_context)
+                return render(request,
+                    'userprofile.html', invalid_forms_context)
 
-        return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': request.user.username}))
+        return HttpResponseRedirect(reverse_lazy('profile_detail',
+            kwargs={'username': request.user.username}))
 
 
 class ContactUs(FormView):
     template_name = 'contactus.html'
     form_class = ContactUsForm
     success_url = reverse_lazy('contact_success')
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -310,10 +345,12 @@ class ContactUs(FormView):
         form.save()
         return super().form_valid(form)
 
-
     def form_invalid(self, form):
-        error_message = "There was an error with your submission. Please check the form and try again."
-        return self.render_to_response(self.get_context_data(form=form, error_message=error_message))
+        error_message = "There was an error with your submission. "
+        "Please check the form and try again."
+
+        return self.render_to_response(self.get_context_data(form=form,
+            error_message=error_message))
 
 
 def contact_success(request):

@@ -9,7 +9,7 @@ $(document).ready(function () {
     $(".delete-post-btn").on("click", function () {
         let postId = $(this).data("post-id");
         let postTitle = $(this).closest(".card").find(".post-title").text();
-        console.log(postId)
+        console.log(postId);
 
         $("#delete-post-id-input").val(postId);
         $("#post-title").text(postTitle);
