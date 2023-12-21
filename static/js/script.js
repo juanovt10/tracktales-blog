@@ -50,6 +50,18 @@ $(document).ready(function () {
 
     // opens the edit profile modal
     $("#edit-profile-btn").on("click", function () {
+        let display_name = $(this).closest(".card").find(".display_name").text();
+        let languages = $(this).closest(".card").find(".languages").text();
+        let most_visited_area = $(this).closest(".card").find(".most_visited_area").text().trim();
+        let countries_traveled = $(this).closest(".card").find(".countries_traveled").text();
+        let user_description = $(this).closest(".card").find(".user_description").text().trim();
+
+        $(".edit-profile-display_name-input input").val(display_name);
+        $(".edit-profile-languages-input input").val(languages);
+        $(".edit-profile-most_visited_area-input select").val(most_visited_area);
+        $(".edit-profile-countries_traveled-input input").val(countries_traveled);
+        $(".edit-profile-user_description-input textarea").val(user_description);
+
         $("#edit-profile-modal").modal("show");
     });
 

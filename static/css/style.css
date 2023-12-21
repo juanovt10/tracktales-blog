@@ -361,3 +361,14 @@ hr {
 .auth-card-signup {
     width: 80%;
 }
+
+/* remove the arrows of numeric inputs */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

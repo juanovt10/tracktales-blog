@@ -1,7 +1,5 @@
 from .models import Post, TAGS, WORLD_AREAS, Comment, UserProfile, ContactInfo
 from django import forms
-from django.utils.html import format_html
-from django.contrib.auth.models import User
 
 
 class PostForm(forms.ModelForm):
@@ -73,7 +71,7 @@ class ProfileForm(forms.ModelForm):
         choices=WORLD_AREAS,
     )
     languages = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    countries_traveled = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control"}))
+    countries_traveled = forms.IntegerField(widget=forms.TextInput(attrs={"class": "form-control", "type":"number"}))
 
     class Meta:
         model = UserProfile
@@ -100,7 +98,4 @@ class ContactUsForm(forms.ModelForm):
     class Meta:
         model = ContactInfo
         fields = ('first_name', 'last_name', 'email', 'phone_number', 'subject', 'message',)
-
-
-class UserDeleteForm(forms.Form):
-    delete = forms.BooleanField(required=True)
+        

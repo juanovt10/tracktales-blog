@@ -13,20 +13,31 @@
             {{ message }}
             {% endfor %}
         </div>
+        {% elif post_form.errors %}
+        <div class="alert alert-danger col post-board-alerts" role="alert">
+            <strong>Your Post was not received!</strong>
+            <ul>
+                {% for field, error_list in post_form.errors.items %}
+                {% for error in error_list %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="card filter-card mt-3">
                 <div class="card-body">
-                    <h5 class="card-title ms-2">{{ user_profile.display_name }}</h5>
+                    <h5 class="card-title ms-2 display_name">{{ user_profile.display_name }}</h5>
                     <h6 class="card-title ms-2">@{{ user_profile.username }}</h6>
                     {% if request.user.is_authenticated %}
-                        <p class="card-text mt-2 ms-2">{{ user_profile.user_description }}</p>
+                        <p class="card-text mt-2 ms-2 user_description">{{ user_profile.user_description }}</p>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Most visited area: {{ user_profile.most_visited_area }}</li>
-                            <li class="list-group-item">Lanaguages: {{ user_profile.languages }}</li>
-                            <li class="list-group-item">Countries travelled: {{ user_profile.countries_traveled }}</li>
+                            <li class="list-group-item">Most visited area: <span class="most_visited_area">{{ user_profile.most_visited_area }}</span></li>
+                            <li class="list-group-item">Languages: <span class="languages">{{ user_profile.languages }}</span></li>
+                            <li class="list-group-item">Countries travelled: <span class="countries_traveled">{{ user_profile.countries_traveled }}</span></li>
                             <li class="list-group-item">Joined on: {{ user_profile.created_on|date:"d M. Y" }}</li>
                         </ul>
                         {% if request.user.id == user_profile.username.id %}
@@ -288,41 +299,43 @@
                 </div>
                 <form class="modal-body" method="post">
                     {% csrf_token %}
-                    {% if profile_form.errors %}
-                    <div class="alert alert-danger">
-                        <strong>Error!</strong> {{ profile_form.errors }}
-                    </div>
-                    {% endif %}
                     <div class="mb-3 comment-form-divs">
                         <div>
                             <label for="{{ profile_form.display_name.id_for_label }}" class="form-label">Display name:</label>
-                            {{ profile_form.display_name }}
+                            <div class="edit-profile-display_name-input">
+                                {{ profile_form.display_name }}
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 comment-form-divs">
                         <label for="{{ profile_form.most_visited_area.id_for_label }}" class="form-label">Most visited
                             area:</label>
-                        <div class="btn-group">
+                        <div class="btn-group edit-profile-most_visited_area-input">
                             {{ profile_form.most_visited_area }}
                         </div>
                         <div>
                             <label for="{{ profile_form.countries_traveled.id_for_label }}" class="form-label">Country:</label>
-                            {{ profile_form.countries_traveled }}
+                            <div class="edit-profile-countries_traveled-input">
+                                {{ profile_form.countries_traveled }}
+                            </div>
                         </div>
                     
                         <div>
                             <label for="{{ profile_form.languages.id_for_label }}" class="form-label">Languages:</label>
-                            {{ profile_form.languages }}
+                            <div class="edit-profile-languages-input">
+                                {{ profile_form.languages }}
+                            </div>
                         </div>
                     </div>
                     <div class="mb-3 comment-form-divs">
-                        <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe
-                            yourself:</label>
-                        {{ profile_form.user_description }}
+                        <label for="{{ profile_form.user_description.id_for_label }}" class="form-label">Describe yourself:</label>
+                        <div class="edit-profile-user_description-input">
+                            {{ profile_form.user_description }}
+                        </div>
                     </div>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-danger me-2" id="delete-profile-btn">Delete Profile</button>
-                        <button type="submit" class="btn btn-success btn-post">Edit Profile</button>
+                        <button type="submit" name="edit-profile-id" class="btn btn-success btn-post">Edit Profile</button>
                     </div>
                 </form>
             </div>
