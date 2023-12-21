@@ -4,8 +4,7 @@
 
 Explore Track Tales, a thoughtfully designed platform for seamless storytelling. Create posts with titles, rich content, and holiday tags. Personalize your profile, adding a unique touch, while geographical tags provide a global context. Interact seamlessly with likes and comments, fostering a sense of community. Join us in the beautifully crafted space of Track Tales and effortlessly share your stories.
 
-The TrackTales community is live, to access it [click here.][ADD LINK]
-
+The TrackTales community is live, to access it [click here.](https://track-tales-community-d01b2f85b4e9.herokuapp.com/)
 ## Table of contents
 
 + [UX](#ux)
@@ -550,14 +549,6 @@ I used [ElephantSQL](https://www.elephantsql.com/) as my database.
 5. Here you will check the name, cloud provider and region where the application will be hosted. If, everything is correct, click `Create instance`.
 6. Go to dashboard and your instance will be there. Click in the name and under `Details` copy the `URL`, this will be values that will be needed for the [Heroku variables setup](#heroku-settings) and the [env.py](#envpy-file-set-up) file.
 
-#### External storage set up
-
-I used [Cloudinary](https://cloudinary.com/ip/gr-sea-gg-brand-home-base?utm_source=google&utm_medium=search&utm_campaign=goog_selfserve_brand_wk22_replicate_core_branded_keyword&utm_term=1329&campaignid=17601148700&adgroupid=141182782954&keyword=cloudinary&device=c&matchtype=e&adposition=&gad_source=1&gclid=Cj0KCQiAm4WsBhCiARIsAEJIEzUYoKHM06ldJtPMxUmtjFK3HxOkfQI3_8G9vOXPuRsPWuCVCSFEPzsaAjiJEALw_wcB) as cloud storage for this project. 
-
-1. Create and account or login. 
-2. Go to `Dashboard` and copy the `API Environment variable`.
-3. This URL will be required when setting up the [env.py](#envpy-file-set-up) and the [Heroku variables](#heroku-settings). 
-
 #### env.py file set up
 
 1. In the root directory of your project create a new file called `env.py`.
@@ -574,13 +565,7 @@ os.environ["DATABASE_URL"]="<copiedURL>"
 os.environ["SECRET_KEY"]="<copiedGeneratedKEY>"
 ```
 
-5. Finally, using the same process, create a `CLOUDINARY_URL`. 
-
-```
-os.environ["CLOUDINARY_URL"]="<copiedCloudinaryURL>"
-```
-
-6. Save the file.
+5. Save the file.
 
 #### Heroku settings 
 
@@ -589,7 +574,6 @@ After the application is created in Heroku. Got to your dashboard and you will s
 1. Go to the settings tab and go to `ConfigVars` and click on `Reveal Config Vars` and set the following variables: 
     - Key: `PORT`, Value: `8000`
     - Key: `DATABASE_URL`, Value: [databaseURL](#external-database-set-up) 
-    - Key: `ClOUDINARY_URL`, Value: [storageURL](#external-storage-set-up)
     - Key: `SECRET_KEY`, Value: [randomKey](#envpy-file-set-up)
 
 2. After setting up the variables, go to `Buildpacks` and select `Python`.
