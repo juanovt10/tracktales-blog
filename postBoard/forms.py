@@ -40,7 +40,7 @@ class PostForm(forms.ModelForm):
 
 
 class EditPostForm(forms.ModelForm):
-    country = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Edit country"}))
+    country = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Edit country"}), required=True)
     tags = forms.ChoiceField(
         widget=forms.Select(
             attrs= {
@@ -49,12 +49,14 @@ class EditPostForm(forms.ModelForm):
             }
         ),
         choices=TAGS,
+        required=True,
     )
 
     world_area = forms.ChoiceField(
         widget=forms.Select(
             attrs= {"class": "btn btn-info dropdown-toggle"}),
         choices=WORLD_AREAS,
+        required=True,
     )
     content = forms.CharField(
         widget=forms.Textarea(
@@ -64,7 +66,8 @@ class EditPostForm(forms.ModelForm):
                 "rows":"3",
                 "placeholder": "Edit your post content"
             }
-        )
+        ),
+        required=True,
     )
     class Meta:
         model = Post

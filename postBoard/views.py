@@ -54,7 +54,6 @@ class PostBoard(generic.ListView):
         #define context
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
-        edit_post_form = EditPostForm(data=request.POST)
         posts = Post.objects.filter(approved=True).order_by('-created_on')
         post_comments = {}
         for post in posts:
@@ -86,18 +85,18 @@ class PostBoard(generic.ListView):
             print("Entering edit post form")
             post_slug = request.POST['edit_post_id']
             post = get_object_or_404(Post, slug=post_slug)
-            edit_form = EditPostForm(instance=post, data=request.POST) 
-            if edit_form.is_valid():
+            post_form = PostForm(instance=post, data=request.POST) 
+            if post_form.is_valid():
                 post.approved = False
                 post.edited = True
-                edit_form.save()
+                post_form.save()
                 messages.success(request, 'Your post has been edited and is awaiting for approval, this will take a couple of minutes.')
             else:
+                print("Edit Form Errors:", post_form.errors)
                 return render(request,
                 'board.html', {
                     'post_form': post_form,
                     'comment_form': comment_form,
-                    'edit_post_form': edit_form,
                     'tags': TAGS,
                     'areas': WORLD_AREAS,
                     'filter_tags': TAGS[1:],
@@ -105,7 +104,6 @@ class PostBoard(generic.ListView):
                     'posts': posts,
                     'post_comments': post_comments,
                 })
-
         else: 
             #check if teh post form is valid and post the form the database
             if post_form.is_valid():
@@ -118,7 +116,7 @@ class PostBoard(generic.ListView):
                 'board.html', {
                     'post_form': post_form,
                     'comment_form': comment_form,
-                    'edit_post_form': edit_post_form,
+                    # 'edit_post_form': edit_post_form,
                     'tags': TAGS,
                     'areas': WORLD_AREAS,
                     'filter_tags': TAGS[1:],
@@ -324,7 +322,6 @@ class ProfileDetail(generic.DetailView):
                     })
 
         return HttpResponseRedirect(reverse_lazy('profile_detail', kwargs={'username': request.user.username}))
-
 
 
 class ContactUs(FormView):

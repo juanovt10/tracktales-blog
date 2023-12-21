@@ -25,17 +25,6 @@
                 {% endfor %}
             </ul>
         </div>
-        {% elif edit_post_form.errors %}
-        <div class="alert alert-danger col post-board-alerts" role="alert">
-            <strong>Your Post was not edited!</strong>
-            <ul>
-                {% for field, error_list in edit_post_form.errors.items %}
-                {% for error in error_list %}
-                <li>{{ error }}</li>
-                {% endfor %}
-                {% endfor %}
-            </ul>
-        </div>
         {% endif %}
     </div>
 
@@ -210,9 +199,7 @@
                 <div class="card-footer">
                     {% if user.is_authenticated %}
                     <form method="POST" class="mb-0 me-1">
-
                         {% csrf_token %} 
-
                         <input type="hidden" name="blogpost_id_like" value="{{post.slug}}">
                         <button type="submit" class="btn btn-outline-danger">
                             {% if post|user_liked_post:request.user %}
@@ -277,7 +264,7 @@
                             <strong>"{{ post.title }}"</strong>
                             <p class="mt-3">Note that all reactions including comments will also be deleted.</p>
                         </div>
-                        <form method="post" action="{% url 'delete_post' %}" class="modal-footer delete-post-form">
+                        <form method="post" action="{% url 'delete_post' %}" class="modal-footer">
                             {% csrf_token %}
                             <input type="hidden" name="delete_post_id" id="delete-post-id-input-{{ post.slug }}" value="{{post.slug}}">
                             <button type="button" class="btn btn-danger delete-post">Yes, delete my post</button>
@@ -294,27 +281,30 @@
                             <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Post: {{ post.title }}</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="post" class="edit-post-form">
+                        <form method="post">
                             <div class="modal-body">
                                 {% csrf_token %}
+                                <div class="d-none edit-post-title-input">
+                                    {{ post_form.title }}
+                                </div>
                                 <div class="mb-3 edit-post-country-input">
-                                    {{ edit_post_form.country }}
+                                    {{ post_form.country }}
                                 </div>
                                 <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between">
                                     <div class="btn-group col-12 col-sm mb-3 mb-sm-0 edit-post-tags-input">
-                                        {{ edit_post_form.tags }}
+                                        {{ post_form.tags }}
                                     </div>
                                     <div class="d-none d-sm-block col-sm-1"></div>
                                     <div class="btn-group col-12 col-sm edit-post-area-input">
-                                        {{ edit_post_form.world_area }}
+                                        {{ post_form.world_area }}
                                     </div>
                                 </div>
                                 <div class="mb-3 d-flex edit-post-content-input">
-                                    {{ edit_post_form.content }}
+                                    {{ post_form.content }}
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <input type="hidden" name="edit_post_id" id="edit-post-id-input-{{ post.slug }}" value="{{post.slug}}">
-                                    <button type="button" class="btn btn-secondary d-flex edit-post">Edit post</button>                                        
+                                    <button type="submit" class="btn btn-secondary d-flex">Edit post</button>                                        
                                 </div>
                             </div>
                         </form>
