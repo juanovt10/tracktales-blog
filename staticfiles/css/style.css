@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Quicksand&display=swap');
+
+/* General styling */
+body {
+    font-family: "Quicksand", "sans-serif";
+    background-color: #090921;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat", "sans-serif";
+}
+
+
+
+/* -- index styling -- */
+
+.carousel .carousel-inner {
+    height: 100vh;
+}
+
+.carousel-inner img {
+    height: 100vh;
+}
+
+/* -- navbar styling -- */
+
+.menu {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #ED7C4D;
+}
+
+.nav-item ul, .menu {
+    background-color: #090921;
+}
+
+.menu-btn {
+    background-color: #EAEAEA;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link,
+.nav-item a,
+.dropdown-menu .dropdown-item {
+    color: #EAEAEA;
+    transition: all .3s ease;
+}
+
+.navbar-brand:hover,
+.nav-link:hover, 
+.dropdown-menu a:hover {
+    color: #ED7C4D;
+}
+
+.nav-link:focus {
+    color: #ED7C4D;
+}
+
+.dropdown-menu a:hover {
+    background-color: #090921;
+}
+
+.navbar-text a {
+    display: inline-block;
+}
+
+.profile-icon {
+    width: 2.5rem; 
+    height: 2.5rem;
+    border: 2px solid;
+}
+
+/* -- footer styling -- */
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    color: #EAEAEA;
+    background-color: #090921;
+    border-top: 1px solid #ED7C4D;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-media a {
+    text-decoration: none;
+    font-size: 150%;
+    font-weight: 500;
+    padding: 0.75rem 0.75rem;
+    margin: 0 0.75rem;
+    color: inherit;
+    transition: all .3s ease;
+}
+
+.social-media a:hover {
+    background-color: #ED7C4D;
+    color: #090921;
+}
+
+/* about us styling */
+
+.about-us-container {
+    min-height: 100vh;
+    color: #EAEAEA;
+    padding: 80px 0;
+}
+
+/* contactus styling */
+
+.contact-us-container {
+    min-height: 100vh;
+    padding: 80px 10px;
+}
+
+.card {
+    background-color: #EAEAEA;
+    color: #090921;
+}
+
+/* -- board page styling -- */
+
+.community-container {
+    margin-top: 4rem;
+}
+
+.filter-card {
+    width: 100%;
+    position: sticky;
+    overflow-y: auto;
+    top: 80px;
+}
+
+.accordion-item,
+.accordion-button,
+.accordion-button:not(.collapsed) {
+    color:#090921;
+    background-color: #EAEAEA;
+    border: 1px solid #090921;
+}
+
+.accordion-item:active,
+.accordion-button:active {
+    --bs-accordion-btn-focus-box-shadow: 234, 234, 234;
+    --bs-accordion-btn-focus-border-color: #090921;
+}
+
+.accordion-item:focus,
+.accordion-button:focus {
+    --bs-accordion-btn-focus-box-shadow: 234, 234, 234;
+    --bs-accordion-btn-focus-border-color: #090921;
+}
+
+textarea {
+    resize: none;
+}
+
+.profile-link {
+    text-decoration: none;
+    color: #090921;
+    transition: all .3s ease;
+}
+
+.profile-link:hover {
+    color: #ED7C4D;
+}
+
+.badge {
+    background-color: #090921;
+}
+
+hr {
+    color: #ED7C4D;
+    border-style: solid;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.btn-group>.btn-group:not(:last-child)>.btn,
+.btn-group>.btn.dropdown-toggle-split:first-child,
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn {
+    border: none;
+}
+
+.btn-warning {
+    background-color: #d59129;
+    border: none;
+}
+
+.btn-primary, 
+.btn-secondary,
+.btn-success,
+.btn-info {
+    border: none;
+    transition: all .3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ED7C4D;
+    transform: translate(-2px, -5px);
+} 
+
+.btn-primary:active {
+    --bs-btn-active-bg: #ae5c37;
+}
+
+.btn-secondary:hover {
+    background-color: #801F1F;
+    transform: translate(-2px, -5px);
+}
+
+.btn-secondary:active {
+    --bs-btn-active-bg: #5a1616;
+}
+ 
+.btn-success:hover {
+    background-color: #A59D64;
+    transform: translate(-2px, -5px);
+}
+
+.btn-success:active {
+    --bs-btn-active-bg: #7d7550;
+}
+
+.btn-info:hover,
+.btn-outline-primary:hover {
+    background-color: #090921;
+    color: #EAEAEA;
+}
+
+.btn-info:active {
+    --bs-btn-active-bg: #090921;
+    --bs-btn-active-color: #EAEAEA;
+    --bs-btn-active-shadow: none;
+}
+
+.btn-info:focus {
+    --bs-btn-active-shadow: none;
+    --bs-btn-hover-bg: #090921;
+    --bs-btn-hover-color: #EAEAEA;
+    --bs-btn-focus-shadow-rgb: 41, 41, 65;
+}
+
+.btn-primary {
+    background-color: #ED7C4D;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #801F1F;
+}
+
+.btn-success {
+    background-color: #A59D64;
+}
+
+.btn-info {
+    background-color: #090921;
+    color: #EAEAEA;
+}
+
+.btn-outline-primary {
+    color: #090921;
+}
+
+.home-slide-2-text {
+    color: #090921;
+}
+
+.home-slide-2-text p,
+.home-slide-2-text h2 {
+    font-weight: 900;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    width: 70%;
+}
+
+
+.btn-outline-secondary {
+    transition: all .3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #090921;
+}
+
+.post-options {
+    background-color: #090921;
+}
+
+.post-options button:hover {
+    background-color: #090921;
+    color: #ED7C4D;
+}
+
+/* like and commetn buttons styling */
+
+.user-comment-area {
+    display: none;
+}
+
+.comment-submit {
+    width: 50%;
+}
+
+
+/* modals stylying */
+
+.modal-content {
+    background-color: #EAEAEA;
+    color: #090921;
+}
+
+
+
+/* Create profile styling */
+.create-profile-card {
+    width: 80%;
+}
+
+.no-posts {
+    color: #ED7C4D;
+}
+
+/* authentication pages styling */
+
+.auth-card-container {
+    min-height: 100vh;
+    padding: 80px 10px;
+}
+
+.auth-card-signup {
+    width: 80%;
+}
+
+/* remove the arrows of numeric inputs */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* --bs-btn-focus-shadow-rgb: 41, 41, 65; */
+.form-control:focus {
+    color:#090921;
+    border-color: #090921;
+    box-shadow: 0 0 0 0.2rem rgba(41, 41, 65, .50);
+}
