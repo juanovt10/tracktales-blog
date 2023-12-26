@@ -108,20 +108,14 @@ h1, h2, h3, h4, h5, h6 {
 .about-us-container {
     min-height: 100vh;
     color: #EAEAEA;
+    padding: 80px 0;
 }
 
 /* contactus styling */
 
 .contact-us-container {
     min-height: 100vh;
-}
-
-@media (max-width: 576px) {
-    .about-us-container,
-    .contact-us-container,
-    .auth-card-container {
-        padding: 80px 0;
-    }
+    padding: 80px 10px;
 }
 
 .card {
@@ -356,6 +350,7 @@ hr {
 
 .auth-card-container {
     min-height: 100vh;
+    padding: 80px 10px;
 }
 
 .auth-card-signup {

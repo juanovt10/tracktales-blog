@@ -13,6 +13,7 @@ def user_liked_post(post, user):
 def key(d, key_name):
     return d[key_name]
 
+#filter to display custom date
 @register.filter(name='custom_timesince')
 def custom_timesince(value):
     timesince_str = timesince(value)

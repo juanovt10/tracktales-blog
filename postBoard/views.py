@@ -172,15 +172,11 @@ class CreateProfile(generic.ListView):
         return context
 
     def post(self, request, username, *args, **kwargs):
-        print("Entering post method")
         profile_instance = request.user.userprofile
         profile_form = ProfileForm(data=request.POST, 
             instance=profile_instance)
 
-        print(profile_instance)
-
         if profile_form.is_valid():
-            print("Form is valid")
             profile_form.save()
             messages.success(request, 
                 f'{username}, you have successfully created your profile!')

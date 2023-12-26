@@ -70,6 +70,26 @@ The body of the elements on the website utilized the font Quicksand, while the h
 
 The three hero images were obtained from a free stock photo platform to capture attention regarding the main purpose of the web application: travel.
 
+### Agile methodology
+
+Agile project management principles guided the development of this project, leveraging GitHub Projects as the primary software for tracking user stories. Utilizing the Kanban board task view, I crafted a comprehensive user story template that served as the foundation for all project-related narratives. Beyond capturing the core user stories, GitHub Projects played a pivotal role in efficiently monitoring and addressing bugs identified throughout the project's lifecycle. 
+
+### Wireframes
+
+- The separate documetns for the wireframes can be found here:
+    - [Desktop Wireframes](/docs/WIREFRAMES.md)
+    - [Mobile Wireframes](/docs/WIREFRAMES_mobile.md)
+
+### Database schema
+
+The database schema is composed by four models: user profile, post, comment and contact information. 
+
+The user profile is automatically filled with the user's name when a new user signs up for the website; that is why the username is a One-to-One Field. Due to the feature that redirects users to the "create profile" page, they will finish filling out the user profile model. The Post model contains the author as a foreign key, representing the username of the user who created the posts, followed by other Character and Text fields. On the other hand, the likes field is a Many-to-Many Field, reflecting the fact that many users can like a single post.
+
+The comment model also includes the author as a foreign key, along with the remaining Text and Character fields. Finally, the contact info model serves as a basic information repository where the app collects names, email addresses, phone numbers, and message information. This model is designed for users to communicate with the administrators of the page; therefore, it does not have any relationships with the other models.
+
+![database_schema](static/images/readme_images/database_diagram.png)
+
 ## Features
 
 ### Existing Features
@@ -101,17 +121,21 @@ The three hero images were obtained from a free stock photo platform to capture 
 #### Index
 
 - Three carousel images are displayed on the home page. 
+- Due to the size of the different screens, landscape images were used for large screens while portrait images were used for small screens 
 - The initial page contains catchy titles and functional links to the posts board and About Us pages.
 
 ![home_slide_1](static/images/readme_images/home_slide1.png)
+![home_slide_1_mobile](/static/images/readme_images/home_slide1_mobile.png)
 
 - The second page encourages users to create an account and provides links to sign-up or login.
 
-add screenshot
+![home_slide_2](/static/images/readme_images/home_slide2.png)
+![home_slide_2_mobile](/static/images/readme_images/home_slide2_mobile.png)
 
 - The third page provides a brief background about the application and offers a link to "Learn More," redirecting to the About Us page. Additionally, there is a "Contact Us" link that directs users to the contact form. 
 
-add screenshot
+![home_slide_3](/static/images/readme_images/home_slide3.png)
+![home_slide_3_mobile](/static/images/readme_images/home_slide3_mobile.png)
 
 #### About us 
 
@@ -590,6 +614,40 @@ After the application is created in Heroku. Got to your dashboard and you will s
 
 ### Design
 
+The site type was a mixed between a social media and blog web application. The following sites were used for instpiration: 
+
+- [LinkedIn](https://www.linkedin.com/)
+- [Instagram](https://www.instagram.com)
+- [Reddit](https://www.reddit.com/) 
+
+Additionally, the framework used for the front-end was [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction/).
+
 ### Code
 
+In Django, the typical workflow for creating a view involves writing the view code first and subsequently creating the template to render the view. However, I took a slightly different approach by starting with the template to visualize the application before refining the code. During this process, I faced an issue that wasn't addressed in the [Code Institute](https://codeinstitute.net/global/) Django walkthrough projects, particularly regarding the customization of form styling.
+
+Initially, I applied Bootstrap classes to style the forms, but I encountered challenges. Thanks to the insights gained from [CodingEntrepreneurs Tutorial](/https://www.youtube.com/watch?v=quJzUzCs6Q0&t=623s), I was able to achieve the desired styling by implementing html attributes directly in the [forms.py](/postBoard/forms.py) file.
+
+
+Given the project's data models, a crucial requirement was to generate a new user profile data instance upon a user's signup, followed by redirecting them to a "create profile" page for further profile completion
+
+To address the first challenge, I devised two methods within [models.py](/postBoard/models.py) adorned with a receiver decorator. The initial method creates the user profile, while the subsequent method utilizes the newly generated username to populate the user profile created in the first method. This solution was inspired by insights gleaned from a relevant [Stack Overflow discussion](https://stackoverflow.com/questions/65876529/how-to-create-instance-of-model-during-user-registration-process-django). 
+
+For the second issue, my inclination was to avoid altering predetermined properties in django-allauth. However, consulting another insightful [Stack Overflow discussion](https://stackoverflow.com/questions/20138049/redirect-user-to-another-url-with-django-allauth-log-in-signal?newreg=b829fa7359404ec7b3765563ae9f145b) guided me towards a solution. I introduced a new redirect method in [views.py](/postBoard/views.py) to seamlessly direct the user to the "create profile" page immediately after completing the signup process.
+
+Another challenging feature I grappled with was prepopulating fields when users desired to edit a post or their profile. Initially, I attempted to utilize the get methods to extract data from the backend and populate the fields, but this approach proved ineffective. Seeking assistance, I came across a helpful [Stack Overflow discussion](https://stackoverflow.com/questions/12439180/prefill-form-with-jquery) that guided me to leverage JavaScript, specifically jQuery. This solution enabled me to retrieve the current existing data and seamlessly prefill the forms with this information.
+
+During troubleshooting, I encountered challenges in understanding how to effectively debug activities occurring in the backend. To address this, I incorporated the [Django messages feature](https://docs.djangoproject.com/en/3.2/ref/contrib/messages/#using-messages-in-views-and-templates). This implementation allowed me to display errors occurring in the templates, providing valuable insights during the debugging process.
+
+In the final stages, while working on the presentation of dynamic content like post likes, post comments, and dates, I encountered limitations with certain syntax within the template. To overcome this hurdle, I discovered [Django custom template tags](https://docs.djangoproject.com/en/5.0/howto/custom-template-tags/). This feature proved invaluable as it enabled me to present likes, showcase comments alongside their respective posts, and exhibit dates for both posts and comments in a more user-friendly manner
+
 ### Media
+
+All the hero images were taken from [Pexels](https://www.pexels.com/), a free image stick image provider. Then they were optimized to reduced their size. 
+
+- [Hero Image Slide 1 (desktop)](https://www.pexels.com/photo/lake-and-mountain-417074/)
+- [Hero Image Slide 1 (desktop)](https://www.pexels.com/photo/city-of-istanbul-turkey-with-view-of-sultan-ahmed-mosque-during-night-time-14356751/)
+- [Hero Image Slide 3 (desktop)](https://www.pexels.com/photo/man-and-woman-near-waterfall-450441/)
+- [Hero Image Slide 1 (mobile)](https://www.pexels.com/photo/people-on-road-2104044/)
+- [Hero Image Slide 2 (mobile)](https://www.pexels.com/photo/photo-of-person-standing-on-a-famous-temple-2659475/)
+- [Hero Image Slide 3 (mobile)](https://www.pexels.com/photo/people-sitting-in-front-of-bonfire-in-desert-during-nighttime-1703314/)
