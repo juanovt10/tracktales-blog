@@ -333,9 +333,7 @@ The comment model also includes the author as a foreign key, along with the rema
 
 ### Methodology 
 
-Insert methodology here**
-
-### User Stories 
+Testing was an integral part of the project development, encompassing the use of Django debug pages and strategically placed print statements to verify the functionality of the code at various stages. Furthermore, a comprehensive testing approach was adopted, outlined below. This involved meticulous manual testing to ensure alignment with all user stories and acceptance criteria 
 
 #### Index page
 
@@ -517,7 +515,6 @@ INPUT
 - [Gitpod](https://gitpod.io/workspaces)
 - [Heroku](https://id.heroku.com/login)
 - [Realtime Colors](https://www.realtimecolors.com/?colors=e6eef8-03060a-92b3de-262376-694cc9&fonts=Poppins-Poppins)
-- [Cloudinary](https://cloudinary.com/ip/gr-sea-gg-brand-home-base?utm_source=google&utm_medium=search&utm_campaign=goog_selfserve_brand_wk22_replicate_core_branded_keyword&utm_term=1329&campaignid=17601148700&adgroupid=141182782954&keyword=cloudinary&device=c&matchtype=e&adposition=&gad_source=1&gclid=Cj0KCQiAm4WsBhCiARIsAEJIEzUYoKHM06ldJtPMxUmtjFK3HxOkfQI3_8G9vOXPuRsPWuCVCSFEPzsaAjiJEALw_wcB)
 - [Django](https://www.djangoproject.com/)
 - [Django databases](https://docs.djangoproject.com/en/5.0/ref/databases/)
 - [Django cloudinary storage](https://djangopackages.org/packages/p/django-cloudinary-storage/)
