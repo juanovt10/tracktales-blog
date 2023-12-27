@@ -16,7 +16,7 @@
 
     <body class="d-flex justify-content-center align-items-center m-0">
         <div class="card create-profile-card mt-4 mb-4">
-            <h5 class="card-header">Create Profile - {{ request.user.username }} </h5>
+            <h5 class="card-header">Create Profile - @{{ request.user.username }} </h5>
             <div class="card-body">
                 <form method="post" action="{% url 'create_profile' username=request.user.username %}">
                     {% csrf_token %}
@@ -63,8 +63,6 @@
                 </form>
             </div>
         </div>
-
-
         <script src="{% static 'js/script.js'%}"> </script>
         <script src="https://kit.fontawesome.com/3156a2e938.js" crossorigin="anonymous"></script>
     </body>

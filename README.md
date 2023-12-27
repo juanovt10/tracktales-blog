@@ -276,7 +276,17 @@ The comment model also includes the author as a foreign key, along with the rema
 
 ![create_profile_success](static/images/readme_images/create_profile_success.png)
 
-#### User profile 
+- If the user chooses not to complete their profile creation and navigates elsewhere within the app using the URL bar, their profile will not be accessible to either themselves or other users.
+
+    - If the user attempts to access their profile without having completed it, a card will display explanatory information and include a link directing them to the profile creation form.
+
+    ![profile_not_created_same_user](/static/images/readme_images/profile_not_created_user.png)
+
+    - In the event that another user attempts to access the profile, a card will appear, providing an explanation of the situation and offering links to either the community board or the user profile.
+
+    ![profile_not_created_other_user](/static/images/readme_images/profile_not_created_other_user.png)
+
+#### User profile
 
 - The main difference between the user profile and the posts board is that there is no possibility of filtering posts; all displayed posts belong to the user, and a card with the user's profile information is visible. 
 - When the authenticated user is on their profile, they can create posts and also edit their profile by clicking the 'Edit Profile' button. 
@@ -315,7 +325,7 @@ The comment model also includes the author as a foreign key, along with the rema
 - Asynchronous behaviour
     - When a post is liked or commented on, the page is automatically reloaded. A future feature is planned to avoid reloading the page when these actions are taken by the user.
 
-- Post information datamodel 
+- Post information datamodel
     - The idea of world areas and holiday types is good for filtering and differentiating posts, but additional details such as country and author could enhance this feature
     - The country should be implemented as another dropdown list with the countries selected based on the chosen world area.
 
@@ -324,10 +334,6 @@ The comment model also includes the author as a foreign key, along with the rema
     - Implement notifications to inform users when their posts or comments have been approved.
     - Implement notifications for when another user has commented or reacted to a post.
     - Implement notifications for when a comment is added to a post a user has commented on.
-
-- Create profile limitation
-    - Currently, the newly signed-up user is requested to fill out a form to create their profile. Although the create profile form has the correct validation and the navbar is not present, the user can simply rewrite the URL link and gain access to all pages.
-    - Ideally, the user should be restricted from taking any actions until they have correctly filled out their profile.
 
 ## Testing
 
