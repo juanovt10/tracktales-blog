@@ -85,7 +85,7 @@ class UserProfile(models.Model):
     countries_traveled = models.IntegerField(default=1)
     sign_on = models.BooleanField(default=False)
     created_on = models.DateTimeField(default=timezone.now)
-    approved = models.BooleanField(default=False)
+    profile_completed = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.username}'s Profile"

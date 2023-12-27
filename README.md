@@ -1,8 +1,8 @@
 # Track Tales Community
 
-#### /input responsive screenshot/
-
 Explore Track Tales, a thoughtfully designed platform for seamless storytelling. Create posts with titles, rich content, and holiday tags. Personalize your profile, adding a unique touch, while geographical tags provide a global context. Interact seamlessly with likes and comments, fostering a sense of community. Join us in the beautifully crafted space of Track Tales and effortlessly share your stories.
+
+![responsive_test](/static/images/readme_images/main.png)
 
 The TrackTales community is live, to access it [click here.](https://track-tales-community-d01b2f85b4e9.herokuapp.com/)
 ## Table of contents

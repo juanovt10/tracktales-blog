@@ -4,7 +4,7 @@
 
 {% load custom_filters %}
 
-
+{% if request.user.is_authenticated and user_profile.profile_completed %}
 <div class="container community-container">
     <div class="row px-3">
         {% if messages %}
@@ -92,7 +92,7 @@
                     <div class="card mt-3">
                         <h5 class="card-header">This is @{{ user_profile.username }} profile.</h5>
                         <div class="card-body">
-                            <h6 class="card-title text-left">To create a post please go to the <a href="#" class="btn btn-primary">main board</a> or to <a href="#" class="btn btn-secondary">your profile</a></h6>  
+                            <h6 class="card-title text-left">To create a post please go to the <a href="{% url 'post_board' %}" class="btn btn-primary">main board</a> or to <a href="{% url 'profile_detail' username=request.user %}" class="btn btn-secondary">your profile</a></h6>  
                         </div>
                     </div>
                 {% endif %}
@@ -363,5 +363,26 @@
         </div>
     </div>
 </div>
+{% else %}
+<div class="auth-card-container d-flex justify-content-center align-items-center">
+    <div class="card auth-card mx-1 mx-sm-5">
+        <div class="card-body">
+            <h5 class="card-title">@{{ user_profile.username }}'s profile has not been created yet!</h5>
+            {% if request.user == user_profile.username %}
+            <p class="text-body-secondary">Please complete creating your profile to be able to access it.</h6>
+            <div class="d-flex justify-content-end mt-2">
+                <a class="btn btn-primary" href="{% url 'create_profile' username=request.user %}">Create Profile!</a>
+            </div>
+            {% else %}
+            <p class="text-body-secondary">Until @{{ user_profile.username }} does not create their profile you wont be able to see their information nor their posts. For now you can check out other users in the main board.</p>
+            <div class="d-flex justify-content-between mt-2">
+                <a class="btn btn-secondary" href="{% url 'post_board' %}">Main board</a>
+                <a class="btn btn-primary" href="{% url 'profile_detail' username=request.user %}">Your profile</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}

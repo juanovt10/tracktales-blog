@@ -27,10 +27,9 @@ class CommentAdmin(admin.ModelAdmin):
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
 
-    list_display = ('username', 'display_name', 'created_on', 'approved')
+    list_display = ('username', 'display_name', 'created_on', 'profile_completed')
     list_filter = ('username', 'created_on')
     search_fields = ('username', 'display_name')
-    actions = ['approve_profile']
 
 
 @admin.register(ContactInfo)

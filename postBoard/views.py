@@ -177,6 +177,7 @@ class CreateProfile(generic.ListView):
             instance=profile_instance)
 
         if profile_form.is_valid():
+            profile_instance.profile_completed = True
             profile_form.save()
             messages.success(request, 
                 f'{username}, you have successfully created your profile!')
