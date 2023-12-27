@@ -10,15 +10,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.contrib import messages
 
-
+# method to display index page
 def index(request):
     return render(request, 'index.html')
 
-
+# method to display about us page
 def about_us(request):
     return render(request, 'aboutus.html')
 
-
+# class for main post board page
 class PostBoard(generic.ListView):
     model = Post
     queryset = Post.objects.filter(approved=True).order_by('-created_on')
@@ -96,7 +96,6 @@ class PostBoard(generic.ListView):
 
         # method to edit posts
         elif 'edit_post_id' in request.POST:
-            print("Entering edit post form")
             post_slug = request.POST['edit_post_id']
             post = get_object_or_404(Post, slug=post_slug)
             post_form = PostForm(instance=post, data=request.POST) 
@@ -108,7 +107,6 @@ class PostBoard(generic.ListView):
                     'Your post has been edited and is awaiting for approval. '
                     'This will take a couple of minutes.')
             else:
-                print("Edit Form Errors:", post_form.errors)
                 return render(request, 'board.html', invalid_forms_context)
         else: 
             # check if teh post form is valid and post the form the database
@@ -144,25 +142,23 @@ class PostBoard(generic.ListView):
 
         return queryset
 
-
+# class to delete posts
 class DeletePostView(View):
     def post(self, request, *args, **kwargs):
-        print("Delete is being triggered")
         post_slug = request.POST.get('delete_post_id')
-        print(post_slug)
         post = get_object_or_404(Post, slug=post_slug)
-        print(post)
         post.delete()
         messages.success(request, 
             f'Your post: "{post.title}" has been successfully deleted')
 
         return redirect('post_board')
 
-
+# class to create profiles
 class CreateProfile(generic.ListView):
     model = UserProfile
     template_name = 'createprofile.html'
 
+    # get method to provide all context data from backend
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = TAGS
@@ -171,6 +167,7 @@ class CreateProfile(generic.ListView):
 
         return context
 
+    # post method to fill the create profile form 
     def post(self, request, username, *args, **kwargs):
         profile_instance = request.user.userprofile
         profile_form = ProfileForm(data=request.POST, 
@@ -192,7 +189,7 @@ class CreateProfile(generic.ListView):
                     'profile_form': profile_form
                 })
 
-
+# class for the user profile page
 class ProfileDetail(generic.DetailView):
     model = UserProfile
     template_name = 'userprofile.html'
@@ -200,10 +197,12 @@ class ProfileDetail(generic.DetailView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
+    # get method to get the user's profile
     def get_object(self, queryset=None):
         username = self.kwargs.get('username')
         return get_object_or_404(User, username=username).userprofile
 
+    # get method to get all the context data from the backend
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = TAGS
@@ -227,6 +226,8 @@ class ProfileDetail(generic.DetailView):
 
         return context
 
+    # post method to post the edit profile form, posts, 
+    # comments and likes
     def post(self, request, username, *args, **kwargs):
         post_form = PostForm(data=request.POST)
         comment_form = CommentForm(data=request.POST)
@@ -326,22 +327,25 @@ class ProfileDetail(generic.DetailView):
         return HttpResponseRedirect(reverse_lazy('profile_detail',
             kwargs={'username': request.user.username}))
 
-
+# class to dislay contact page
 class ContactUs(FormView):
     template_name = 'contactus.html'
     form_class = ContactUsForm
     success_url = reverse_lazy('contact_success')
 
+    # get method to get the context data from the backend
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['contact_form'] = ContactUsForm()
 
         return context
 
+    # post method to save the submition
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
 
+    # method to handle the error
     def form_invalid(self, form):
         error_message = "There was an error with your submission. "
         "Please check the form and try again."
@@ -349,11 +353,11 @@ class ContactUs(FormView):
         return self.render_to_response(self.get_context_data(form=form,
             error_message=error_message))
 
-
+# method to display the success page
 def contact_success(request):
     return render(request, 'contactsuccess.html')
         
-
+# method to redirect from sign up to create profile
 def account_signup_redirect(request):
     username = request.user.username
     redirect_url = f"/create_profile/{username}"

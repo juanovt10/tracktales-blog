@@ -4,7 +4,9 @@
 
 {% load custom_filters %}
 
-{% if request.user.is_authenticated and user_profile.profile_completed %}
+{% if user_profile.profile_completed %}
+<!-- Only display if the profile to be accessed is completed -->
+<!-- error messages display area -->
 <div class="container community-container">
     <div class="row px-3">
         {% if messages %}
@@ -27,6 +29,7 @@
         {% endif %}
     </div>
     <div class="row">
+        <!-- user profile -->
         <div class="col-md-4">
             <div class="card filter-card mt-3">
                 <div class="card-body">
@@ -55,6 +58,7 @@
         <div class="col-md-8 mb-4 pb-5">
             {% if request.user.is_authenticated %}
                 {% if request.user.id == user_profile.username.id %}
+                <!-- area to create posts if the user is in his profile -->
                     <div class="card mt-3">
                         <h5 class="card-header">Create post - @{{ request.user.username }}</h5>
                         <div class="card-body">
@@ -364,20 +368,30 @@
     </div>
 </div>
 {% else %}
+<!-- to display this "error" card when the profile has not been created -->
 <div class="auth-card-container d-flex justify-content-center align-items-center">
     <div class="card auth-card mx-1 mx-sm-5">
         <div class="card-body">
             <h5 class="card-title">@{{ user_profile.username }}'s profile has not been created yet!</h5>
-            {% if request.user == user_profile.username %}
+            {% if request.user.is_authenticated and request.user == user_profile.username %}
+            <!-- if the same user is trying to access, redirection to create profile -->
             <p class="text-body-secondary">Please complete creating your profile to be able to access it.</h6>
             <div class="d-flex justify-content-end mt-2">
                 <a class="btn btn-primary" href="{% url 'create_profile' username=request.user %}">Create Profile!</a>
             </div>
-            {% else %}
+            {% elif request.user.is_authenticated %}
+            <!-- if another user tries to access a non-creted profile, redireciton to other pages -->
             <p class="text-body-secondary">Until @{{ user_profile.username }} does not create their profile you wont be able to see their information nor their posts. For now you can check out other users in the main board.</p>
             <div class="d-flex justify-content-between mt-2">
                 <a class="btn btn-secondary" href="{% url 'post_board' %}">Main board</a>
                 <a class="btn btn-primary" href="{% url 'profile_detail' username=request.user %}">Your profile</a>
+            </div>
+            {% else %}
+            <!-- if another user tries to access a non-creted profile, redireciton to other pages -->
+            <p class="text-body-secondary">Until @{{ user_profile.username }} does not create their profile you wont be able to see their information nor their posts. For now you can check out other users in the main board.</p>
+            <div class="d-flex justify-content-between mt-2">
+                <a class="btn btn-secondary" href="{% url 'post_board' %}">Main board</a>
+                <a class="btn btn-primary" href="{% url 'account_signup' %}">Sign Up</a>
             </div>
             {% endif %}
         </div>

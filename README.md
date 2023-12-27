@@ -68,7 +68,7 @@ The body of the elements on the website utilized the font Quicksand, while the h
 
 ### Imagery
 
-The three hero images were obtained from a free stock photo platform to capture attention regarding the main purpose of the web application: travel.
+The six hero images were obtained from a free stock photo platform to capture attention regarding the main purpose of the web application: travel.
 
 ### Agile methodology
 
@@ -84,7 +84,9 @@ Agile project management principles guided the development of this project, leve
 
 The database schema is composed by four models: user profile, post, comment and contact information. 
 
-The user profile is automatically filled with the user's name when a new user signs up for the website; that is why the username is a One-to-One Field. Due to the feature that redirects users to the "create profile" page, they will finish filling out the user profile model. The Post model contains the author as a foreign key, representing the username of the user who created the posts, followed by other Character and Text fields. On the other hand, the likes field is a Many-to-Many Field, reflecting the fact that many users can like a single post.
+When a new user signs up on the website, a user profile instance is automatically generated, utilizing a One-to-One Field with the username. Subsequently, the user is seamlessly redirected to the 'create profile' form to finalize the profile details. Upon completion, the 'complete profile' boolean is set to true, triggering a redirection to the user's completed profile.
+
+The Post model contains the author as a foreign key, representing the username of the user who created the posts, followed by other Character and Text fields. On the other hand, the likes field is a Many-to-Many Field, reflecting the fact that many users can like a single post.
 
 The comment model also includes the author as a foreign key, along with the remaining Text and Character fields. Finally, the contact info model serves as a basic information repository where the app collects names, email addresses, phone numbers, and message information. This model is designed for users to communicate with the administrators of the page; therefore, it does not have any relationships with the other models.
 
@@ -114,14 +116,14 @@ The comment model also includes the author as a foreign key, along with the rema
 
 #### Footer
 
-- Users have functional links to X, Instagram, and YouTube. These links will open in a new tab as they are outside the web application. 
+- Users have functional links to X (Twitter), Instagram, and YouTube. These links will open in a new tab as they are outside the web application. 
 
 ![footer](static/images/readme_images/footer.png)
 
 #### Index
 
 - Three carousel images are displayed on the home page. 
-- Due to the size of the different screens, landscape images were used for large screens while portrait images were used for small screens 
+- Due to the size of the different screens, landscape images were used for large screens while portrait images were used for small screens.
 - The initial page contains catchy titles and functional links to the posts board and About Us pages.
 
 ![home_slide_1](static/images/readme_images/home_slide1.png)
@@ -286,6 +288,10 @@ The comment model also includes the author as a foreign key, along with the rema
 
     ![profile_not_created_other_user](/static/images/readme_images/profile_not_created_other_user.png)
 
+    - If an unauthenticated user attempts to access a profile, a card will be displayed, offering a similar explanation. However, instead of providing an option to visit the profile, it will feature a button prompting the user to sign up.
+
+    ![profile_not_created_other_user](/static/images/readme_images/profile_not_created_other_user_not_auth.png)
+
 #### User profile
 
 - The main difference between the user profile and the posts board is that there is no possibility of filtering posts; all displayed posts belong to the user, and a card with the user's profile information is visible. 
@@ -345,42 +351,42 @@ Testing was an integral part of the project development, encompassing the use of
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| Navigation bar functionality (user not authenticated) | Test that all links work | User is directed respectively to the home, about us, board, contact or account registration links | PASS |
-| Navigation bar functionality (user authenticated) | Test that all links work | User is directed respectively to the navbar links and has the correct account links (profile and logout) | PASS |
-| Footer links | Test that all links work and open a new tab when clicked | User is directed respectively to all social media links with  | PASS |
-| Carrousel links | Test that all links work and redirect the user to the board, sing | User is directed respectively to all social media links with  | PASS |
+| Navigation bar functionality (user not authenticated) | Click all available links | User is directed respectively to the home, about us, board, contact or account registration links | PASS |
+| Navigation bar functionality (user authenticated) | Click all available links | User is directed respectively to the navbar links and has the correct account links (profile and logout) | PASS |
+| Footer links | Click all available links | User is directed respectively to all social media links with  | PASS |
+| Carrousel links | Click all available links | User is directed respectively to all social media links with  | PASS |
 
 #### About us page
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| "Start Exploring" and "Join us" buttons | Test that the links redirects to the post board | User is directed succesfully to the post board page and to the signup page when not authenticated | PASS |
+| "Start Exploring" and "Join us" buttons | Click all available links as authenticated and unauthenticated user | User is directed succesfully to the post board page and to the signup page when not authenticated. | PASS |
 
 #### Board
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
 | Filter post functionality | Test multiple filters from a single category and both categories. Clear filters button clear all selected filters.  | Post are successfully filter depending the applied filters. The clear filter button clears all selected filters. | PASS |
-| Sign-in button display and functionality (user not authenticated) | The first card displayed above the displays a button to sign up, and the button redirects to sign-in form.  | Card successfully displays button and the button redirects to sign-in page | PASS |
-| Like and comment buttons (user not authenticated) | When a not-authenticated user tries to like or comment on a post, a message is displayed stating that they need to login to performed any of those actions. The message contains an login link. | The buttons successfully toggle the login request message and the login link redirects to the login page. | PASS |
-| Create post form (user authenticated) | The create post form is displayed with the username username at displayed at the top of the form. | When user is authenticated, the create post form is successfully displayed with the correct sign-in user at the top | PASS |
+| Sign-in button display and functionality (user not authenticated) | Access as an unauthenticated user and try to login or signup with the card links.  | Card successfully displays button and the button redirects to sign-in page | PASS |
+| Like and comment buttons (user not authenticated) | As an unauthenticated user try to like or comment a post. | The buttons successfully toggle the login request message and the login link redirects to the login page. | PASS |
+| Create post form (user authenticated) | Access the main board as an authenticated user. | When user is authenticated, the create post form is successfully displayed with the correct sign-in user at the top | PASS |
 | Create post form - Form validation | Submit an empty form | The browser promts validation that all fields need to be filled. | PASS |
 | Create post form - Form validation | Submit an form with an existing title. | An error message is displayed, stating that there is already a post with that title. | PASS |
 | Create post form - Form validation | Submit an incomplete form. | The browser promts validation that all fields need to be filled. | PASS |
 | Create post form - Form validation | Submit a complete post. | The post is successfully submited and a success message is displayed, stating that the post is awaiting review. | PASS |
-| Post buttons - profile button | click on the post author name to be redirected to the author's profile. | The button successfully redirects to the correct user profile page. | PASS |
-| Post buttons - Like button | When the post is not liked by the authenticated user, the heart icon should be no solid, and when it is, it should be solid. When the post is liked or unliked, the counter should add up or substract down the number of likes and change the fill of the icon. | the button successfully adds or substracts the number of likes and the heart icon changes depending on the like status for that user. | PASS |
-| Post buttons - Comment button | The comment button toggles a comment field area where the user can comment in the post. | The button successfuly toggles the comment area and the submit comment button. | PASS |
-| Post buttons - Options dropdown button | When the authenticated user is the author of any of the posts, an option dropdown button should be displayed in the top right corner of the card. The dropdown should display two options: edit post and delete post. | The button is successfully displayed for posts where the authenticated user is the author but is not displayed for posts where the authenticated user is not the autor. | PASS |
+| Post buttons - profile button | Click on the post author name to be redirected to the author's profile. | The button successfully redirects to the correct user profile page. | PASS |
+| Post buttons - Like button | Try to like and unlike posts. | The button successfully adds or substracts the number of likes and the heart icon changes depending on the like status for that user. | PASS |
+| Post buttons - Comment button | click the comment button in each post. | The button successfuly toggles the comment area and the submit comment button. | PASS |
+| Post buttons - Options dropdown button (user authenticated is the post author) | As the author check if the options button is displayed. | The button is successfully displayed for posts where the authenticated user is the author but is not displayed for posts where the authenticated user is not the autor. | PASS |
 | Comment form - Form validation | Submit an empty comment. | The browser promts validation that all fields need to be filled. | PASS |
 | Comment form - Form validation | Submit a comment. | The comment is successfully submited an a success message is displayed, stating that the comment is awaiting review. | PASS |
-| Post options - Edit post | When the post options is available, the edit post button displays a edit post modal with the correspondent post title at the top and the form to edit the post. | When the authenticated user is the author, it successfully displays the edit post modal when clicking the edit post option. | PASS |
-| Post options - Delete post | When the post options is available, the delete post button displays a delete post modal with the correspondent post title at the top and the a button to delete the post. | When the authenticated user is the author, it successfully displays the delete post modal when clicking the delete post option. | PASS |
+| Post options - Edit post | As a post author click the edit post button under post options. | When the authenticated user is the author, it successfully displays the edit post modal when clicking the edit post option. | PASS |
+| Post options - Delete post | As a post author click the delete post button under post options. | When the authenticated user is the author, it successfully displays the delete post modal when clicking the delete post option. | PASS |
 | Edit post - Form validation | Submit an empty form. | An error message is displayed, stating that fields are are required. | PASS |
 | Edit post - Form validation | Submit an incomplete form. | An error message is displayed, stating that all fields are are required. | PASS |
 | Edit post - Form validation | Submit an valid form. | A success message is displayed, stating that the post was successfully received and is awating for approval. | PASS |
 | Delete post functionality | Click on delete post. | The post is successfully deleted and a success message is displayed confirming tha the post has been deleted. | PASS |
-| Edit post display | After a post has been edited and approved, (edited) should be displayed in italics. | The (edited) message is successfully displayed below the post content after this is edited an approved. | PASS |
+| Edit post display | Edit a post and wait for admin approval. | The (edited) message is successfully displayed below the post content after this is edited an approved. | PASS |
 
 #### Contact 
 
@@ -411,32 +417,33 @@ Testing was an integral part of the project development, encompassing the use of
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| Create profile page redirection  | When a new user signs up for the website, it should be redirected to the create profile page. | A new user is successfully redirected to the create profile page that displays the create profile form. | PASS |
+| Create profile page redirection  | Create a new user (signup) and get redirected to "create profile" | A new user is successfully redirected to the create profile page that displays the create profile form. | PASS |
 | Create profile - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
 | Create profile - Form validation | Submit an incomplete form. | Browser promts that required fields need to be filled. | PASS |
 | Create profile - Form validation | Submit letters in the countries visited field. | Browswer does not allow letters in this field. | PASS |
 | Create profile - Form validation | Submit a valid form. | User is redirected to their profile and a success message is displayed. | PASS |
-| Create profile - Form validation | No submition and go to user profile manually by chaning the browser link. | User can see their profile with the default values and the success message of created profile is not displayed. | PASS |
 
 #### User profile
 
 | Testing  | Steps | Expected Outcome | Results |  
 | - | - | - | - |
-| Profile display - Authenticated user profile  | When the authenticated user navigates to their profile and should display the edit profile button. | The authenticated user successfully sees their profile information and the edit profile button. | PASS |
-| Profile display - Authenticated user navigating another user's profile  | When the authenticated user navigates to another user profile should be able to see the users profile information without being able to edit their profile. | The authenticated user successfully sees other user profile and their profile information. | PASS |
-| Profile display - Non authenticated user navigates to a user profiles  | When a non-authenticated user navigates to a user's profile they are not able to see the user's profile information besides the username and display name. The profile card should display a a login link. | The non-authenticated user cannot see the user information and the login link successfully redirects to the login page. | PASS |
-| Profile display - Non authenticated user navigates to a user profiles  | When a non-authenticated user navigates to a user's profile they are not able to see the user's profile information besides the username and display name. The profile card should display a a login link. | The non-authenticated user cannot see the user information and the login link successfully redirects to the login page. | PASS |
-| Edit profile button | When the authenticated user is in their profile, the "edit profile" button should open the edit profile modal. | When clicking the edit profile button, the edit profile modal is successfully displayed with the field's prefilled with the exisiting information. | PASS |
+| Profile display - Authenticated user's profile  | Access the own profile. | The authenticated user successfully sees their profile information and the edit profile button. | PASS |
+| Profile display - Authenticated user navigating another user's profile  | Try to access another user profile with an authenticated account. | The authenticated user successfully sees other user profile and their profile information. | PASS |
+| Profile display - Non authenticated user navigates to a user profiles  | Try to access another user profile without an authenticated account. | The non-authenticated user cannot see the user information and the login link successfully redirects to the login page. | PASS |
+| Profile display - profile not created, authenticated user | Create a new user, skip the create profile form and try to access the profile. | The profile is not displayed, a card informs the user that a they need to create their profile and a link to create profile form is provided. | PASS |
+| Profile display - profile not created, other authenticated user | With another user try to access the a non-completed profile. | The profile is not displayed, a card informs the user that a they need to create their profile and a links to the main board and profile is provided. | PASS |
+| Profile display - profile not created, non-authenticated user | As a non-authenticated user try to access the a non-completed profile. | The profile is not displayed, a card informs the user that a they need to create their profile and a links to the main board and signup is provided. | PASS |
+| Edit profile button | Click the edit profile button. | When clicking the edit profile button, the edit profile modal is successfully displayed with the field's prefilled with the exisiting information. | PASS |
 | Edit profile form - Form validation | Submit an empty form. | Browser promts that required fields need to be filled. | PASS |
 | Edit profile form - Form validation | Submit an incomplete form. | Browser promts that required fields need to be filled. | PASS |
 | Edit profile form - Form validation | Submit a valid form. | The profile is successfully updated an a success message is displayed to provide feedback to the user. | PASS |
-| Delete profile | When a user clicks on delete profile, they have a button for delete profile that shoud open a delete profile confirmation modal. | The delete profile modal is successfully displayed. | PASS |
-| Delete profile - Functionality | when the user confirms that they want to delete their profile, they should be logged in and their records deleted from the database. | The delete profile feature successfully logs out the user and deletes the user from the databse. | PASS |
-| Post form display - Authenticated user's profile | When the authenticated user is in their profile they are able to create posts. | The post form is successfully displayed for the authenticated user to create a post from their profile page. | PASS |
-| Post form display - Authenticated user in another user's profile | When the authenticated user is in another user's profile they cannot create posts but the there are links explaing where they can create them. | The post form is not displayed and a card with the board and profile buttons is displayed. Both the board and the user profile links are wired correctly. | PASS |
-| Post form display - Non-authenticated user in a user's profile | When a non-authenticated user is in another user's profile no card is displayed above the exisiting user's posts. | The post form is not displayed. | PASS |
-| Posts display - User with existing posts | All user posts should be displayed when navigating to their profile. | All user posts are successfully displayed. | PASS |
-| Posts display - User with no existing posts | When navigating to a user's profile without posts, a message should be displayued stating that the user's profile do not have any posts. | Message is displayed succeessfuly for when an user do no have any posts. | PASS |
+| Delete profile | Click the delete profile button in the edit profile modal. | The delete profile modal is successfully displayed. | PASS |
+| Delete profile - Functionality | Confirm profile deletetion in delete profile modal. | The delete profile feature successfully logs out the user and deletes the user from the databse. | PASS |
+| Post form display - Authenticated user's profile | Access the own profile. | The post form is successfully displayed for the authenticated user to create a post from their profile page. | PASS |
+| Post form display - Authenticated user in another user's profile | Access another user profile as an authenticated user. | The post form is not displayed and a card with the board and profile buttons is displayed. Both the board and the user profile links are wired correctly. | PASS |
+| Post form display - Non-authenticated user in a user's profile | Access another user profile as an unauthenticated user. | The post form is not displayed. | PASS |
+| Posts display - User with existing posts | Access a user profile that contains posts. | All user posts are successfully displayed. | PASS |
+| Posts display - User with no existing posts | Access a user profile that does not contains posts. | Message is displayed succeessfuly for when an user do no have any posts. | PASS |
 
 ### Testing user stories from UX section 
 
@@ -483,7 +490,7 @@ As the exisitng and new users will have the same user experience for the app bes
 
 ### Validator testing 
 
-- I tested the board.html and userprofile.html files. They both get 39 and 33 errors that are related to djnago curly brackets sytnax. [W3C validator](https://validator.w3.org/#validate_by_uri) with no issues. 
+- I tested the board.html and userprofile.html files. They both get 39 and 33 errors that are related to djnago curly brackets sytnax. [W3C validator](https://validator.w3.org/#validate_by_uri) with no issues.
 
 - style.css file passed through the [Jigsaw Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) with no issues. 
 
@@ -527,6 +534,8 @@ INPUT
 - [Django-allauth](https://docs.allauth.org/en/latest/)
 - [Guinicorn](https://gunicorn.org/)
 - [Psycopg](https://www.psycopg.org/docs/)
+- [Balsamiq](https://balsamiq.com/) - For wireframes 
+- [Lucidchart](https://lucid.app/users/login#/login) - For database diagram 
 
 ## Deployment
 
@@ -576,6 +585,14 @@ I used [ElephantSQL](https://www.elephantsql.com/) as my database.
 5. Here you will check the name, cloud provider and region where the application will be hosted. If, everything is correct, click `Create instance`.
 6. Go to dashboard and your instance will be there. Click in the name and under `Details` copy the `URL`, this will be values that will be needed for the [Heroku variables setup](#heroku-settings) and the [env.py](#envpy-file-set-up) file.
 
+#### External storage set up
+
+I used [Cloudinary](https://cloudinary.com/ip/gr-sea-gg-brand-home-base?utm_source=google&utm_medium=search&utm_campaign=goog_selfserve_brand_wk22_replicate_core_branded_keyword&utm_term=1329&campaignid=17601148700&adgroupid=141182782954&keyword=cloudinary&device=c&matchtype=e&adposition=&gad_source=1&gclid=Cj0KCQiAm4WsBhCiARIsAEJIEzUYoKHM06ldJtPMxUmtjFK3HxOkfQI3_8G9vOXPuRsPWuCVCSFEPzsaAjiJEALw_wcB) as cloud storage for this project. 
+
+1. Create and account or login. 
+2. Go to `Dashboard` and copy the `API Environment variable`.
+3. This URL will be required when setting up the [env.py](#envpy-file-set-up) and the [Heroku variables](#heroku-settings). 
+
 #### env.py file set up
 
 1. In the root directory of your project create a new file called `env.py`.
@@ -592,7 +609,13 @@ os.environ["DATABASE_URL"]="<copiedURL>"
 os.environ["SECRET_KEY"]="<copiedGeneratedKEY>"
 ```
 
-5. Save the file.
+5. Then, using the same process, in the `env.py` file import the `os` module and add the [storageURL](#external-storage-set-up).
+
+```
+os.environ["CLOUDINARY_URL"]="<copiedCloudinaryURL>"
+```
+
+6. Save the file.
 
 #### Heroku settings 
 
@@ -600,7 +623,8 @@ After the application is created in Heroku. Got to your dashboard and you will s
 
 1. Go to the settings tab and go to `ConfigVars` and click on `Reveal Config Vars` and set the following variables: 
     - Key: `PORT`, Value: `8000`
-    - Key: `DATABASE_URL`, Value: [databaseURL](#external-database-set-up) 
+    - Key: `DATABASE_URL`, Value: [databaseURL](#external-database-set-up)
+    - Key: `CLOUDINARY_URL`, Value [storageURL](#external-storage-set-up)
     - Key: `SECRET_KEY`, Value: [randomKey](#envpy-file-set-up)
 
 2. After setting up the variables, go to `Buildpacks` and select `Python`.
@@ -623,14 +647,13 @@ The site type was a mixed between a social media and blog web application. The f
 - [Instagram](https://www.instagram.com)
 - [Reddit](https://www.reddit.com/) 
 
-Additionally, the framework used for the front-end was [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction/).
+Additionally, the [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction/) framework was heavily used for the front-end development.
 
 ### Code
 
 In Django, the typical workflow for creating a view involves writing the view code first and subsequently creating the template to render the view. However, I took a slightly different approach by starting with the template to visualize the application before refining the code. During this process, I faced an issue that wasn't addressed in the [Code Institute](https://codeinstitute.net/global/) Django walkthrough projects, particularly regarding the customization of form styling.
 
-Initially, I applied Bootstrap classes to style the forms, but I encountered challenges. Thanks to the insights gained from [CodingEntrepreneurs Tutorial](/https://www.youtube.com/watch?v=quJzUzCs6Q0&t=623s), I was able to achieve the desired styling by implementing html attributes directly in the [forms.py](/postBoard/forms.py) file.
-
+Initially, I applied Bootstrap classes to style the forms, but I encountered challenges to display the form fields with the desired styling. Thanks to the insights gained from [CodingEntrepreneurs Tutorial](/https://www.youtube.com/watch?v=quJzUzCs6Q0&t=623s), I was able to achieve the desired styling by implementing html attributes in the [forms.py](/postBoard/forms.py) file.
 
 Given the project's data models, a crucial requirement was to generate a new user profile data instance upon a user's signup, followed by redirecting them to a "create profile" page for further profile completion
 
@@ -642,7 +665,7 @@ Another challenging feature I grappled with was prepopulating fields when users 
 
 During troubleshooting, I encountered challenges in understanding how to effectively debug activities occurring in the backend. To address this, I incorporated the [Django messages feature](https://docs.djangoproject.com/en/3.2/ref/contrib/messages/#using-messages-in-views-and-templates). This implementation allowed me to display errors occurring in the templates, providing valuable insights during the debugging process.
 
-In the final stages, while working on the presentation of dynamic content like post likes, post comments, and dates, I encountered limitations with certain syntax within the template. To overcome this hurdle, I discovered [Django custom template tags](https://docs.djangoproject.com/en/5.0/howto/custom-template-tags/). This feature proved invaluable as it enabled me to present likes, showcase comments alongside their respective posts, and exhibit dates for both posts and comments in a more user-friendly manner
+In the final stages, while working on the presentation of dynamic content like post likes, post comments, and dates, I encountered limitations with certain syntax within the template. To overcome this issue, I discovered [Django custom template tags](https://docs.djangoproject.com/en/5.0/howto/custom-template-tags/). This feature proved invaluable as it enabled me to present likes, showcase comments alongside their respective posts, and exhibit dates for both posts and comments in a more user-friendly manner
 
 ### Media
 

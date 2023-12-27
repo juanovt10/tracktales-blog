@@ -5,36 +5,37 @@ from cloudinary.models import CloudinaryField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+# World areas and type of holidays
 WORLD_AREAS = [
     ('', 'Wolrd Area'),
-    ("north_america", "North America"),
-    ("south_america", "South America"),
-    ("europe", "Europe"),
-    ("south_asia", "South Asia"), 
-    ("east_asia", "East Asia"),
-    ("west_asia", "West Asia"),
-    ("oceania", "Oceania"),
-    ("africa", "Africa"),
-    ("middle_east", "Middle East"),
+    ("North America", "North America"),
+    ("South America", "South America"),
+    ("Europe", "Europe"),
+    ("South Asia", "South Asia"), 
+    ("East Asia", "East Asia"),
+    ("West Asia", "West Asia"),
+    ("Oceania", "Oceania"),
+    ("Africa", "Africa"),
+    ("Middle East", "Middle East"),
 ]
 
 TAGS = [
     ('', 'Holiday Type'),
-    ("nightlife", "Nightlife"),
-    ("sightseeing", "Sightseeing"),
-    ("gastronomy", "Gastronomy"),
-    ("culture", "Culture"),
-    ("shopping", "Shopping"),
-    ("relaxation", "Relaxation"),
-    ("history", "History"),
-    ("adventure", "Adventure"), 
-    ("stays", "Stays"),
-    ("nature", "Nature"),
-    ("festivals", "Festivals"),
-    ("beach", "Beach"),
+    ("Nightlife", "Nightlife"),
+    ("Sightseeing", "Sightseeing"),
+    ("Gastronomy", "Gastronomy"),
+    ("Culture", "Culture"),
+    ("Shopping", "Shopping"),
+    ("Relaxation", "Relaxation"),
+    ("History", "History"),
+    ("Adventure", "Adventure"), 
+    ("Stays", "Stays"),
+    ("Nature", "Nature"),
+    ("Festivals", "Festivals"),
+    ("Beach", "Beach"),
 ]
 
-
+# post model
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -59,7 +60,7 @@ class Post(models.Model):
     def number_of_likes(self):
         return self.likes.count()
 
-
+# comment model
 class Comment(models.Model):
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
@@ -75,7 +76,7 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment {self.body} by {self.author.username}"
 
-
+# User profile model
 class UserProfile(models.Model):
     username = models.OneToOneField(User, on_delete=models.CASCADE)
     display_name = models.TextField()
@@ -83,7 +84,6 @@ class UserProfile(models.Model):
     most_visited_area = models.CharField(max_length=50, choices=WORLD_AREAS)
     languages = models.TextField(blank=True, null=True)
     countries_traveled = models.IntegerField(default=1)
-    sign_on = models.BooleanField(default=False)
     created_on = models.DateTimeField(default=timezone.now)
     profile_completed = models.BooleanField(default=False)
 
@@ -101,7 +101,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
 
-
+# contact info model
 class ContactInfo(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

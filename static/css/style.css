@@ -278,14 +278,6 @@ hr {
     color: #EAEAEA;
 }
 
-.btn-outline-primary {
-    color: #090921;
-}
-
-.home-slide-2-text {
-    color: #090921;
-}
-
 .home-slide-2-text p,
 .home-slide-2-text h2 {
     font-weight: 900;
@@ -298,7 +290,6 @@ hr {
     transform: translate(-50%, -50%);  
     width: 70%;
 }
-
 
 .btn-outline-secondary {
     transition: all .3s ease;
@@ -334,7 +325,6 @@ hr {
     background-color: #EAEAEA;
     color: #090921;
 }
-
 
 
 /* Create profile styling */
