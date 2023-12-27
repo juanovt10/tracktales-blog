@@ -5,6 +5,7 @@ Explore Track Tales, a thoughtfully designed platform for seamless storytelling.
 ![responsive_test](/static/images/readme_images/main.png)
 
 The TrackTales community is live, to access it [click here.](https://track-tales-community-d01b2f85b4e9.herokuapp.com/)
+
 ## Table of contents
 
 + [UX](#ux)
@@ -677,3 +678,7 @@ All the hero images were taken from [Pexels](https://www.pexels.com/), a free im
 - [Hero Image Slide 1 (mobile)](https://www.pexels.com/photo/people-on-road-2104044/)
 - [Hero Image Slide 2 (mobile)](https://www.pexels.com/photo/photo-of-person-standing-on-a-famous-temple-2659475/)
 - [Hero Image Slide 3 (mobile)](https://www.pexels.com/photo/people-sitting-in-front-of-bonfire-in-desert-during-nighttime-1703314/)
+
+### Content
+
+Due to the nature of the web application, the content is provided by the users rather than by the web administrator, unless the administrators create posts themselves. Therefore, I used [ChatGPT](https://chat.openai.com/) to generate random profiles, posts, and comments to be able to populate the website with realistic content
